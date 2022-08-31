@@ -1,0 +1,19 @@
+{
+  "name": "jarjam",
+  "version": "1.0.0",
+  "description": "An app to connect you to other music makers in your area",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joewhocodes/jarjam.git"
+  },
+  "author": "Joe Ulyatt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joewhocodes/jarjam/issues"
+  },
+  "homepage": "https://github.com/joewhocodes/jarjam#readme"
+}
