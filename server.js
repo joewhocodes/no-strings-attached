@@ -39,6 +39,12 @@ app.get('/posts', (req, res) => {
         .catch((err) => console.log(err));
 });
 
+app.delete('/delete/:id', (req, res) => {
+    Post.findByIdAndDelete({ _id: req.params.id })
+        .then((doc) => console.log(doc))
+        .catch((err) => console.log(err));
+})
+
 app.listen(3001, () => {
     console.log('server is running');
-});
+});``
