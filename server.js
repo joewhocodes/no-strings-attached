@@ -8,12 +8,29 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cors());
 
+mongoose
+    .connect('mongodb+srv://joe:test@habits.9o0tigu.mongodb.net/?retryWrites=true&w=majority')
+    .catch((err) => console.log(err));
+
+// DB SCHEMA AND MODEL
+const postSchema = mongoose.Schema({
+    title: String,
+    description: String
+})
+
+const Post = mongoose.model('Post', postSchema);
+
 app.get('/', (req, res) => {
     res.send('Express is here');
 });
 
 app.post('/create', (req, res) => {
-    console.log(req.body);
+    Post.create({
+        title: req.body.title,
+        description: req.body.description,
+    })
+        .then((doc) => console.log(doc))
+        .catch((err) => console.log(err));
 })
 
 app.listen(3001, () => {
