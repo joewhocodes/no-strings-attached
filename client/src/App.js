@@ -6,9 +6,15 @@ function App() {
     const navigate = useNavigate();
 
     return (
-        <div className="App">
+        <div style={{ width: '90%', margin: 'auto auto', textAlign: 'center' }}>
             <h1>Homepage</h1>
-            <Button onClick={() => navigate('create')}>NEXT</Button>
+            <Button
+                variant="outline-dark"
+                style={{ width: '100%' }}
+                onClick={() => navigate('create')}
+            >
+                NEXT
+            </Button>
         </div>
     );
 }
