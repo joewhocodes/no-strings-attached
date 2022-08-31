@@ -20,13 +20,15 @@ const CreatePost = () => {
         })
     };
 
-    const handleClick = (e) => {
+    const createPost = (e) => {
         e.preventDefault();
         console.log(post)
         axios
             .post('/create', post)
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
+
+            navigate('posts')
     }
 
     return (
@@ -52,7 +54,7 @@ const CreatePost = () => {
                 <Button
                     variant="outline-success"
                     style={{ width: '100%', marginBottom: '1rem' }}
-                    onClick={handleClick}
+                    onClick={createPost}
                 >
                     CREATE POST
                 </Button>

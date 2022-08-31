@@ -33,6 +33,12 @@ app.post('/create', (req, res) => {
         .catch((err) => console.log(err));
 })
 
+app.get('/posts', (req, res) => {
+    Post.find()
+        .then((items) => res.json(items))
+        .catch((err) => console.log(err));
+});
+
 app.listen(3001, () => {
     console.log('server is running');
 });
