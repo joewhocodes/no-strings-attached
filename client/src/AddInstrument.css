@@ -1,0 +1,18 @@
+.add-instrument-card {
+    display: flex;
+    justify-content: space-evenly;
+    border: solid lightgray 1px;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    width: 20%
+}
+
+.add-instrument-card Button {
+    width: 20%
+}
+
+.modal-body {
+    display: flex;
+    justify-content: space-around;
+}

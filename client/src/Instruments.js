@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import './Instruments.css';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 
 
 const Instruments = () => {
-    const [posts, setPosts] = useState([]);
+    const [instruments, setInstruments] = useState([]);
 
     useEffect(() => {
         axios
             .get('/posts')
             .then((res) => {
-                console.log(res);
-                setPosts(res.data);
+                setInstruments(res.data);
             })
             .catch((err) => console.log(err));
     }, []);
@@ -28,38 +28,27 @@ const Instruments = () => {
 
     return (
         <div>
-            {posts ? (
+            {instruments ? (
                 <>
-                    {posts.map((post) => {
+                    {instruments.map((instrument) => {
                         return (
                             <div
-                                key={post._id}
-                                style={{
-                                    border: 'solid lightgray 1px',
-                                    borderRadius: '8px',
-                                    marginBottom: '1rem',
-                                    padding: '1rem',
-                                }}
+                                key={instrument._id}
+                                className='instrument-card'
                             >
-                                <h4>{post.instrument}</h4>
                                 <img
-                                    src={require(`./images/instrument-icons/${post.instrument}.png`)}
-                                    alt={`${post.instrument}`}
+                                    src={require(`./images/instrument-icons/${instrument.instrument}.png`)}
+                                    alt={`${instrument.instrument}`}
+                                    height="40px"
                                 />
-
-                                <div
-                                    style={{
-                                        display: 'flex',
-                                        flexDirection: 'row',
-                                        justifyContent: 'space-between',
-                                    }}
-                                ></div>
+                                <h4>{instrument.instrument}</h4>
+                                <h4>{instrument.skillLevel}</h4>
                                 <Button
-                                    onClick={() => deleteInstrument(post._id)}
+                                    onClick={() => deleteInstrument(instrument._id)}
                                     variant="outline-danger"
-                                    style={{ width: '100%' }}
+                                    // style={{ width: '20%' }}
                                 >
-                                    DELETE
+                                    X
                                 </Button>
                             </div>
                         );

@@ -1,3 +1,4 @@
+import './AddInstrument.css';
 import { Button } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import DropdownButton from 'react-bootstrap/DropdownButton';
@@ -6,7 +7,10 @@ import { useState } from 'react';
 import axios from 'axios';
 
 const AddInstrument = () => {
-    const [newInstrument, setNewInstrument] = useState('');
+    const [newInstrument, setNewInstrument] = useState({
+        instrument: '',
+        skillLevel: '',
+    });
 
     // Modal State
     const [show, setShow] = useState(false);
@@ -25,25 +29,34 @@ const AddInstrument = () => {
 
     const handleAddInstrument = (e) => {
         e.preventDefault();
-        console.log(newInstrument);
+
         axios
-            .post('/create', {instrument: newInstrument})
+            .post('/create', newInstrument)
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
 
         window.location.reload();
     };
 
-    const handleSelect=(e)=>{
-        console.log(e);
-        setNewInstrument(e);
+    const handleSelectInstrument=(e)=>{
+        setNewInstrument({
+            ...newInstrument,
+            instrument: e
+        })
+    };
+
+    const handleSelectSkillLevel=(e)=>{
+        setNewInstrument({
+            ...newInstrument,
+            skillLevel: e
+        })
     };
 
     return (
-        <div style={{ width: '90%', margin: 'auto auto', textAlign: 'center' }}>
+        <div className='add-instrument-card'>
+            <h3>Add New</h3>
             <Button
                 variant="dark"
-                style={{ width: '10%' }}
                 onClick={() => handleShow()}
             >
                 +
@@ -56,15 +69,25 @@ const AddInstrument = () => {
                 <Modal.Body>
                     <DropdownButton
                         variant="info"
-                        title={newInstrument ? newInstrument : 'Choose Instrument'}
+                        title={newInstrument.instrument ? newInstrument.instrument : 'Select Instrument'}
                         id="dropdown-menu-align-right"
-                        onSelect={handleSelect}
+                        onSelect={handleSelectInstrument}
                     >
                         <Dropdown.Item eventKey="Guitar">Guitar</Dropdown.Item>
                         <Dropdown.Item eventKey="Bass">Bass</Dropdown.Item>
                         <Dropdown.Item eventKey="Vocals">Vocals</Dropdown.Item>
                         <Dropdown.Item eventKey="Drums">Drums</Dropdown.Item>
                         <Dropdown.Item eventKey="Keyboard">Keyboard</Dropdown.Item>
+                    </DropdownButton>
+                    <DropdownButton
+                        variant="info"
+                        title={newInstrument.skillLevel ? newInstrument.skillLevel : 'Select Skill Level'}
+                        id="dropdown-menu-align-right"
+                        onSelect={handleSelectSkillLevel}
+                    >
+                        <Dropdown.Item eventKey="Beginner">Beginner</Dropdown.Item>
+                        <Dropdown.Item eventKey="Intermediate">Intermediate</Dropdown.Item>
+                        <Dropdown.Item eventKey="Professional">Professional</Dropdown.Item>
                     </DropdownButton>
                 </Modal.Body>
                 <Modal.Footer>

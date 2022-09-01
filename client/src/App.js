@@ -55,7 +55,8 @@ function App() {
             <section id="instruments" class="col-3">
                 <h3>Instruments</h3>
                 <div class="my-box row d-flex">
-                    <h3>Add New</h3>
+                    <Instruments/>
+                    <AddInstrument/>
                 </div>
             </section>
 
@@ -78,12 +79,6 @@ function App() {
         </section>
 
     </div>
-        <div style={{ width: '90%', margin: 'auto auto', textAlign: 'center' }}>
-            <h1>Homepage</h1>
-            <h2>My Instruments</h2>
-            <Instruments/>
-            <AddInstrument/>
-        </div>
         </>
     );
 }

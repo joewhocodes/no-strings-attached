@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 app.post('/create', (req, res) => {
     Post.create({
         instrument: req.body.instrument,
-        description: req.body.description,
+        skillLevel: req.body.skillLevel,
     })
         .then((doc) => console.log(doc))
         .catch((err) => console.log(err));
