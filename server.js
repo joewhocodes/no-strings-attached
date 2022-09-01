@@ -16,7 +16,7 @@ mongoose
 
 // DB SCHEMA AND MODEL
 const postSchema = mongoose.Schema({
-    title: String,
+    instrument: String,
     description: String,
 });
 
@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 
 app.post('/create', (req, res) => {
     Post.create({
-        title: req.body.title,
+        instrument: req.body.instrument,
         description: req.body.description,
     })
         .then((doc) => console.log(doc))
