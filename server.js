@@ -17,7 +17,7 @@ mongoose
 // DB SCHEMA AND MODEL
 const postSchema = mongoose.Schema({
     instrument: String,
-    description: String,
+    skillLevel: String,
 });
 
 const Post = mongoose.model('Post', postSchema);

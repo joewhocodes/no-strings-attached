@@ -2,7 +2,7 @@ import './AddInstrument.css';
 import { Button } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown'
+import Dropdown from 'react-bootstrap/Dropdown';
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -17,48 +17,35 @@ const AddInstrument = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setInstrument((prev) => {
-    //         return {
-    //             ...prev,
-    //             [name]: value,
-    //         };
-    //     });
-    // };
-
     const handleAddInstrument = (e) => {
         e.preventDefault();
-
         axios
             .post('/create', newInstrument)
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
-
         window.location.reload();
     };
 
-    const handleSelectInstrument=(e)=>{
+    const handleSelectInstrument = (e) => {
         setNewInstrument({
             ...newInstrument,
-            instrument: e
-        })
+            instrument: e,
+        });
+        console.log(newInstrument)
     };
 
-    const handleSelectSkillLevel=(e)=>{
+    const handleSelectSkillLevel = (e) => {
         setNewInstrument({
             ...newInstrument,
-            skillLevel: e
-        })
+            skillLevel: e,
+        });
+        console.log(newInstrument)
     };
 
     return (
-        <div className='add-instrument-card'>
+        <div className="add-instrument-card">
             <h3>Add New</h3>
-            <Button
-                variant="dark"
-                onClick={() => handleShow()}
-            >
+            <Button variant="dark" onClick={() => handleShow()}>
                 +
             </Button>
 
@@ -69,7 +56,11 @@ const AddInstrument = () => {
                 <Modal.Body>
                     <DropdownButton
                         variant="info"
-                        title={newInstrument.instrument ? newInstrument.instrument : 'Select Instrument'}
+                        title={
+                            newInstrument.instrument
+                                ? newInstrument.instrument
+                                : 'Select Instrument'
+                        }
                         id="dropdown-menu-align-right"
                         onSelect={handleSelectInstrument}
                     >
@@ -77,17 +68,29 @@ const AddInstrument = () => {
                         <Dropdown.Item eventKey="Bass">Bass</Dropdown.Item>
                         <Dropdown.Item eventKey="Vocals">Vocals</Dropdown.Item>
                         <Dropdown.Item eventKey="Drums">Drums</Dropdown.Item>
-                        <Dropdown.Item eventKey="Keyboard">Keyboard</Dropdown.Item>
+                        <Dropdown.Item eventKey="Keyboard">
+                            Keyboard
+                        </Dropdown.Item>
                     </DropdownButton>
                     <DropdownButton
                         variant="info"
-                        title={newInstrument.skillLevel ? newInstrument.skillLevel : 'Select Skill Level'}
+                        title={
+                            newInstrument.skillLevel
+                                ? newInstrument.skillLevel
+                                : 'Select Skill Level'
+                        }
                         id="dropdown-menu-align-right"
                         onSelect={handleSelectSkillLevel}
                     >
-                        <Dropdown.Item eventKey="Beginner">Beginner</Dropdown.Item>
-                        <Dropdown.Item eventKey="Intermediate">Intermediate</Dropdown.Item>
-                        <Dropdown.Item eventKey="Professional">Professional</Dropdown.Item>
+                        <Dropdown.Item eventKey="Beginner">
+                            Beginner
+                        </Dropdown.Item>
+                        <Dropdown.Item eventKey="Intermediate">
+                            Intermediate
+                        </Dropdown.Item>
+                        <Dropdown.Item eventKey="Professional">
+                            Professional
+                        </Dropdown.Item>
                     </DropdownButton>
                 </Modal.Body>
                 <Modal.Footer>
