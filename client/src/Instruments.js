@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
-// import Guitar from './images/instrument-icons/Guitar.png'
-import Bass from './images/instrument-icons/Bass.png'
-import Vocals from './images/instrument-icons/Vocals.png'
-import Drums from './images/instrument-icons/Drums.png'
-import Keyboard from './images/instrument-icons/Keyboard.png'
 
 
 const Instruments = () => {
@@ -36,7 +31,6 @@ const Instruments = () => {
             {posts ? (
                 <>
                     {posts.map((post) => {
-                        const imageName = post.instrument
                         return (
                             <div
                                 key={post._id}
@@ -48,9 +42,10 @@ const Instruments = () => {
                                 }}
                             >
                                 <h4>{post.instrument}</h4>
-                                <p>{post.description}</p>
-                                <img src={imageName} alt={post.instrument}/>
-                                <img src={require(`./images/instrument-icons/${post.instrument}.png`)} />
+                                <img
+                                    src={require(`./images/instrument-icons/${post.instrument}.png`)}
+                                    alt={`${post.instrument}`}
+                                />
 
                                 <div
                                     style={{
@@ -58,14 +53,13 @@ const Instruments = () => {
                                         flexDirection: 'row',
                                         justifyContent: 'space-between',
                                     }}
-                                >
-                                </div>
+                                ></div>
                                 <Button
-                                        onClick={() => deleteInstrument(post._id)}
-                                        variant="outline-danger"
-                                        style={{ width: '100%' }}
-                                    >
-                                        DELETE
+                                    onClick={() => deleteInstrument(post._id)}
+                                    variant="outline-danger"
+                                    style={{ width: '100%' }}
+                                >
+                                    DELETE
                                 </Button>
                             </div>
                         );
