@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import AddInstrument from './AddInstrument';
-import Posts from './Posts';
+import Profile from './Profile'
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -14,8 +13,7 @@ root.render(
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<App />} />
-                <Route path="/create" element={<AddInstrument />} />
-                <Route path="/create/posts" element={<Posts />} />
+                <Route path="/Profile" element={<Profile />} />
             </Routes>
         </BrowserRouter>
     </React.StrictMode>
