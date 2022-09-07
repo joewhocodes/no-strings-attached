@@ -1,18 +1,31 @@
 .instrument-card {
     display: flex;
+    justify-content: space-evenly;
     border: solid lightgray 1px;
     border-radius: 8px;
     margin-bottom: 1rem;
     padding: 1rem;
+    background-color: white;
+    border-radius: 20px;
+    width: 305px;
 }
 
 .instrument-card h4 {
-    align-self: flex-end;
+    margin: auto auto;
     font-weight: 700;
     font-size: 1.4rem;
-    padding: 0px 20px;
+    /* padding: 0px 12px; */
+}
+
+.instrument-card h5 {
+    align-self: flex-end;
+    margin: auto auto;
+    font-weight: 700;
+    font-size: 1rem;
+    /* padding-right: 10px; */
+    color:green;
 }
 
 .instrument-card Button {
-    width:20%
+    width: 36px;
 }

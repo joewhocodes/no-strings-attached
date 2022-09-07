@@ -12,6 +12,9 @@ const AddInstrument = () => {
         skillLevel: '',
     });
 
+    const instrumentList = ['Guitar', 'Bass', 'Vocals', 'Drums', 'Keyboard'];
+    const skillList = ['Beginner', 'Intermediate', 'Professional'];
+
     // Modal State
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -31,7 +34,7 @@ const AddInstrument = () => {
             ...newInstrument,
             instrument: e,
         });
-        console.log(newInstrument)
+        console.log(newInstrument);
     };
 
     const handleSelectSkillLevel = (e) => {
@@ -39,7 +42,7 @@ const AddInstrument = () => {
             ...newInstrument,
             skillLevel: e,
         });
-        console.log(newInstrument)
+        console.log(newInstrument);
     };
 
     return (
@@ -64,13 +67,7 @@ const AddInstrument = () => {
                         id="dropdown-menu-align-right"
                         onSelect={handleSelectInstrument}
                     >
-                        <Dropdown.Item eventKey="Guitar">Guitar</Dropdown.Item>
-                        <Dropdown.Item eventKey="Bass">Bass</Dropdown.Item>
-                        <Dropdown.Item eventKey="Vocals">Vocals</Dropdown.Item>
-                        <Dropdown.Item eventKey="Drums">Drums</Dropdown.Item>
-                        <Dropdown.Item eventKey="Keyboard">
-                            Keyboard
-                        </Dropdown.Item>
+                    {instrumentList.map(e => <Dropdown.Item eventKey={e} key={e}>{e}</Dropdown.Item>)}
                     </DropdownButton>
                     <DropdownButton
                         variant="info"
@@ -82,15 +79,7 @@ const AddInstrument = () => {
                         id="dropdown-menu-align-right"
                         onSelect={handleSelectSkillLevel}
                     >
-                        <Dropdown.Item eventKey="Beginner">
-                            Beginner
-                        </Dropdown.Item>
-                        <Dropdown.Item eventKey="Intermediate">
-                            Intermediate
-                        </Dropdown.Item>
-                        <Dropdown.Item eventKey="Professional">
-                            Professional
-                        </Dropdown.Item>
+                    {skillList.map(e => <Dropdown.Item eventKey={e} key={e}>{e}</Dropdown.Item>)}
                     </DropdownButton>
                 </Modal.Body>
                 <Modal.Footer>

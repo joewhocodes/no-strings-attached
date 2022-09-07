@@ -1,33 +1,31 @@
 const express = require('express');
+const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
+const connectDB = require('./config/database');
 
-const app = express();
+require('dotenv').config({path: './config/.env'});
+
+connectDB();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-mongoose
-    .connect(
-        'mongodb+srv://joe:test@habits.9o0tigu.mongodb.net/?retryWrites=true&w=majority'
-    )
-    .catch((err) => console.log(err));
-
 // DB SCHEMA AND MODEL
-const postSchema = mongoose.Schema({
+const InstrumentPostSchema = mongoose.Schema({
     instrument: String,
     skillLevel: String,
 });
 
-const Post = mongoose.model('Post', postSchema);
+const Instrument = mongoose.model('Instrument', InstrumentPostSchema);
 
 app.get('/', (req, res) => {
     res.send('Express is here');
 });
 
 app.post('/create', (req, res) => {
-    Post.create({
+    Instrument.create({
         instrument: req.body.instrument,
         skillLevel: req.body.skillLevel,
     })
@@ -36,19 +34,19 @@ app.post('/create', (req, res) => {
 });
 
 app.get('/posts', (req, res) => {
-    Post.find()
+    Instrument.find()
         .then((items) => res.json(items))
         .catch((err) => console.log(err));
 });
 
 app.delete('/delete/:id', (req, res) => {
-    Post.findByIdAndDelete({ _id: req.params.id })
+    Instrument.findByIdAndDelete({ _id: req.params.id })
         .then((doc) => console.log(doc))
         .catch((err) => console.log(err));
 });
 
 app.put('/update/:id', (req, res) => {
-    Post.findByIdAndUpdate(
+    Instrument.findByIdAndUpdate(
         { _id: req.params.id },
         {
             title: req.body.title,
@@ -59,6 +57,6 @@ app.put('/update/:id', (req, res) => {
         .catch((err) => console.log(err));
 });
 
-app.listen(3001, () => {
-    console.log('server is running');
-});
+app.listen(process.env.PORT, ()=>{
+    console.log(`Server is running on port ${process.env.PORT}`)
+})

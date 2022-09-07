@@ -5,7 +5,9 @@
     border-radius: 8px;
     margin-bottom: 1rem;
     padding: 1rem;
-    width: 20%
+    background-color: white;
+    border-radius: 20px;
+    width: 305px;
 }
 
 .add-instrument-card Button {

@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/joewhocodes/jarjam/issues"
   },
-  "homepage": "https://github.com/joewhocodes/jarjam#readme"
+  "homepage": "https://github.com/joewhocodes/jarjam#readme",
+  "dependencies": {
+    "dotenv": "^16.0.2"
+  }
 }

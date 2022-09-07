@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Instruments.css';
+import AddInstrument from './AddInstrument';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 
@@ -42,7 +43,7 @@ const Instruments = () => {
                                     height="40px"
                                 />
                                 <h4>{instrument.instrument}</h4>
-                                <h4>{instrument.skillLevel}</h4>
+                                <h5>{instrument.skillLevel}</h5>
                                 <Button
                                     onClick={() => deleteInstrument(instrument._id)}
                                     variant="outline-danger"
@@ -53,6 +54,7 @@ const Instruments = () => {
                             </div>
                         );
                     })}
+                    <AddInstrument/>
                 </>
             ) : (
                 ''
