@@ -3,7 +3,6 @@ const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
 const connectDB = require('./config/database');
-const homeRoutes = require('./routes/home')
 
 require('dotenv').config({path: './config/.env'});
 
@@ -13,27 +12,32 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-app.use('/', homeRoutes)
-
 // DB SCHEMA AND MODEL
 const InstrumentPostSchema = mongoose.Schema({
     instrument: String,
     skillLevel: String,
 });
 
-const Instrument = mongoose.model('Instrument', InstrumentPostSchema);
+const Instrument = mongoose.model('instruments', InstrumentPostSchema);
+
+app.get('/', (req, res) => {
+    res.send('Express is here');
+});
 
 app.post('/create', (req, res) => {
+
     Instrument.create({
         instrument: req.body.instrument,
         skillLevel: req.body.skillLevel,
     })
         .then((doc) => console.log(doc))
         .catch((err) => console.log(err));
-});
+});``
 
 app.get('/posts', (req, res) => {
+    console.log(req)
     Instrument.find()
+    .then(console.log("found items"))
         .then((items) => res.json(items))
         .catch((err) => console.log(err));
 });
