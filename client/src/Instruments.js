@@ -19,10 +19,9 @@ const Instruments = () => {
 
     const deleteInstrument = (id) => {
         axios
-            .delete(`/instruments/delete/${id}`)
+            .delete(`/instruments/deleteInstrument`, {data : {id: id}})
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
-
             window.location.reload();
     };
 

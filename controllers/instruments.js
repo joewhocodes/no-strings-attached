@@ -7,21 +7,27 @@ module.exports = {
             console.log('found items');
             res.json(instruments);
         } catch (err) {
-            err => console.log(err);
+            console.log(err);
         }
     },
     createInstrument: async (req, res) => {
         try {
-            console.log(req)
             await Instrument.create({
                 instrument: req.body.instrument,
                 skillLevel: req.body.skillLevel,
             });
         } catch (err) {
-            err => console.log(err);
+            console.log(err);
         }
     },
-    // app.put('/instruments/update/:id', (req, res) => {
+    deleteInstrument: async (req, res) => {
+        try {
+            await Instrument.findByIdAndDelete({ _id: req.body.id })
+        } catch (err) {
+            console.log(err)
+        }
+    },
+        // app.put('/instruments/update/:id', (req, res) => {
     //     Instrument.findByIdAndUpdate(
     //         { _id: req.params.id },
     //         {
@@ -32,14 +38,4 @@ module.exports = {
     //         .then((doc) => console.log(doc))
     //         .catch((err) => console.log(err));
     // }),
-    deleteInstrument: async (req, res) => {
-        console.log(req);
-        try {
-            await Instrument.findByIdAndDelete({ _id: req.params.id })((doc) =>
-                console.log(doc)
-            );
-        } catch (err) {
-            err => console.log(err);
-        }
-    },
 };

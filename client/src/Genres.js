@@ -19,7 +19,7 @@ const Genres = () => {
 
     const deleteGenre = (id) => {
         axios
-            .delete(`/genres/delete/${id}`)
+            .delete(`/genres/deleteGenre/${id}`)
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
 
