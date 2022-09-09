@@ -26,7 +26,6 @@ const Instruments = () => {
             window.location.reload();
     };
 
-
     return (
         <div>
             {instruments ? (

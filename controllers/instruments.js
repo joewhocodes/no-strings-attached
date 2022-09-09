@@ -12,6 +12,7 @@ module.exports = {
     },
     createInstrument: async (req, res) => {
         try {
+            console.log(req)
             await Instrument.create({
                 instrument: req.body.instrument,
                 skillLevel: req.body.skillLevel,
