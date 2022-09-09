@@ -2,25 +2,22 @@ const Instrument = require('../models/Instruments');
 
 module.exports = {
     getInstruments: async (req, res) => {
-        console.log(req);
         try {
-            await Instrument.find()
-            (console.log('found items'))
-            ((items) => res.json(items))
-        } catch(err) {
-            (err) => console.log(err)
+            const instruments = await Instrument.find();
+            console.log('found items');
+            res.json(instruments);
+        } catch (err) {
+            err => console.log(err);
         }
     },
     createInstrument: async (req, res) => {
-        console.log(req);
         try {
             await Instrument.create({
                 instrument: req.body.instrument,
                 skillLevel: req.body.skillLevel,
-            })
-            ((doc) => console.log(doc))
-        } catch(err) {
-            (err) => console.log(err)
+            });
+        } catch (err) {
+            err => console.log(err);
         }
     },
     // app.put('/instruments/update/:id', (req, res) => {
@@ -37,10 +34,11 @@ module.exports = {
     deleteInstrument: async (req, res) => {
         console.log(req);
         try {
-            await Instrument.findByIdAndDelete({ _id: req.params.id })
-            ((doc) => console.log(doc))
-        } catch(err) {
-            (err) => console.log(err)
+            await Instrument.findByIdAndDelete({ _id: req.params.id })((doc) =>
+                console.log(doc)
+            );
+        } catch (err) {
+            err => console.log(err);
         }
     },
-}
+};

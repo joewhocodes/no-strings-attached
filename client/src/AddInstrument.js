@@ -23,7 +23,7 @@ const AddInstrument = () => {
     const handleAddInstrument = (e) => {
         e.preventDefault();
         axios
-            .post('/instruments/create', newInstrument)
+            .post('/routes/instruments.js', newInstrument)
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
         window.location.reload();
