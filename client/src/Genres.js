@@ -5,21 +5,21 @@ import { Button } from 'react-bootstrap';
 import axios from 'axios';
 
 
-const Instruments = () => {
-    const [instruments, setInstruments] = useState([]);
+const Genres = () => {
+    const [genres, setGenres] = useState([]);
 
     useEffect(() => {
         axios
-            .get('/instruments')
+            .get('/genres')
             .then((res) => {
-                setInstruments(res.data);
+                setGenres(res.data);
             })
             .catch((err) => console.log(err));
     }, []);
 
-    const deleteInstrument = (id) => {
+    const deleteGenre = (id) => {
         axios
-            .delete(`/instruments/delete/${id}`)
+            .delete(`/delete/${id}`)
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
 
@@ -29,23 +29,22 @@ const Instruments = () => {
 
     return (
         <div>
-            {instruments ? (
+            {genres ? (
                 <>
-                    {instruments.map((instrument) => {
+                    {Genres.map((genre) => {
                         return (
                             <div
-                                key={instrument._id}
-                                className='instrument-card'
+                                key={genre._id}
+                                className='genre-card'
                             >
                                 <img
-                                    src={require(`./images/instrument-icons/${instrument.instrument}.png`)}
-                                    alt={`${instrument.instrument}`}
+                                    src={require(`./images/genre-icons/${genre.genre}.png`)}
+                                    alt={`${genre.genre}`}
                                     height="40px"
                                 />
-                                <h4>{instrument.instrument}</h4>
-                                <h5>{instrument.skillLevel}</h5>
+                                <h4>{genre.genre}</h4>
                                 <Button
-                                    onClick={() => deleteInstrument(instrument._id)}
+                                    onClick={() => deleteGenre(genre._id)}
                                     variant="outline-danger"
                                     // style={{ width: '20%' }}
                                 >
@@ -63,4 +62,4 @@ const Instruments = () => {
     );
 }
 
-export default Instruments;
+export default Genres;
