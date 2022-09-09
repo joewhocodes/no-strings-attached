@@ -21,7 +21,7 @@ const AddGenre = () => {
     const handleAddGenre = (e) => {
         e.preventDefault();
         axios
-            .post('/genres/create', newGenre)
+            .post('/genres/createGenre', newGenre)
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
         window.location.reload();
