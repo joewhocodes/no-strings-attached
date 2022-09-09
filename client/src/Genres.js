@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import './Instruments.css';
-import AddInstrument from './AddInstrument';
+import './Genres.css';
+import AddGenre from './AddGenre';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 
@@ -19,7 +19,7 @@ const Genres = () => {
 
     const deleteGenre = (id) => {
         axios
-            .delete(`/delete/${id}`)
+            .delete(`/genres/delete/${id}`)
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
 
@@ -31,29 +31,28 @@ const Genres = () => {
         <div>
             {genres ? (
                 <>
-                    {Genres.map((genre) => {
+                    {genres.map((genre) => {
                         return (
                             <div
                                 key={genre._id}
                                 className='genre-card'
                             >
-                                <img
+                                { <img
                                     src={require(`./images/genre-icons/${genre.genre}.png`)}
                                     alt={`${genre.genre}`}
                                     height="40px"
-                                />
+                                />}
                                 <h4>{genre.genre}</h4>
                                 <Button
                                     onClick={() => deleteGenre(genre._id)}
                                     variant="outline-danger"
-                                    // style={{ width: '20%' }}
                                 >
                                     X
                                 </Button>
                             </div>
                         );
                     })}
-                    <AddInstrument/>
+                    <AddGenre/>
                 </>
             ) : (
                 ''

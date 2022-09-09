@@ -1,5 +1,6 @@
 import './App.css';
 import Instruments from './Instruments';
+import Genres from './Genres';
 import ProfilePic from './images/profile-pic.png';
 import Message from './images/Message.png';
 import Clock from './images/Clock.png';
@@ -90,7 +91,7 @@ function App() {
                     <section id="genres" className="col-3">
                         <h3>Genres</h3>
                         <div className="my-box row d-flex">
-                            <Instruments />
+                            <Genres />
                         </div>
                     </section>
                 </section>

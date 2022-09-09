@@ -75,8 +75,7 @@ app.get('/genres', (req, res) => {
 
 app.post('/genres/create', (req, res) => {
     Genre.create({
-        Genre: req.body.genre,
-        skillLevel: req.body.skillLevel,
+        genre: req.body.genre,
     })
         .then((doc) => console.log(doc))
         .catch((err) => console.log(err));

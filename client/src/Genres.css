@@ -1,0 +1,31 @@
+.genre-card {
+    display: flex;
+    justify-content: space-evenly;
+    border: solid lightgray 1px;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 20px;
+    width: 305px;
+}
+
+.genre-card h4 {
+    margin: auto auto;
+    font-weight: 700;
+    font-size: 1.4rem;
+    /* padding: 0px 12px; */
+}
+
+.genre-card h5 {
+    align-self: flex-end;
+    margin: auto auto;
+    font-weight: 700;
+    font-size: 1rem;
+    /* padding-right: 10px; */
+    color:green;
+}
+
+.genre-card Button {
+    width: 36px;
+}
