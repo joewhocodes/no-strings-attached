@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/joewhocodes/jarjam#readme",
   "dependencies": {
-    "dotenv": "^16.0.2"
+    "dotenv": "^16.0.2",
+    "express-flash": "github:RGBboy/express-flash"
   }
 }
