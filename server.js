@@ -7,8 +7,13 @@ const mainRoutes = require('./routes/main');
 const instrumentRoutes = require('./routes/instruments');
 const genreRoutes = require('./routes/genres');
 
+//Use .env file in config folder
 require('dotenv').config({ path: './config/.env' });
 
+// Passport config
+require("./config/passport")(passport);
+
+//Connect To Database
 connectDB();
 
 app.use(express.json());
