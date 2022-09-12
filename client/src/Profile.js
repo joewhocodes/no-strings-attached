@@ -5,7 +5,7 @@ import ProfilePic from './images/profile-pic.png';
 import Message from './images/Message.png';
 import Clock from './images/Clock.png';
 
-function App() {
+const Profile = () => {
     return (
         <>
             <div className="App container">
@@ -100,4 +100,4 @@ function App() {
     );
 }
 
-export default App;
+export default Profile;

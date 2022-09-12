@@ -1,6 +1,6 @@
 import './App.css';
 
-function App() {
+const App = () => {
     return (
         <main class="container">
             <div class="row justify-content-center">

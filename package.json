@@ -17,10 +17,15 @@
   },
   "homepage": "https://github.com/joewhocodes/jarjam#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "connect-mongo": "^4.6.0",
+    "connect-mongodb-session": "^3.1.1",
     "dotenv": "^16.0.2",
     "express-flash": "github:RGBboy/express-flash",
+    "express-session": "^1.17.3",
     "morgan": "^1.10.0",
     "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
     "validator": "^13.7.0"
   }
 }
