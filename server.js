@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
 const connectDB = require('./config/database');
-const logger = require("morgan");
+const logger = require('morgan');
 const mainRoutes = require('./routes/main');
 const instrumentRoutes = require('./routes/instruments');
 const genreRoutes = require('./routes/genres');
@@ -12,7 +12,7 @@ const genreRoutes = require('./routes/genres');
 require('dotenv').config({ path: './config/.env' });
 
 // Passport config
-require("./config/passport")(passport);
+require('./config/passport')(passport);
 
 //Connect To Database
 connectDB();
@@ -23,7 +23,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
 //Logging
-app.use(logger("dev"));
+app.use(logger('dev'));
+
+// Setup Sessions - stored in MongoDB
+app.use(
+    session({
+        secret: 'jarjam',
+        resave: false,
+        saveUninitialized: false,
+        store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    })
+);
 
 // Passport middleware
 app.use(passport.initialize());
