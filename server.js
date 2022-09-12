@@ -2,10 +2,11 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
-const passport = require("passport");
-const session = require("express-session");
-const MongoStore = require("connect-mongo")(session);
+const passport = require('passport');
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 const connectDB = require('./config/database');
+const flash = require("express-flash");
 const logger = require('morgan');
 const mainRoutes = require('./routes/main');
 const instrumentRoutes = require('./routes/instruments');
@@ -28,13 +29,26 @@ app.use(cors());
 //Logging
 app.use(logger('dev'));
 
+const store = new MongoDBStore({
+    uri: process.env.DB_STRING,
+    collection: 'mySessions',
+});
+
+// Catch errors
+store.on('error', function (error) {
+    console.log(error);
+});
+
 // Setup Sessions - stored in MongoDB
 app.use(
-    session({
-        secret: 'jarjam',
-        resave: false,
-        saveUninitialized: false,
-        store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    require('express-session')({
+        secret: process.env.SESSION_SECRET,
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+        },
+        store: store,
+        resave: true,
+        saveUninitialized: true,
     })
 );
 

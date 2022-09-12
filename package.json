@@ -18,7 +18,6 @@
   "homepage": "https://github.com/joewhocodes/jarjam#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
-    "connect-mongo": "^4.6.0",
     "connect-mongodb-session": "^3.1.1",
     "dotenv": "^16.0.2",
     "express-flash": "github:RGBboy/express-flash",
