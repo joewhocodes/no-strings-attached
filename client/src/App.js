@@ -5,6 +5,44 @@ const App = () => {
         <main class="container">
             <div class="row justify-content-center">
                 <section class="col-6 mt-5">
+                    <h1>LOG IN</h1>
+                    <form action="/login" method="POST">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">
+                                Email address
+                            </label>
+                            <input
+                                type="email"
+                                class="form-control"
+                                id="exampleInputEmail1"
+                                aria-describedby="emailHelp"
+                                name="email"
+                            />
+                        </div>
+                        <div class="mb-3">
+                            <label
+                                for="exampleInputPassword1"
+                                class="form-label"
+                            >
+                                Password
+                            </label>
+                            <input
+                                type="password"
+                                class="form-control"
+                                id="exampleInputPassword1"
+                                name="password"
+                            />
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            Submit
+                        </button>
+                    </form>
+                </section>
+            </div>
+
+            <div class="row justify-content-center">
+                <section class="col-6 mt-5">
+                <h1>SIGN UP</h1>
                     <form action="/signup" method="POST">
                         <div class="mb-3">
                             <label for="userName" class="form-label">
@@ -60,8 +98,10 @@ const App = () => {
                     </form>
                 </section>
             </div>
+            
         </main>
+
     );
-}
+};
 
 export default App;

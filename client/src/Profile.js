@@ -4,11 +4,13 @@ import Genres from './Genres';
 import ProfilePic from './images/profile-pic.png';
 import Message from './images/Message.png';
 import Clock from './images/Clock.png';
+import { Button } from 'react-bootstrap';
 
 const Profile = () => {
     return (
         <>
             <div className="App container">
+                <a href="/logout" class="col-3 btn btn-primary">Logout</a>
                 <section className="top-row row mt-5">
                     <section id="profile-info" className="my-box col-6 profile-card">
                         <div className="row">
