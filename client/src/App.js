@@ -18,21 +18,20 @@ const App = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        axios({
-            method: 'POST',
-            data: {
-                userName: 'fred',
-                email: 'fred@fred.com',
-                password: 'something',
-            },
-            withCredentials: true,
-            url: 'http://localhost:3001/signup'
-        }).then((res) => console.log(res))
-        // axios.post('http://localhost:3001/signup', {
-        //     userName: 'fred',
-        //     email: 'fred@fred.com',
-        //     password: 'something'
-        // }).then((res) => console.log(res))
+        axios
+            .post('http://localhost:3001/signup', {
+                userName: 'fred2',
+                email: 'fred2@fred.com',
+                password: 'something2',
+                confirmPassword: 'something2',
+            })
+            .then(function (response) {
+                console.log(response);
+            })
+            .then(navigate('/Profile'))
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
 

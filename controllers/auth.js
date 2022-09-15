@@ -6,7 +6,7 @@ exports.getLogin = (req, res) => {
     if (req.user) {
         return res.redirect('/profile');
     }
-    res.render('login', {
+    res.json('login', {
         title: 'Login',
     });
 };
@@ -63,25 +63,30 @@ exports.getSignup = (req, res) => {
     if (req.user) {
         return res.redirect('/profile');
     }
-    res.render('signup', {
+    // res.json('signup', {
+    //     title: 'Create Account',
+    // });
+    res.status(200).json({
         title: 'Create Account',
     });
 };
 
 exports.postSignup = (req, res, next) => {
-    console.log("i hear ya")
+    console.log(req.body)
     const validationErrors = [];
     if (!validator.isEmail(req.body.email))
-        validationErrors.push({ msg: 'Please enter a valid email address.' });
+    validationErrors.push({ msg: 'Please enter a valid email address.' });
     if (!validator.isLength(req.body.password, { min: 8 }))
-        validationErrors.push({
-            msg: 'Password must be at least 8 characters long',
-        });
+    validationErrors.push({
+        msg: 'Password must be at least 8 characters long',
+    });
     if (req.body.password !== req.body.confirmPassword)
-        validationErrors.push({ msg: 'Passwords do not match' });
+    validationErrors.push({ msg: 'Passwords do not match' });
+    
 
     if (validationErrors.length) {
         req.flash('errors', validationErrors);
+        console.log('there be errors')
         return res.redirect('../signup');
     }
     req.body.email = validator.normalizeEmail(req.body.email, {
@@ -93,6 +98,8 @@ exports.postSignup = (req, res, next) => {
         email: req.body.email,
         password: req.body.password,
     });
+
+
 
     User.findOne(
         { $or: [{ email: req.body.email }, { userName: req.body.userName }] },
