@@ -1,13 +1,14 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const connectDB = require('./config/database');
 const flash = require("express-flash");
 const logger = require('morgan');
+const cookieParser = require("cookie-parser");
+
 const mainRoutes = require('./routes/main');
 const instrumentRoutes = require('./routes/instruments');
 const genreRoutes = require('./routes/genres');
@@ -24,7 +25,10 @@ connectDB();
 // Body Parsing
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+}));
 
 //Logging
 app.use(logger('dev'));
@@ -43,14 +47,14 @@ store.on('error', function (error) {
 app.use(
     require('express-session')({
         secret: process.env.SESSION_SECRET,
-        cookie: {
-            maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
-        },
         store: store,
         resave: true,
         saveUninitialized: true,
     })
 );
+
+// Cookie parser
+app.use(cookieParser(process.env.SESSION_SECRET));
 
 // Passport middleware
 app.use(passport.initialize());
