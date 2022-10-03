@@ -7,7 +7,7 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const connectDB = require('./config/database');
 const flash = require("express-flash");
 const logger = require('morgan');
-const cookieParser = require("cookie-parser");
+const jwt = require('jsonwebtoken')
 
 const mainRoutes = require('./routes/main');
 const instrumentRoutes = require('./routes/instruments');
@@ -52,9 +52,6 @@ app.use(
         saveUninitialized: true,
     })
 );
-
-// Cookie parser
-app.use(cookieParser(process.env.SESSION_SECRET));
 
 // Passport middleware
 app.use(passport.initialize());

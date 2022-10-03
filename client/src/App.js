@@ -5,30 +5,49 @@ import { useNavigate } from 'react-router-dom';
 
 const App = () => {
     const navigate = useNavigate();
+
     const [form, setForm] = useState({
         userName: "",
         email: "",
         password: "",
-        
+        confirmPassword: ""
     });
 
     const handleChange = e => {
-        setForm({[e.target.name] : e.target.value})
+        setForm({...form, [e.target.name] : e.target.value})
     }
 
-    const handleSubmit = e => {
+    const handleSignup = e => {
         e.preventDefault();
         axios
             .post('http://localhost:3001/signup', {
-                userName: 'fred2',
-                email: 'fred2@fred.com',
-                password: 'something2',
-                confirmPassword: 'something2',
+                userName: form.userName,
+                email: form.email,
+                password: form.password,
+                confirmPassword: form.confirmPassword,
             })
             .then(function (response) {
                 console.log(response);
             })
-            .then(navigate('/Profile'))
+            // .then(navigate('/Profile'))
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    const handleLogin = e => {
+        e.preventDefault();
+        axios
+            .post('http://localhost:3001/login', {
+                userName: form.userName,
+                email: form.email,
+                password: form.password,
+                confirmPassword: form.confirmPassword,
+            })
+            .then(function (response) {
+                console.log(response);
+            })
+            // .then(navigate('/Profile'))
             .catch(function (error) {
                 console.log(error);
             });
@@ -41,7 +60,7 @@ const App = () => {
             <div className="row justify-content-center">
                 <section className="col-6 mt-5">
                     <h1>LOG IN</h1>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleLogin}>
                         <div className="mb-3">
                             <label htmlFor="exampleInputEmail1" className="form-label">
                                 Email address
@@ -80,7 +99,7 @@ const App = () => {
             <div className="row justify-content-center">
                 <section className="col-6 mt-5">
                 <h1>SIGN UP</h1>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSignup}>
                         <div className="mb-3">
                             <label htmlFor="userName" className="form-label">
                                 User Name

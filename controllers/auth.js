@@ -13,6 +13,7 @@ exports.getLogin = (req, res) => {
 
 exports.postLogin = (req, res, next) => {
     const validationErrors = [];
+    console.log(`validator has returned ${validator.isEmail(req.body.email)}`)
     if (!validator.isEmail(req.body.email))
         validationErrors.push({ msg: 'Please enter a valid email address.' });
     if (validator.isEmpty(req.body.password))
