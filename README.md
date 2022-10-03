@@ -7,7 +7,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/joewhocodes/jarjam">
-    <img src="/src/images/figma.png" alt="Screenshot of profile page">
+    <img src="/client/src/images/figma.png" alt="Screenshot of profile page">
   </a>
   
   -->
