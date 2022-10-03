@@ -57,7 +57,7 @@
 
 </p>
     <p align="center">
-    Welcome to JarJam, a ful stack web app that connects you to local musicians in your area for no-strings jam sessions.
+    Welcome to JarJam, a full stack web app that connects you to local musicians in your area for no-strings jam sessions.
     <br>
     <br>
 
