@@ -1,13 +1,10 @@
 const express = require('express');
-const app = express();
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const passport = require('passport');
-const session = require('express-session');
-const MongoDBStore = require('connect-mongodb-session')(session);
 const connectDB = require('./config/database');
 const flash = require("express-flash");
 const logger = require('morgan');
-const jwt = require('jsonwebtoken')
 
 const mainRoutes = require('./routes/main');
 const instrumentRoutes = require('./routes/instruments');
@@ -23,39 +20,33 @@ require('./config/passport')(passport);
 connectDB();
 
 // Body Parsing
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+
+const app = express();
+// Bodyparser middleware
+app.use(
+    bodyParser.urlencoded({
+        extended: false,
+    })
+);
+app.use(bodyParser.json());
 app.use(cors({
     origin: "http://localhost:3000",
     credentials: true,
 }));
 
+// Connect to MongoDB
+mongoose
+    .connect(process.env.DB_STRING, { useNewUrlParser: true })
+    .then(() => console.log('MongoDB successfully connected'))
+    .catch((err) => console.log(err));
+
 //Logging
 app.use(logger('dev'));
 
-const store = new MongoDBStore({
-    uri: process.env.DB_STRING,
-    collection: 'mySessions',
-});
-
-// Catch errors
-store.on('error', function (error) {
-    console.log(error);
-});
-
-// Setup Sessions - stored in MongoDB
-app.use(
-    require('express-session')({
-        secret: process.env.SESSION_SECRET,
-        store: store,
-        resave: true,
-        saveUninitialized: true,
-    })
-);
-
 // Passport middleware
 app.use(passport.initialize());
-app.use(passport.session());
+// Passport config
+require('./config/passport')(passport);
 
 //Use flash messages for errors, info, ect...
 app.use(flash());
@@ -64,6 +55,7 @@ app.use(flash());
 app.use('/', mainRoutes);
 app.use('/instruments', instrumentRoutes);
 app.use('/genres', genreRoutes);
+app.use('/api/users', users);
 
 //Server Running
 app.listen(process.env.PORT, () => {
