@@ -1,11 +1,11 @@
-const express = require('express');
-const router = express.Router();
-const genresController = require('../controllers/genres');
+// const express = require('express');
+// const router = express.Router();
+// const genresController = require('../controllers/genres');
 
-router.get('/', genresController.getGenres);
+// router.get('/', genresController.getGenres);
 
-router.post('/createGenre', genresController.createGenre);
+// router.post('/createGenre', genresController.createGenre);
 
-router.delete('/deleteGenre', genresController.deleteGenre);
+// router.delete('/deleteGenre', genresController.deleteGenre);
 
-module.exports = router;
+// module.exports = router;

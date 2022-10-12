@@ -1,7 +1,9 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const users = require('./routes/api/users');
 const connectDB = require('./config/database');
 const flash = require("express-flash");
 const logger = require('morgan');
@@ -52,9 +54,9 @@ require('./config/passport')(passport);
 app.use(flash());
 
 //Setup Routes For Which The Server Is Listening
-app.use('/', mainRoutes);
-app.use('/instruments', instrumentRoutes);
-app.use('/genres', genreRoutes);
+// app.use('/', mainRoutes);
+// app.use('/instruments', instrumentRoutes);
+// app.use('/genres', genreRoutes);
 app.use('/api/users', users);
 
 //Server Running
