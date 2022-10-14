@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { signupUser } from './stateSlices/signupSlice';
+import { signinUser } from './stateSlices/signinSlice';
 
 const Signup = () => {
     const dispatch = useDispatch();
@@ -11,6 +12,10 @@ const Signup = () => {
 
     const { status, userRegistered, error } = useSelector(
         (state) => state.signup
+    );
+
+    const { loggedInUser } = useSelector(
+        (state) => state.signin
     );
 
     const formik = useFormik({
@@ -30,14 +35,18 @@ const Signup = () => {
                 .min(5, 'Must be 5 characters or more')
                 .required('Please enter your password'),
         }),
-        onSubmit: (values) => {
+        onSubmit: async (values) => {
             dispatch(signupUser(values));
+            dispatch(signinUser(values));
+            // navigate(0);
         },
     });
     
-    if (userRegistered) {
-        navigate('/signin');
+    if (loggedInUser) {
+        localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+        navigate('/');
     }
+
     return (
         <div className="register-form-container">
             <div className="col-10 col-sm-8 col-md-4 mx-auto">

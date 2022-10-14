@@ -10,10 +10,13 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
     },
-    isAdmin: {
-        type: Boolean,
-        default: false,
+    instruments: {
+        type: Array,
     },
+    genres: {
+        type: Array,
+    },
+    
 });
 userSchema.methods.matchPassword = async function (incomingPassword) {
     return await bcrypt.compare(incomingPassword, this.password);

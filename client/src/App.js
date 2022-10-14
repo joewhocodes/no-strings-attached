@@ -10,7 +10,6 @@ const App = () => {
 
     return (
         <>  
-
             <main>
                 <Routes>
                     <Route path="/users" element={<Users />} />
