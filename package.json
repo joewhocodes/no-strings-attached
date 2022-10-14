@@ -4,7 +4,9 @@
   "description": "An app to connect you to other music makers in your area",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "client": "npm run start --prefix client",
+    "server": "nodemon server/server.js",
+    "dev": "concurrently \"npm run client\" \"npm run server\""
   },
   "repository": {
     "type": "git",
@@ -17,22 +19,16 @@
   },
   "homepage": "https://github.com/joewhocodes/jarjam#readme",
   "dependencies": {
-    "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
-    "connect-mongodb-session": "^3.1.1",
-    "cookie-parser": "^1.4.6",
+    "concurrently": "^7.4.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
-    "express-flash": "github:RGBboy/express-flash",
-    "express-session": "^1.17.3",
-    "is-empty": "^1.2.0",
+    "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.6.3",
-    "morgan": "^1.10.0",
-    "passport": "^0.6.0",
-    "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0",
-    "validator": "^13.7.0"
+    "mongoose": "^6.6.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }
