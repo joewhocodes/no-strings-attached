@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const asyncHandler = require('express-async-handler');
 const User = require('../models/user');
+
 const requireAuth = asyncHandler(async (req, res, next) => {
     let token;
     if (
@@ -22,6 +23,7 @@ const requireAuth = asyncHandler(async (req, res, next) => {
         next(err);
     }
 });
+
 const requireAdmin = asyncHandler(async (req, res, next) => {
     if (req.user && req.user.isAdmin) {
         next();
@@ -31,4 +33,5 @@ const requireAdmin = asyncHandler(async (req, res, next) => {
         next(err);
     }
 });
+
 module.exports = { requireAuth, requireAdmin };

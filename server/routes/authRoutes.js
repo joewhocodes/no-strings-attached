@@ -4,6 +4,7 @@ const User = require('../models/user');
 const { generateToken } = require('../utils/generateToken');
 const { requireAuth, requireAdmin } = require('../middleware/authMiddleware');
 const router = express.Router();
+
 router.get(
     '/api',
     requireAuth,
@@ -13,6 +14,7 @@ router.get(
         });
     })
 );
+
 router.get(
     '/api/users',
     requireAuth,
@@ -28,6 +30,7 @@ router.get(
         }
     })
 );
+
 router.post(
     '/api/signup',
     asyncHandler(async (req, res, next) => {
@@ -48,6 +51,7 @@ router.post(
         });
     })
 );
+
 router.post(
     '/api/signin',
     asyncHandler(async (req, res, next) => {
@@ -67,4 +71,5 @@ router.post(
         }
     })
 );
+
 module.exports = router;
