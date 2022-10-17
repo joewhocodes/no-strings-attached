@@ -3,7 +3,9 @@ import { Button } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
+import { addInstrument } from './stateSlices/signinSlice';
 import axios from 'axios';
 
 const AddInstrument = () => {
@@ -11,6 +13,8 @@ const AddInstrument = () => {
         instrument: '',
         skillLevel: '',
     });
+
+    const dispatch = useDispatch();
 
     const instrumentList = ['Guitar', 'Bass', 'Vocals', 'Drums', 'Keyboard'];
     const skillList = ['Beginner', 'Intermediate', 'Professional'];
@@ -20,14 +24,19 @@ const AddInstrument = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    // const handleAddInstrument = (e) => {
+    //     e.preventDefault();
+    //     axios
+    //         .post('/instruments/createInstrument', newInstrument)
+    //         .then((res) => console.log(res))
+    //         .catch((err) => console.log(err));
+    //     window.location.reload();
+    // };
+
     const handleAddInstrument = (e) => {
-        e.preventDefault();
-        axios
-            .post('/instruments/createInstrument', newInstrument)
-            .then((res) => console.log(res))
-            .catch((err) => console.log(err));
-        window.location.reload();
-    };
+        dispatch(addInstrument(newInstrument))
+        console.log('clicked')
+    }
 
     const handleSelectInstrument = (e) => {
         setNewInstrument({

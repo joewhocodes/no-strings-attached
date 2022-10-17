@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsers } from './stateSlices/usersSlice';
 import { addInstrument } from './stateSlices/signinSlice';
 import { useNavigate } from 'react-router-dom';
+import AddInstrument from './AddInstrument';
 
 const Users = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
@@ -12,7 +13,7 @@ const Users = () => {
     const navigate = useNavigate();  
 
     const handleAddInstrument = () => {
-        dispatch(addInstrument('guitar'))
+        dispatch(addInstrument('bass'))
         console.log('clicked')
     }
 
@@ -29,7 +30,8 @@ const Users = () => {
     return (
         <div className="col-10, col-sm-8, col-md-6 mx-auto">
         <h1>Welcome back {loggedInUser.firstName}!</h1>
-        <h1>Instruments {loggedInUser.instruments}</h1>
+        <h1>Instruments {loggedInUser.instruments.skillLevel}</h1>
+        <AddInstrument/>
         <button onClick={() => handleAddInstrument()}>ADD INSTRUMENT</button>
         <h2>{users.map(e => e.instruments)}</h2>
             <h1>Registered Email IDs</h1>
