@@ -1,21 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import './Instruments.css';
+import { useSelector } from 'react-redux';
 import AddInstrument from './AddInstrument';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 
 
 const Instruments = () => {
-    const [instruments, setInstruments] = useState([]);
-
-    useEffect(() => {
-        axios
-            .get('/instruments')
-            .then((res) => {
-                setInstruments(res.data);
-            })
-            .catch((err) => console.log(err));
-    }, []);
+    const { users } = useSelector((state) => state.users);
 
     const deleteInstrument = (id) => {
         axios
@@ -27,7 +19,8 @@ const Instruments = () => {
 
     return (
         <div>
-            {instruments ? (
+            ${users.instruments}
+            {/* {instruments ? (
                 <>
                     {instruments.map((instrument) => {
                         return (
@@ -36,7 +29,7 @@ const Instruments = () => {
                                 className='instrument-card'
                             >
                                 <img
-                                    src={require(`./images/instrument-icons/${instrument.instrument}.png`)}
+                                    src={require(`../images/instrument-icons/${instrument.instrument}.png`)}
                                     alt={`${instrument.instrument}`}
                                     height="40px"
                                 />
@@ -56,7 +49,7 @@ const Instruments = () => {
                 </>
             ) : (
                 ''
-            )}
+            )} */}
         </div>
     );
 }

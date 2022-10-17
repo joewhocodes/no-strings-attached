@@ -18,7 +18,7 @@ router.get(
 router.get(
     '/api/users',
     requireAuth,
-    requireAdmin,
+    // requireAdmin,
     asyncHandler(async (req, res) => {
         const users = await User.find();
         if (users) {

@@ -42,9 +42,9 @@ const Signup = () => {
         },
     });
     
-    if (loggedInUser) {
+    if (loggedInUser || userRegistered) {
         localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
-        navigate('/');
+        // navigate('/');
     }
 
     return (

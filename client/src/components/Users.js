@@ -11,16 +11,17 @@ const Users = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!loggedInUser || !loggedInUser.isAdmin) {
+        if (!loggedInUser) {
             navigate('/signin');
         }
-        if (loggedInUser && loggedInUser.isAdmin) {
+        if (loggedInUser) {
             dispatch(fetchUsers({ token: loggedInUser.token }));
         }
     }, [dispatch, loggedInUser]);
 
     return (
         <div className="col-10, col-sm-8, col-md-6 mx-auto">
+        <h1>Welcome back {loggedInUser.firstName}!</h1>
             <h1>Registered Email IDs</h1>
             <table className="table table-striped table-bordered table-hover mt-3">
                 <thead>
@@ -35,6 +36,7 @@ const Users = () => {
                             <tr>
                                 <td>{user.firstName}</td>
                                 <td>{user.email}</td>
+                                {/* <td>{loggedInUser}</td> */}
                             </tr>
                         ))
                         : null}
