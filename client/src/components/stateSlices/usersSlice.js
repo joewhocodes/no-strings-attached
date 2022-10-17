@@ -24,21 +24,14 @@ export const fetchUsers = createAsyncThunk(
     }
 );
 
-export const addInstrument = createAsyncThunk(
-    'users/addInstrument',
-    async (instrument) => {
-        try {
-            const { data } = await axios.post('/api/users', instrument);
-            return data;
-        } catch (err) {
-            console.log('it didnt work')
-        }
-    }
-);
-
 export const usersSlice = createSlice({
     name: 'users',
     initialState,
+    reducers: {
+        addInstrument (state, action) {
+            state.users[0].instruments.push(action.payload)
+        },
+    },
     extraReducers: {
         [fetchUsers.pending]: (state, action) => {
             state.status = 'loading';
@@ -53,5 +46,7 @@ export const usersSlice = createSlice({
         },
     },
 });
+
+export const { addInstrument } = usersSlice.actions;
 
 export default usersSlice.reducer;

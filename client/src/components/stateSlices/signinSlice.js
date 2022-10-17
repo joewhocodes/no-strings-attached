@@ -27,7 +27,7 @@ export const signinSlice = createSlice({
             state.loggedInUser = null;
         },
         addInstrument (state, action) {
-            state.loggedInUser.instruments = action.payload;
+            state.loggedInUser.instruments.push(action.payload)
         },
     },
     extraReducers: {

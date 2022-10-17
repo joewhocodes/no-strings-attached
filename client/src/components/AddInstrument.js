@@ -5,7 +5,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { addInstrument } from './stateSlices/signinSlice';
+import { addInstrument } from './stateSlices/usersSlice';
 import axios from 'axios';
 
 const AddInstrument = () => {
@@ -34,8 +34,8 @@ const AddInstrument = () => {
     // };
 
     const handleAddInstrument = (e) => {
-        dispatch(addInstrument(newInstrument))
-        console.log('clicked')
+        dispatch(addInstrument(newInstrument));
+        handleClose();
     }
 
     const handleSelectInstrument = (e) => {
