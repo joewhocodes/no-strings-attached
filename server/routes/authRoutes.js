@@ -32,6 +32,23 @@ router.get(
 );
 
 router.post(
+    '/api/users',
+    requireAuth,
+    // requireAdmin,
+    asyncHandler(async (req, res) => {
+        const users = await User.find();
+        if (users) {
+            // res.json(users);
+            console.log('working')
+        } else {
+            const err = new Error('Users not found.');
+            err.status = 404;
+            next(err);
+        }
+    })
+);
+
+router.post(
     '/api/signup',
     asyncHandler(async (req, res, next) => {
         const { firstName, email, password } = req.body;

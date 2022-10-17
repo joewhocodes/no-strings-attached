@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import './Instruments.css';
-import { useSelector } from 'react-redux';
-import AddInstrument from './AddInstrument';
+import { useDispatch, useSelector } from 'react-redux';
+import { addInstrument } from './stateSlices/usersSlice'
+
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 
 
 const Instruments = () => {
     const { users } = useSelector((state) => state.users);
+    const { profile } = useSelector((state) => state.profile);
+    const dispatch = useDispatch();
+    
+    const addInstrument = () => {
+        console.log('hey')
+        dispatch(addInstrument('guitar'));
+    }
+
 
     const deleteInstrument = (id) => {
         axios
@@ -17,9 +26,15 @@ const Instruments = () => {
             window.location.reload();
     };
 
+    useEffect(() => {
+        console.log(profile)
+    }, [profile])
+
     return (
         <div>
-            ${users.instruments}
+            <button onClick={() => addInstrument()}>click</button>
+            {/* ${profile.instrument} */}
+            {/* <button onClick={() => addInstrumentClick()}>Click</button> */}
             {/* {instruments ? (
                 <>
                     {instruments.map((instrument) => {

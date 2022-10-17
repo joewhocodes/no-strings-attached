@@ -3,12 +3,12 @@ import axios from 'axios';
 
 const initialState = {
     status: 'idle',
-    users: [],
+    profile: [],
     error: null,
 };
 
-export const fetchUsers = createAsyncThunk(
-    'users/fetchUsers',
+export const fetchProfile = createAsyncThunk(
+    'users/fetchProfile',
     async ({ token }, { rejectWithValue }) => {
         const config = {
             headers: {
@@ -24,34 +24,23 @@ export const fetchUsers = createAsyncThunk(
     }
 );
 
-export const addInstrument = createAsyncThunk(
-    'users/addInstrument',
-    async (instrument) => {
-        try {
-            const { data } = await axios.post('/api/users', instrument);
-            return data;
-        } catch (err) {
-            console.log('it didnt work')
-        }
-    }
-);
-
-export const usersSlice = createSlice({
-    name: 'users',
+export const profileSlice = createSlice({
+    name: 'profile',
     initialState,
     extraReducers: {
-        [fetchUsers.pending]: (state, action) => {
+        [fetchProfile.pending]: (state, action) => {
             state.status = 'loading';
         },
-        [fetchUsers.fulfilled]: (state, action) => {
+        [fetchProfile.fulfilled]: (state, action) => {
             state.status = 'succeeded';
             state.users = [...action.payload];
         },
-        [fetchUsers.rejected]: (state, action) => {
+        [fetchProfile.rejected]: (state, action) => {
             state.status = 'failed';
             state.error = action.payload.message;
         },
     },
 });
 
-export default usersSlice.reducer;
+
+export default profileSlice.reducer;

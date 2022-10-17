@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsers } from './stateSlices/usersSlice';
+import { addInstrument } from './stateSlices/signinSlice';
 import { useNavigate } from 'react-router-dom';
 
 const Users = () => {
@@ -8,9 +9,15 @@ const Users = () => {
     const { status, users, error } = useSelector((state) => state.users);
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    const navigate = useNavigate();  
+
+    const handleAddInstrument = () => {
+        dispatch(addInstrument('guitar'))
+        console.log('clicked')
+    }
 
     useEffect(() => {
+        console.log(users)
         if (!loggedInUser) {
             navigate('/signin');
         }
@@ -22,6 +29,9 @@ const Users = () => {
     return (
         <div className="col-10, col-sm-8, col-md-6 mx-auto">
         <h1>Welcome back {loggedInUser.firstName}!</h1>
+        <h1>Instruments {loggedInUser.instruments}</h1>
+        <button onClick={() => handleAddInstrument()}>ADD INSTRUMENT</button>
+        <h2>{users.map(e => e.instruments)}</h2>
             <h1>Registered Email IDs</h1>
             <table className="table table-striped table-bordered table-hover mt-3">
                 <thead>
