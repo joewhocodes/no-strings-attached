@@ -3,6 +3,7 @@ const asyncHandler = require('express-async-handler');
 const User = require('../models/user');
 const { generateToken } = require('../utils/generateToken');
 const { requireAuth, requireAdmin } = require('../middleware/authMiddleware');
+const { findOneAndUpdate } = require('../models/user');
 const router = express.Router();
 
 router.get(
@@ -33,18 +34,24 @@ router.get(
 
 router.post(
     '/api/users',
-    requireAuth,
+    // requireAuth,
     // requireAdmin,
     asyncHandler(async (req, res) => {
+        console.log(req.body)
         const users = await User.find();
         if (users) {
-            // res.json(users);
-            console.log('working')
+            User.findOneAndUpdate({email: "joeulyatt1@hotmail.co.uk"}, {$set: {instruments: req.body}}, function(err,doc) {
+                if (err) { throw err; }
+                else { console.log("Updated"); }
+            })  
+            // res.json({newInstrument})
         } else {
             const err = new Error('Users not found.');
-            err.status = 404;
-            next(err);
+        //     err.status = 404;
+        //     next(err);
+        // }
         }
+        // console.log(users)
     })
 );
 

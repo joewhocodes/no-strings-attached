@@ -21,9 +21,6 @@ const Users = () => {
         }
     }, [dispatch, loggedInUser]);
 
-    useEffect(() => {
-        console.log(users[0].instruments.length > 0)
-    }, [users])
     
     return (
         <>
@@ -31,21 +28,13 @@ const Users = () => {
                 <h1>Welcome back {loggedInUser.firstName}!</h1>
                 <AddInstrument />
                 <h1>Instruments</h1>
-                {users[0].instruments.length > 0 ? (
+                {/* {users[0].instruments.length > 0 ? (
                     <ul>
                         <li>{users[0].instruments.map((e) => e.instrument + " " + e.skillLevel)}</li>
                     </ul>
                 ) : (
                     <h1>no</h1>
-                )}
-                {/* {users[0].instruments.length > 0} */}
-                {/* {users[0].instruments.map(e => (
-            <ul>
-                <li>{e.skillLevel}</li>
-                <li>{e.instrument}</li>
-            </ul>
-            )
-        )}; */}
+                )} */}
                 <h1>Registered Email IDs</h1>
                 <table className="table table-striped table-bordered table-hover mt-3">
                     <thead>

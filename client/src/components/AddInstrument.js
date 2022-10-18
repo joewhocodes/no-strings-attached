@@ -3,12 +3,12 @@ import { Button } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { addInstrument } from './stateSlices/usersSlice';
-import axios from 'axios';
 
 const AddInstrument = () => {
+    const { loggedInUser } = useSelector((state) => state.signin);
     const [newInstrument, setNewInstrument] = useState({
         instrument: '',
         skillLevel: '',
@@ -23,15 +23,6 @@ const AddInstrument = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-    // const handleAddInstrument = (e) => {
-    //     e.preventDefault();
-    //     axios
-    //         .post('/instruments/createInstrument', newInstrument)
-    //         .then((res) => console.log(res))
-    //         .catch((err) => console.log(err));
-    //     window.location.reload();
-    // };
 
     const handleAddInstrument = (e) => {
         dispatch(addInstrument(newInstrument));

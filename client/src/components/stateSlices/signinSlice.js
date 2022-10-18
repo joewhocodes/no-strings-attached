@@ -26,9 +26,6 @@ export const signinSlice = createSlice({
         logout(state, action) {
             state.loggedInUser = null;
         },
-        addInstrument (state, action) {
-            state.loggedInUser.instruments.push(action.payload)
-        },
     },
     extraReducers: {
         [signinUser.pending]: (state, action) => {
@@ -45,5 +42,5 @@ export const signinSlice = createSlice({
     },
 });
 
-export const { logout, addInstrument } = signinSlice.actions;
+export const { logout } = signinSlice.actions;
 export default signinSlice.reducer;
