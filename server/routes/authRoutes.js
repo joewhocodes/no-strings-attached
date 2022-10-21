@@ -39,19 +39,14 @@ router.post(
     asyncHandler(async (req, res) => {
         console.log(req.body)
         const currentUser = await User.find({email: "joeulyatt1@hotmail.co.uk"});
-        if (users) {
+        if (req.body) {
             User.findOneAndUpdate({email: "joeulyatt1@hotmail.co.uk"}, {$set: {instruments: req.body}}, function(err,doc) {
                 if (err) { throw err; }
                 else { console.log("Updated"); }
             })  
-            // res.json({newInstrument})
         } else {
             const err = new Error('Users not found.');
-        //     err.status = 404;
-        //     next(err);
-        // }
         }
-        // console.log(users)
     })
 );
 
@@ -86,6 +81,8 @@ router.post(
                 firstName: user.firstName,
                 email: user.email,
                 isAdmin: user.isAdmin,
+                instruments: user.instruments,
+                id: user._id,
                 token: generateToken(user._id),
             });
         } else {

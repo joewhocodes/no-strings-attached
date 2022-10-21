@@ -9,7 +9,6 @@ import axios from 'axios';
 
 const Instruments = () => {
     const { users } = useSelector((state) => state.users);
-    const { profile } = useSelector((state) => state.profile);
     const dispatch = useDispatch();
     
     const addInstrument = () => {
@@ -26,14 +25,10 @@ const Instruments = () => {
             window.location.reload();
     };
 
-    useEffect(() => {
-        console.log(profile)
-    }, [profile])
 
     return (
         <div>
             <button onClick={() => addInstrument()}>click</button>
-            {/* ${profile.instrument} */}
             {/* <button onClick={() => addInstrumentClick()}>Click</button> */}
             {/* {instruments ? (
                 <>

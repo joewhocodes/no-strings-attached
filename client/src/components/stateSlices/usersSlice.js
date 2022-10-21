@@ -29,6 +29,7 @@ export const addInstrument = createAsyncThunk(
     async (instrument, { rejectWithValue }) => {
         try {
             const { data } = await axios.post('/api/users', instrument);
+            console.log("instrument added")
             return data;
         } catch (err) {
             return rejectWithValue(err.response.data);

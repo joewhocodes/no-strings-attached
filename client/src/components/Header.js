@@ -24,6 +24,12 @@ const Header = () => {
                         <NavLink to="/" exact activeClassName="active">
                             Home
                         </NavLink>
+                        <NavLink to="/profile" exact activeClassName="active">
+                            Profile
+                        </NavLink>
+                        <NavLink to="/users" exact activeClassName="active">
+                            Users
+                        </NavLink>
                     </li>
                     <li>
                         {loggedInUser && (

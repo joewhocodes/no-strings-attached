@@ -1,16 +1,15 @@
 import React, { useEffect } from 'react';
+import Header from './Header';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUsers, addInstrument } from './stateSlices/usersSlice';
+import { fetchUsers } from './stateSlices/usersSlice';
 import { useNavigate } from 'react-router-dom';
-import AddInstrument from './AddInstrument';
 
 const Users = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
     const { status, users, error } = useSelector((state) => state.users);
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();  
-
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (!loggedInUser) {
@@ -21,21 +20,11 @@ const Users = () => {
         }
     }, [dispatch, loggedInUser]);
 
-    
     return (
         <>
+            <Header />
             <div className="col-10, col-sm-8, col-md-6 mx-auto">
-                <h1>Welcome back {loggedInUser.firstName}!</h1>
-                <AddInstrument />
-                <h1>Instruments</h1>
-                {/* {users[0].instruments.length > 0 ? (
-                    <ul>
-                        <li>{users[0].instruments.map((e) => e.instrument + " " + e.skillLevel)}</li>
-                    </ul>
-                ) : (
-                    <h1>no</h1>
-                )} */}
-                <h1>Registered Email IDs</h1>
+                <h1>All users</h1>
                 <table className="table table-striped table-bordered table-hover mt-3">
                     <thead>
                         <tr>
@@ -46,12 +35,12 @@ const Users = () => {
                     <tbody>
                         {users
                             ? users.map((user) => (
-                                  <tr>
-                                      <td>{user.firstName}</td>
-                                      <td>{user.email}</td>
+                                <tr>
+                                    <td>{user.firstName}</td>
+                                    <td>{user.email}</td>
                                       {/* <td>{loggedInUser}</td> */}
-                                  </tr>
-                              ))
+                                </tr>
+                            ))
                             : null}
                     </tbody>
                 </table>
