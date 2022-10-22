@@ -5,7 +5,7 @@ import Signin from './Signin';
 const Landing = () => {
     return (
         <>  
-            <h1>Welcome</h1>
+            <h1>Welcome to No Strings Attached!</h1>
             <Signup/>
             <Signin/>
         </>

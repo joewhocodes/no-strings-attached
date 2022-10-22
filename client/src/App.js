@@ -14,7 +14,7 @@ const App = () => {
             <main>
                 <Routes>
                     <Route path="/users" element={<Users />} />
-                    <Route path="/profile" element={<Profile />} />
+                    <Route path={loggedInUser && `/${loggedInUser.id}`} element={<Profile />} />
                     <Route path="/" element={loggedInUser ? <Home /> : <Landing />} />
                 </Routes>
             </main>

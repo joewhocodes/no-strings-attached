@@ -5,7 +5,6 @@ import { logout } from './stateSlices/signinSlice';
 import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
-    
     const { loggedInUser } = useSelector((state) => state.signin);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -24,7 +23,7 @@ const Header = () => {
                         <NavLink to="/" exact activeClassName="active">
                             Home
                         </NavLink>
-                        <NavLink to="/profile" exact activeClassName="active">
+                        <NavLink to={`/${loggedInUser.id}`} exact activeClassName="active">
                             Profile
                         </NavLink>
                         <NavLink to="/users" exact activeClassName="active">

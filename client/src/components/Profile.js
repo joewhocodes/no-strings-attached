@@ -25,6 +25,10 @@ const Profile = () => {
         <>
             <Header />
             <h1>Profile</h1>
+            <h2>Bio</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique rem libero voluptatibus magnam ex ea?</p>
+            <h2>Location</h2>
+            <p>Bristol, UK</p>
             <h1>Instruments</h1>
             {/* <h1>{loggedInUser.instruments.map(e => e.instrument)}</h1> */}
                 {/* {users[0].instruments.length > 0 ? (
