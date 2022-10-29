@@ -26,9 +26,9 @@ export const fetchUsers = createAsyncThunk(
 
 export const addInstrument = createAsyncThunk(
     'users/addInstrument',
-    async (instrument, { rejectWithValue }) => {
+    async (instrument, id, { rejectWithValue }) => {
         try {
-            const { data } = await axios.post('/api/users', instrument);
+            const { data } = await axios.post('/api/users', instrument, id);
             console.log("instrument added")
             return data;
         } catch (err) {

@@ -37,8 +37,9 @@ router.post(
     // requireAuth,
     // requireAdmin,
     asyncHandler(async (req, res) => {
-        console.log(req.body)
-        const currentUser = await User.find({email: "joeulyatt1@hotmail.co.uk"});
+        // console.log(req.body)
+        const currentUser = await User.find({_id: id});
+        console.log(`current usr us ${currentUser}`)
         if (req.body) {
             User.findOneAndUpdate({email: "joeulyatt1@hotmail.co.uk"}, {$set: {instruments: req.body}}, function(err,doc) {
                 if (err) { throw err; }

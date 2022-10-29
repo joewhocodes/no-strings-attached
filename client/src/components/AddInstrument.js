@@ -16,8 +16,9 @@ const AddInstrument = () => {
 
     const dispatch = useDispatch();
 
-    const instrumentList = ['Guitar', 'Bass', 'Vocals', 'Drums', 'Keyboard'];
+    const instrumentList = ['Guitar', 'Bass', 'Vocals', 'Drums', 'Keyboard'].filter(e => e !== loggedInUser.instruments[0].instrument);
     const skillList = ['Beginner', 'Intermediate', 'Professional'];
+
 
     // Modal State
     const [show, setShow] = useState(false);
@@ -25,7 +26,7 @@ const AddInstrument = () => {
     const handleShow = () => setShow(true);
 
     const handleAddInstrument = (e) => {
-        dispatch(addInstrument(newInstrument));
+        dispatch(addInstrument(newInstrument, loggedInUser._id));
         handleClose();
     }
 
