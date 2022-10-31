@@ -37,16 +37,20 @@ router.post(
     // requireAuth,
     // requireAdmin,
     asyncHandler(async (req, res) => {
-        // console.log(req.body)
-        const currentUser = await User.find({_id: id});
-        console.log(`current usr us ${currentUser}`)
+        let newInstrument = {instrument: req.body.instrument, skill: req.body.skill}
+        console.log('this is the post part')
+        console.log(newInstrument)
+        // const currentUser = await User.find({id: id});
+        // console.log(`current usr us ${currentUser}`)
         if (req.body) {
-            User.findOneAndUpdate({email: "joeulyatt1@hotmail.co.uk"}, {$set: {instruments: req.body}}, function(err,doc) {
+            User.findOneAndUpdate({email: "joeulyatt1@hotmail.co.uk"}, {$set: {instruments: newInstrument}}, function(err,doc) {
                 if (err) { throw err; }
+                
                 else { console.log("Updated"); }
             })  
         } else {
             const err = new Error('Users not found.');
+            console.log('errors ahoy')
         }
     })
 );

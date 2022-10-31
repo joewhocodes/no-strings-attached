@@ -26,13 +26,14 @@ export const fetchUsers = createAsyncThunk(
 
 export const addInstrument = createAsyncThunk(
     'users/addInstrument',
-    async (instrument, id, { rejectWithValue }) => {
+    async ({instrument, skill, id}) => {
         try {
-            const { data } = await axios.post('/api/users', instrument, id);
-            console.log("instrument added")
+            console.log(instrument, skill, id)
+            const { data } = await axios.post('/api/users', {instrument, skill, id});
             return data;
         } catch (err) {
-            return rejectWithValue(err.response.data);
+            console.log('it didn\'t work')
+            console.log(err)
         }
     }
 );
@@ -48,10 +49,18 @@ export const usersSlice = createSlice({
     extraReducers: {
         [addInstrument.pending]: (state, action) => {
             console.log('loading')
+            state.status = 'loading';
         },
-        [addInstrument.fufilled]: (state, action) => {
-            console.log('completed')
+        [addInstrument.fulfilled]: (state, action) => {
+            state.status = 'succeeded';
+            console.log('succeeded')
             state.users[0].instruments.push(action.payload)
+        },
+        [addInstrument.rejected]: (state, action) => {
+            state.status = 'failed';
+            console.log(state)
+            console.log(action)
+            // state.error = action.payload.message;
         },
         [fetchUsers.pending]: (state, action) => {
             state.status = 'loading';

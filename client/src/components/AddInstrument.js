@@ -25,8 +25,8 @@ const AddInstrument = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const handleAddInstrument = (e) => {
-        dispatch(addInstrument(newInstrument, loggedInUser._id));
+    const handleAddInstrument = () => {
+        dispatch(addInstrument({instrument: newInstrument.instrument, skill: newInstrument.skillLevel, id: loggedInUser.id}));
         handleClose();
     }
 
