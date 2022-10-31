@@ -38,14 +38,9 @@ router.post(
     // requireAdmin,
     asyncHandler(async (req, res) => {
         let newInstrument = {instrument: req.body.instrument, skill: req.body.skill}
-        console.log('this is the post part')
-        console.log(newInstrument)
-        // const currentUser = await User.find({id: id});
-        // console.log(`current usr us ${currentUser}`)
         if (req.body) {
-            User.findOneAndUpdate({email: "joeulyatt1@hotmail.co.uk"}, {$set: {instruments: newInstrument}}, function(err,doc) {
+            User.findOneAndUpdate({id: req.body.id}, {$set: {instruments: newInstrument}}, function(err,doc) {
                 if (err) { throw err; }
-                
                 else { console.log("Updated"); }
             })  
         } else {

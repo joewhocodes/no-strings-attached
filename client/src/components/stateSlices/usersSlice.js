@@ -28,11 +28,9 @@ export const addInstrument = createAsyncThunk(
     'users/addInstrument',
     async ({instrument, skill, id}) => {
         try {
-            console.log(instrument, skill, id)
             const { data } = await axios.post('/api/users', {instrument, skill, id});
             return data;
         } catch (err) {
-            console.log('it didn\'t work')
             console.log(err)
         }
     }
