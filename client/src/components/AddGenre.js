@@ -35,7 +35,6 @@ const AddGenre = () => {
         console.log(newGenre);
     };
 
-
     return (
         <div className="add-genre-card">
             <h3>Add New</h3>

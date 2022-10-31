@@ -56,9 +56,6 @@ export const usersSlice = createSlice({
         },
         [addInstrument.rejected]: (state, action) => {
             state.status = 'failed';
-            console.log(state)
-            console.log(action)
-            // state.error = action.payload.message;
         },
         [fetchUsers.pending]: (state, action) => {
             state.status = 'loading';
@@ -73,7 +70,5 @@ export const usersSlice = createSlice({
         },
     },
 });
-
-// export const { addInstrument } = usersSlice.actions;
 
 export default usersSlice.reducer;

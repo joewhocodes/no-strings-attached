@@ -33,6 +33,7 @@ const Signin = () => {
         localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
         navigate('/');
     }
+    
     return (
         <div className="login-form-container">
             <div className="col-10 col-sm-8 col-md-4 mx-auto">
@@ -94,4 +95,5 @@ const Signin = () => {
         </div>
     );
 };
+
 export default Signin;

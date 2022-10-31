@@ -9,6 +9,7 @@ import { addInstrument } from './stateSlices/usersSlice';
 
 const AddInstrument = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
+    const { users } = useSelector((state) => state.users);
     const [newInstrument, setNewInstrument] = useState({
         instrument: '',
         skillLevel: '',
@@ -35,7 +36,6 @@ const AddInstrument = () => {
             ...newInstrument,
             instrument: e,
         });
-        console.log(newInstrument);
     };
 
     const handleSelectSkillLevel = (e) => {
@@ -43,7 +43,6 @@ const AddInstrument = () => {
             ...newInstrument,
             skillLevel: e,
         });
-        console.log(newInstrument);
     };
 
     return (

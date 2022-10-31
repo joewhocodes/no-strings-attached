@@ -22,10 +22,8 @@ const Genres = () => {
             .delete(`/genres/deleteGenre/${id}`)
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
-
             window.location.reload();
     };
-
 
     return (
         <div>

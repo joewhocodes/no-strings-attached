@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,7 +7,6 @@ import { signinUser } from './stateSlices/signinSlice';
 
 const Signup = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const { status, userRegistered, error } = useSelector(
         (state) => state.signup
@@ -38,14 +36,12 @@ const Signup = () => {
         onSubmit: async (values) => {
             dispatch(signupUser(values));
             dispatch(signinUser(values));
-            // navigate(0);
         },
     });
     
     if (loggedInUser || userRegistered) {
         localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
-        // navigate('/');
-    }
+    };
 
     return (
         <div className="register-form-container">
@@ -123,4 +119,5 @@ const Signup = () => {
         </div>
     );
 };
+
 export default Signup;
