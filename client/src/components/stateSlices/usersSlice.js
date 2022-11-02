@@ -39,11 +39,6 @@ export const addInstrument = createAsyncThunk(
 export const usersSlice = createSlice({
     name: 'users',
     initialState,
-    // reducers: {
-    //     addInstrument (state, action) {
-    //         state.users[0].instruments.push(action.payload)
-    //     },
-    // },
     extraReducers: {
         [addInstrument.pending]: (state, action) => {
             console.log('loading')
@@ -51,7 +46,7 @@ export const usersSlice = createSlice({
         },
         [addInstrument.fulfilled]: (state, action) => {
             state.status = 'succeeded';
-            console.log('succeeded')
+            console.log(action.payload)
             state.users[0].instruments.push(action.payload)
         },
         [addInstrument.rejected]: (state, action) => {

@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
         type: String,
     },
     instruments: {
-        type: Array,
+        type: Object,
     },
     genres: {
         type: Array,

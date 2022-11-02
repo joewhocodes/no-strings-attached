@@ -4,20 +4,26 @@ import Modal from 'react-bootstrap/Modal';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchUsers } from './stateSlices/usersSlice';
 import { useState } from 'react';
 import { addInstrument } from './stateSlices/usersSlice';
+import { useLocation } from "react-router-dom"
 
 const AddInstrument = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
     const { users } = useSelector((state) => state.users);
+    const currentProfileId = useLocation();
     const [newInstrument, setNewInstrument] = useState({
         instrument: '',
         skillLevel: '',
     });
 
     const dispatch = useDispatch();
+    
+    const currentUser = users.find(e => e._id === currentProfileId.pathname.substring(1)).instruments
 
-    const instrumentList = ['Guitar', 'Bass', 'Vocals', 'Drums', 'Keyboard'].filter(e => e !== loggedInUser.instruments[0].instrument);
+    // const instrumentList = ['Guitar', 'Bass', 'Vocals', 'Drums', 'Keyboard'].filter(e => e !== loggedInUser.instruments[0].instrument);
+    const instrumentList = ['Guitar', 'Bass', 'Vocals', 'Drums', 'Keyboard']
     const skillList = ['Beginner', 'Intermediate', 'Professional'];
 
 
@@ -26,8 +32,10 @@ const AddInstrument = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+
     const handleAddInstrument = () => {
         dispatch(addInstrument({instrument: newInstrument.instrument, skill: newInstrument.skillLevel, id: loggedInUser.id}));
+        dispatch(fetchUsers({ token: loggedInUser.token }));
         handleClose();
     }
 
@@ -36,6 +44,8 @@ const AddInstrument = () => {
             ...newInstrument,
             instrument: e,
         });
+        console.log(currentUser)
+        console.log(Object.keys(currentUser))
     };
 
     const handleSelectSkillLevel = (e) => {

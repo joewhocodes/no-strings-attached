@@ -20,7 +20,7 @@ const Profile = () => {
         if (loggedInUser) {
             dispatch(fetchUsers({ token: loggedInUser.token }));
         }
-    }, [dispatch, users, loggedInUser]);
+    }, [dispatch, loggedInUser, navigate]);
 
     return (
         <>
@@ -35,10 +35,10 @@ const Profile = () => {
             <p>Bristol, UK</p>
             <h1>Instruments</h1>
             <p>
-                {//finds current user from URL and maps instruments
+                {/* {
                 users
                     .find(e => e._id === currentProfileId.pathname.substring(1))
-                    .instruments.map((e) => e.instrument)}
+                    .instruments.map((e) => e.instrument)} */}
             </p>
             {/* <h1>{loggedInUser.instruments.map(e => e.instrument)}</h1> */}
             {/* {users[0].instruments.length > 0 ? (

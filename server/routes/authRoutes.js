@@ -37,18 +37,36 @@ router.post(
     // requireAuth,
     // requireAdmin,
     asyncHandler(async (req, res) => {
-        let newInstrument = {instrument: req.body.instrument, skill: req.body.skill}
+        const instrument =  (req.body.instrument)
+        let newInstrument = {[instrument]: req.body.skill}
         if (req.body) {
             User.findOneAndUpdate({id: req.body.id}, {$set: {instruments: newInstrument}}, function(err,doc) {
                 if (err) { throw err; }
-                else { console.log("Updated"); }
+                else { console.log("Instruments Updated"); }
             })  
+            res.json(req.body)
         } else {
             const err = new Error('Users not found.');
             console.log('errors ahoy')
         }
     })
 );
+
+// router.post(
+//     '/api/updateInstruments',
+//     asyncHandler(async (req, res) => {
+//         let newInstrument = {instrument: req.body.instrument, skill: req.body.skill}
+//         if (req.body) {
+//             User.findOneAndUpdate({id: req.body.id}, {$set: {instruments: newInstrument}}, function(err,doc) {
+//                 if (err) { throw err; }
+//                 else { console.log("Updated"); }
+//             })  
+//         } else {
+//             const err = new Error('Users not found.');
+//             console.log('errors ahoy')
+//         }
+//     })
+// );
 
 router.post(
     '/api/signup',
@@ -92,5 +110,7 @@ router.post(
         }
     })
 );
+
+
 
 module.exports = router;

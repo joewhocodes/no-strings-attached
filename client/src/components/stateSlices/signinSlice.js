@@ -19,6 +19,18 @@ export const signinUser = createAsyncThunk(
     }
 );
 
+// export const updateInstruments = createAsyncThunk(
+//     'users/updateInstrument',
+//     async ({instrument, skill, id}) => {
+//         try {
+//             const { data } = await axios.post('/api/updateInstruments', {instrument, skill, id});
+//             return data;
+//         } catch (err) {
+//             console.log(err)
+//         }
+//     }
+// );
+
 export const signinSlice = createSlice({
     name: 'signin',
     initialState,
@@ -28,6 +40,15 @@ export const signinSlice = createSlice({
         },
     },
     extraReducers: {
+        // [updateInstruments.pending]: (state, action) => {
+        //     console.log('loading instrument')
+        //     state.status = 'loading';
+        // },
+        // [updateInstruments.fulfilled]: (state, action) => {
+        //     state.status = 'succeeded';
+        //     console.log('instrument updated')
+        //     state.users[0].instruments.push(action.payload)
+        // },
         [signinUser.pending]: (state, action) => {
             state.status = 'loading';
         },
