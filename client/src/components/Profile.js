@@ -35,6 +35,12 @@ const Profile = () => {
             <p>Bristol, UK</p>
             <h1>Instruments</h1>
             <p>
+            
+            {Object.entries(loggedInUser.instruments).map(([instrument, level], i) => (
+                <li key={i}>
+                    <span>{instrument}: {level}</span>
+                </li>
+            ))}
                 {/* {
                 users
                     .find(e => e._id === currentProfileId.pathname.substring(1))
