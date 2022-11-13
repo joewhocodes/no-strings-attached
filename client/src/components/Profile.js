@@ -35,28 +35,8 @@ const Profile = () => {
             <p>Bristol, UK</p>
             <h1>Instruments</h1>
             <p>
-            {loggedInUser.instruments.map((e, i) => {
-                return <p key={i}>{Object.keys(e)} - {Object.values(e)}</p>
-            })
-            }
-            {/* {Object.entries(loggedInUser.instruments).map(([instrument, level], i) => (
-                <li key={i}>
-                    <span>{instrument}: {level}</span>
-                </li>
-            ))} */}
-                {/* {
-                users
-                    .find(e => e._id === currentProfileId.pathname.substring(1))
-                    .instruments.map((e) => e.instrument)} */}
+                {loggedInUser.instruments.map((e, i) => <p key={i}>{Object.keys(e)} - {Object.values(e)}</p>)}
             </p>
-            {/* <h1>{loggedInUser.instruments.map(e => e.instrument)}</h1> */}
-            {/* {users[0].instruments.length > 0 ? (
-                    <ul>
-                        <li>{users[0].instruments.map((e) => e.instrument + " " + e.skillLevel)}</li>
-                    </ul>
-                ) : (
-                    <h1>no</h1>
-                )} */}
             {loggedInUser && <AddInstrument />}
         </>
     );

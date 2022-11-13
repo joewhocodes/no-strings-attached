@@ -19,18 +19,6 @@ export const signinUser = createAsyncThunk(
     }
 );
 
-// export const updateInstruments = createAsyncThunk(
-//     'users/updateInstrument',
-//     async ({instrument, skill, id}) => {
-//         try {
-//             const { data } = await axios.post('/api/updateInstruments', {instrument, skill, id});
-//             return data;
-//         } catch (err) {
-//             console.log(err)
-//         }
-//     }
-// );
-
 export const signinSlice = createSlice({
     name: 'signin',
     initialState,
@@ -38,17 +26,13 @@ export const signinSlice = createSlice({
         logout(state, action) {
             state.loggedInUser = null;
         },
+        updateInstruments(state, action) {
+            const instrument =  (action.payload.instrument)
+            const newInstrument = {[instrument]: action.payload.skill}
+            state.loggedInUser.instruments.push(newInstrument)
+        }
     },
     extraReducers: {
-        // [updateInstruments.pending]: (state, action) => {
-        //     console.log('loading instrument')
-        //     state.status = 'loading';
-        // },
-        // [updateInstruments.fulfilled]: (state, action) => {
-        //     state.status = 'succeeded';
-        //     console.log('instrument updated')
-        //     state.users[0].instruments.push(action.payload)
-        // },
         [signinUser.pending]: (state, action) => {
             state.status = 'loading';
         },
@@ -63,5 +47,5 @@ export const signinSlice = createSlice({
     },
 });
 
-export const { logout } = signinSlice.actions;
+export const { logout, updateInstruments } = signinSlice.actions;
 export default signinSlice.reducer;

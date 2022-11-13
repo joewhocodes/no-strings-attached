@@ -38,7 +38,7 @@ router.post(
     // requireAdmin,
     asyncHandler(async (req, res) => {
         const instrument =  (req.body.instrument)
-        let newInstrument = {[instrument]: req.body.skill}
+        const newInstrument = {[instrument]: req.body.skill}
         if (req.body) {
             User.findOneAndUpdate({id: req.body.id}, {$push: {instruments: newInstrument}}, function(err,doc) {
                 if (err) { throw err; }

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsers } from './stateSlices/usersSlice';
 import { useState } from 'react';
 import { addInstrument } from './stateSlices/usersSlice';
+import { updateInstruments } from './stateSlices/signinSlice';
 import { useLocation } from "react-router-dom"
 
 const AddInstrument = () => {
@@ -35,6 +36,7 @@ const AddInstrument = () => {
 
     const handleAddInstrument = () => {
         dispatch(addInstrument({instrument: newInstrument.instrument, skill: newInstrument.skillLevel, id: loggedInUser.id}));
+        dispatch(updateInstruments({instrument: newInstrument.instrument, skill: newInstrument.skillLevel}))
         dispatch(fetchUsers({ token: loggedInUser.token }));
         handleClose();
     }
