@@ -47,7 +47,7 @@ export const usersSlice = createSlice({
         [addInstrument.fulfilled]: (state, action) => {
             state.status = 'succeeded';
             console.log(action.payload)
-            state.users[0].instruments.push(action.payload)
+            // state.users[0].instruments.push(action.payload)
         },
         [addInstrument.rejected]: (state, action) => {
             state.status = 'failed';
