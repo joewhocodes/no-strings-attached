@@ -16,6 +16,9 @@ const userSchema = new mongoose.Schema({
     genres: {
         type: Array,
     },
+    bio: {
+        type: String,
+    },
     
 });
 userSchema.methods.matchPassword = async function (incomingPassword) {
