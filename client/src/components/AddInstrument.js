@@ -21,10 +21,8 @@ const AddInstrument = () => {
 
     const dispatch = useDispatch();
     
-    const currentUser = users.find(e => e._id === currentProfileId.pathname.substring(1)).instruments
 
-    // const instrumentList = ['Guitar', 'Bass', 'Vocals', 'Drums', 'Keyboard'].filter(e => e !== loggedInUser.instruments[0].instrument);
-    const instrumentList = ['Guitar', 'Bass', 'Vocals', 'Drums', 'Keyboard']
+    const instrumentList = ['Guitar', 'Bass', 'Vocals', 'Drums', 'Keyboard'].filter(e => !loggedInUser.instruments.map(e => Object.keys(e)[0]).includes(e))
     const skillList = ['Beginner', 'Intermediate', 'Professional'];
 
 
@@ -46,8 +44,7 @@ const AddInstrument = () => {
             ...newInstrument,
             instrument: e,
         });
-        console.log(currentUser)
-        console.log(Object.keys(currentUser))
+        console.log(instrumentList)
     };
 
     const handleSelectSkillLevel = (e) => {
