@@ -16,7 +16,6 @@ const Instruments = () => {
         dispatch(addInstrument('guitar'));
     }
 
-
     const deleteInstrument = (id) => {
         axios
             .delete(`/instruments/deleteInstrument`, {data : {id: id}})

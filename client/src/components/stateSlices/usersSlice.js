@@ -36,6 +36,18 @@ export const addInstrument = createAsyncThunk(
     }
 );
 
+export const deleteInstrument = createAsyncThunk(
+    'users/deleteInstrument',
+    async ({instrument, id}) => {
+        try {
+            const { data } = await axios.delete('/api/users', {instrument, id});
+            return data;
+        } catch (err) {
+            console.log(err)
+        }
+    }
+);
+
 export const usersSlice = createSlice({
     name: 'users',
     initialState,

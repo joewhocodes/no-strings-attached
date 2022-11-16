@@ -4,27 +4,21 @@ import Modal from 'react-bootstrap/Modal';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUsers } from './stateSlices/usersSlice';
 import { useState } from 'react';
 import { addInstrument } from './stateSlices/usersSlice';
 import { updateInstruments } from './stateSlices/signinSlice';
-import { useLocation } from "react-router-dom"
 
 const AddInstrument = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
-    const { users } = useSelector((state) => state.users);
-    const currentProfileId = useLocation();
     const [newInstrument, setNewInstrument] = useState({
         instrument: '',
         skillLevel: '',
     });
 
     const dispatch = useDispatch();
-    
 
-    const instrumentList = ['Guitar', 'Bass', 'Vocals', 'Drums', 'Keyboard'].filter(e => !loggedInUser.instruments.map(e => Object.keys(e)[0]).includes(e))
+    const instrumentList = ['Guitar', 'Bass', 'Vocals', 'Drums', 'Keyboard'].filter(e => !loggedInUser.instruments.map(e => Object.keys(e)[0]).includes(e));
     const skillList = ['Beginner', 'Intermediate', 'Professional'];
-
 
     // Modal State
     const [show, setShow] = useState(false);
@@ -33,25 +27,22 @@ const AddInstrument = () => {
 
 
     const handleAddInstrument = () => {
+        if (!newInstrument.instrument || !newInstrument.skillLevel)  {return}
         dispatch(addInstrument({instrument: newInstrument.instrument, skill: newInstrument.skillLevel, id: loggedInUser.id}));
         dispatch(updateInstruments({instrument: newInstrument.instrument, skill: newInstrument.skillLevel}))
         handleClose();
-        setNewInstrument({instrument: '', skillLevel: ''})
+        setTimeout(() => {
+            setNewInstrument({instrument: '', skillLevel: ''});
+        }, 1000)
+        
     }
 
     const handleSelectInstrument = (e) => {
-        setNewInstrument({
-            ...newInstrument,
-            instrument: e,
-        });
-        console.log(instrumentList)
+        setNewInstrument({...newInstrument, instrument: e});
     };
 
     const handleSelectSkillLevel = (e) => {
-        setNewInstrument({
-            ...newInstrument,
-            skillLevel: e,
-        });
+        setNewInstrument({...newInstrument, skillLevel: e});
     };
 
     return (

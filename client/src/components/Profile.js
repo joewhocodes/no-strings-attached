@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
+import { Button } from 'react-bootstrap';
 import Header from './Header';
 import AddInstrument from './AddInstrument';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUsers } from './stateSlices/usersSlice';
-import { useLocation, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import { deleteInstrument } from './stateSlices/usersSlice';
 
 const Profile = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
-    const currentProfileId = useLocation();
-    const { users } = useSelector((state) => state.users);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -17,10 +16,11 @@ const Profile = () => {
         if (!loggedInUser) {
             navigate('/signin');
         }
-        if (loggedInUser) {
-            dispatch(fetchUsers({ token: loggedInUser.token }));
-        }
     }, [dispatch, loggedInUser, navigate]);
+
+    const handleDeleteInstrument = (e) => {
+        dispatch(deleteInstrument({...e, id: loggedInUser.id}));
+    };
 
     return (
         <>
@@ -35,7 +35,12 @@ const Profile = () => {
             <p>Bristol, UK</p>
             <h1>Instruments</h1>
             <p>
-                {loggedInUser.instruments.map((e, i) => <p key={i}>{Object.keys(e)} - {Object.values(e)}</p>)}
+                {loggedInUser.instruments.map((e, i) => (
+                        <p key={i}>
+                            {Object.keys(e)} - {Object.values(e)} 
+                            <Button onClick={() => handleDeleteInstrument(e)}>X</Button>
+                        </p>
+                ))}
             </p>
             {loggedInUser && <AddInstrument />}
         </>

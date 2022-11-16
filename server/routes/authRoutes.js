@@ -3,7 +3,6 @@ const asyncHandler = require('express-async-handler');
 const User = require('../models/user');
 const { generateToken } = require('../utils/generateToken');
 const { requireAuth, requireAdmin } = require('../middleware/authMiddleware');
-const { findOneAndUpdate } = require('../models/user');
 const router = express.Router();
 
 router.get(
@@ -52,21 +51,25 @@ router.post(
     })
 );
 
-// router.post(
-//     '/api/updateInstruments',
-//     asyncHandler(async (req, res) => {
-//         let newInstrument = {instrument: req.body.instrument, skill: req.body.skill}
-//         if (req.body) {
-//             User.findOneAndUpdate({id: req.body.id}, {$set: {instruments: newInstrument}}, function(err,doc) {
-//                 if (err) { throw err; }
-//                 else { console.log("Updated"); }
-//             })  
-//         } else {
-//             const err = new Error('Users not found.');
-//             console.log('errors ahoy')
-//         }
-//     })
-// );
+router.delete(
+    '/api/users',
+    // requireAuth,
+    // requireAdmin,
+    asyncHandler(async (req, res) => {
+        const instrument =  (req.body.instrument)
+        const newInstrument = {[instrument]: req.body.skill}
+        if (req.body) {
+            User.findOneAndDelete({id: req.body.id}, {$delete: {instruments: newInstrument}}, function(err,doc) {
+                if (err) { throw err; }
+                else { console.log("Instrument deleted"); }
+            })  
+            res.json(req.body)
+        } else {
+            const err = new Error('Users not found.');
+            console.log('errors ahoy')
+        }
+    })
+);
 
 router.post(
     '/api/signup',
