@@ -35,8 +35,8 @@ const AddInstrument = () => {
     const handleAddInstrument = () => {
         dispatch(addInstrument({instrument: newInstrument.instrument, skill: newInstrument.skillLevel, id: loggedInUser.id}));
         dispatch(updateInstruments({instrument: newInstrument.instrument, skill: newInstrument.skillLevel}))
-        dispatch(fetchUsers({ token: loggedInUser.token }));
         handleClose();
+        setNewInstrument({instrument: '', skillLevel: ''})
     }
 
     const handleSelectInstrument = (e) => {
