@@ -51,12 +51,14 @@ router.post(
     })
 );
 
-router.delete(
-    '/api/users',
+router.post(
+    '/api/users/deleteInstrument',
     // requireAuth,
     // requireAdmin,
     asyncHandler(async (req, res) => {
-        console.log(req.body.instruments)
+        console.log(req.body)
+        const newInstruments =  (req.body.instruments)
+        console.log(newInstruments)
         if (req.body) {
             User.findOneAndUpdate({id: req.body.id}, {$set: {instruments: req.body.instruments}}, function(err,doc) {
                 if (err) { throw err; }

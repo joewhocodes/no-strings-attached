@@ -38,9 +38,9 @@ export const addInstrument = createAsyncThunk(
 
 export const deleteInstrument = createAsyncThunk(
     'users/deleteInstrument',
-    async ({instrument, id}) => {
+    async ({instruments, id}) => {
         try {
-            const { data } = await axios.delete('/api/users', {instrument, id});
+            const { data } = await axios.post('/api/users/deleteInstrument', {instruments, id});
             return data;
         } catch (err) {
             console.log(err)
