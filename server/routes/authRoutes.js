@@ -56,10 +56,9 @@ router.delete(
     // requireAuth,
     // requireAdmin,
     asyncHandler(async (req, res) => {
-        const instrument =  (req.body.instrument)
-        const newInstrument = {[instrument]: req.body.skill}
+        console.log(req.body.instruments)
         if (req.body) {
-            User.findOneAndDelete({id: req.body.id}, {$delete: {instruments: newInstrument}}, function(err,doc) {
+            User.findOneAndUpdate({id: req.body.id}, {$set: {instruments: req.body.instruments}}, function(err,doc) {
                 if (err) { throw err; }
                 else { console.log("Instrument deleted"); }
             })  
