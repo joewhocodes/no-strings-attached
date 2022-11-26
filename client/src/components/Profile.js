@@ -20,9 +20,9 @@ const Profile = () => {
     }, [dispatch, loggedInUser, navigate]);
 
     const handleDeleteInstrument = (ins) => {
-        const filteredInstruments = loggedInUser.instruments.filter(e => e !== ins)
-        dispatch(deleteInstrument({instruments: filteredInstruments, id: loggedInUser.id}))
-        dispatch(deleteLocalInstrument({instruments: filteredInstruments}))
+        const filteredInstruments = loggedInUser.instruments.filter(e => e !== ins);
+        dispatch(deleteInstrument({instruments: filteredInstruments, id: loggedInUser.id}));
+        dispatch(deleteLocalInstrument({instruments: filteredInstruments}));
     };
 
     return (

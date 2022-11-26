@@ -23,17 +23,16 @@ export const signinSlice = createSlice({
     name: 'signin',
     initialState,
     reducers: {
-        logout(state, action) {
+        logout(state) {
             state.loggedInUser = null;
         },
         addLocalInstrument(state, action) {
-            const instrument =  (action.payload.instrument)
-            const newInstrument = {[instrument]: action.payload.skill}
-            state.loggedInUser.instruments.push(newInstrument)
+            const instrument =  (action.payload.instrument);
+            const newInstrument = {[instrument]: action.payload.skill};
+            state.loggedInUser.instruments.push(newInstrument);
         },
         deleteLocalInstrument(state, action) {
-            const filteredInstruments =  (action.payload.instruments)
-            console.log(filteredInstruments)
+            const filteredInstruments =  (action.payload.instruments);
             state.loggedInUser.instruments = (filteredInstruments);
         }
     },
