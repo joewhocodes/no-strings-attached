@@ -6,9 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom"
 import { deleteInstrument } from './stateSlices/usersSlice';
 import { deleteLocalInstrument } from './stateSlices/signinSlice';
+import { useParams } from "react-router-dom";
 
 const Profile = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
+    const {id} = useParams();
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -27,6 +29,7 @@ const Profile = () => {
 
     return (
         <>
+            {id}
             <Header />
             <h1>Profile</h1>
             <h2>Bio</h2>

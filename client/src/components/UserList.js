@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import Header from './Header';
+import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsers } from './stateSlices/usersSlice';
 import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-const Users = () => {
+const UserList = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
     const { status, users, error } = useSelector((state) => state.users);
 
@@ -36,9 +38,12 @@ const Users = () => {
                         {users
                             ? users.map((user) => (
                                 <tr>
+                                    {/* <NavLink to={`users/${user._id}`} exact activeClassName="active">Profile</NavLink> */}
+                                    <NavLink to={`/users/${user._id}`} exact activeClassName="active">Profile</NavLink>
+                                    <td>{user._id}</td>
+                                    <Link to={`/users/33`}></Link>
                                     <td>{user.firstName}</td>
                                     <td>{user.email}</td>
-                                      {/* <td>{loggedInUser}</td> */}
                                 </tr>
                             ))
                             : null}
@@ -49,4 +54,4 @@ const Users = () => {
     );
 };
 
-export default Users;
+export default UserList;

@@ -26,7 +26,7 @@ const Header = () => {
                         <NavLink to={`/${loggedInUser.id}`} exact activeClassName="active">
                             Profile
                         </NavLink>
-                        <NavLink to="/users" exact activeClassName="active">
+                        <NavLink to="/UserList" exact activeClassName="active">
                             Users
                         </NavLink>
                     </li>
