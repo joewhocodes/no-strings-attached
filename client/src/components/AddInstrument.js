@@ -6,7 +6,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { addInstrument } from './stateSlices/usersSlice';
-import { updateInstruments } from './stateSlices/signinSlice';
+import { addLocalInstrument } from './stateSlices/signinSlice';
 
 const AddInstrument = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
@@ -29,7 +29,7 @@ const AddInstrument = () => {
     const handleAddInstrument = () => {
         if (!newInstrument.instrument || !newInstrument.skillLevel)  {return}
         dispatch(addInstrument({instrument: newInstrument.instrument, skill: newInstrument.skillLevel, id: loggedInUser.id}));
-        dispatch(updateInstruments({instrument: newInstrument.instrument, skill: newInstrument.skillLevel}))
+        dispatch(addLocalInstrument({instrument: newInstrument.instrument, skill: newInstrument.skillLevel}))
         handleClose();
         setTimeout(() => {
             setNewInstrument({instrument: '', skillLevel: ''});
