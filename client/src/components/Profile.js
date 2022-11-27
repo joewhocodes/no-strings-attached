@@ -15,6 +15,7 @@ const Profile = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const userInfo = users.find(e => e._id === id);
 
     useEffect(() => {
         if (!loggedInUser) {
@@ -31,7 +32,7 @@ const Profile = () => {
     return (
         <>
             <Header />
-            <h1>Profile</h1>
+            <h1>{userInfo.firstName}</h1>
             <h2>Bio</h2>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -52,7 +53,7 @@ const Profile = () => {
                     <AddInstrument/>
                     </>
                 :
-                    users.find(e => e._id === id).instruments.map((e, i) => (
+                    userInfo.instruments.map((e, i) => (
                         <p key={i}>
                             {Object.keys(e)} - {Object.values(e)} 
                         </p>
