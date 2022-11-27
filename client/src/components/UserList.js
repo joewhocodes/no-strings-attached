@@ -30,21 +30,20 @@ const UserList = () => {
                 <table className="table table-striped table-bordered table-hover mt-3">
                     <thead>
                         <tr>
-                            <th scope="col">First Name</th>
-                            <th scope="col">Email</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Main Instrument</th>
                         </tr>
                     </thead>
                     <tbody>
                         {users
-                            ? users.map((user) => (
+                        .filter(e => e._id !== loggedInUser.id)
+                        .map((user) => (
                                 <tr>
-                                    <NavLink to={`/users/${user._id}`} exact activeClassName="active">Profile</NavLink>
-                                    <td>{user._id}</td>
-                                    <td>{user.firstName}</td>
-                                    <td>{user.email}</td>
+                                    <NavLink to={`/users/${user._id}`} exact activeClassName="active">{user.firstName}</NavLink>
+                                    <td>{Object.keys(user.instruments[0])}</td>
                                 </tr>
                             ))
-                            : null}
+                            }
                     </tbody>
                 </table>
             </div>
