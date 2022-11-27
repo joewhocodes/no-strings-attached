@@ -10,7 +10,8 @@ import { useParams } from "react-router-dom";
 
 const Profile = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
-    const {id} = useParams();
+    const { id } = useParams();
+    const { users } = useSelector((state) => state.users);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -29,7 +30,6 @@ const Profile = () => {
 
     return (
         <>
-            {id}
             <Header />
             <h1>Profile</h1>
             <h2>Bio</h2>
@@ -41,14 +41,25 @@ const Profile = () => {
             <p>Bristol, UK</p>
             <h1>Instruments</h1>
             <p>
-                {loggedInUser.instruments.map((e, i) => (
+                { id === loggedInUser.id ? 
+                    <>
+                    {loggedInUser.instruments.map((e, i) => (
                         <p key={i}>
                             {Object.keys(e)} - {Object.values(e)} 
                             <Button onClick={() => handleDeleteInstrument(e)}>X</Button>
                         </p>
-                ))}
+                    ))}
+                    <AddInstrument/>
+                    </>
+                :
+                    users.find(e => e._id === id).instruments.map((e, i) => (
+                        <p key={i}>
+                            {Object.keys(e)} - {Object.values(e)} 
+                        </p>
+                    ))
+                }
+
             </p>
-            {loggedInUser && <AddInstrument />}
         </>
     );
 };

@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const UserList = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
-    const { status, users, error } = useSelector((state) => state.users);
+    const { users } = useSelector((state) => state.users);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -38,10 +38,8 @@ const UserList = () => {
                         {users
                             ? users.map((user) => (
                                 <tr>
-                                    {/* <NavLink to={`users/${user._id}`} exact activeClassName="active">Profile</NavLink> */}
                                     <NavLink to={`/users/${user._id}`} exact activeClassName="active">Profile</NavLink>
                                     <td>{user._id}</td>
-                                    <Link to={`/users/33`}></Link>
                                     <td>{user.firstName}</td>
                                     <td>{user.email}</td>
                                 </tr>
