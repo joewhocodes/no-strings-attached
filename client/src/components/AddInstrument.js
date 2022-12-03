@@ -17,25 +17,25 @@ const AddInstrument = () => {
 
     const dispatch = useDispatch();
 
+    // Filters user instruments so only new ones appear in Modal
     const instrumentList = ['Guitar', 'Bass', 'Vocals', 'Drums', 'Keyboard'].filter(e => !loggedInUser.instruments.map(e => Object.keys(e)[0]).includes(e));
     const skillList = ['Beginner', 'Intermediate', 'Professional'];
 
     // Modal State
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleCloseModal = () => setShow(false);
+    const handleShowModal = () => setShow(true);
 
 
     const handleAddInstrument = () => {
         if (!newInstrument.instrument || !newInstrument.skillLevel)  {return}
         dispatch(addInstrument({instrument: newInstrument.instrument, skill: newInstrument.skillLevel, id: loggedInUser.id}));
-        dispatch(addLocalInstrument({instrument: newInstrument.instrument, skill: newInstrument.skillLevel}))
-        handleClose();
+        dispatch(addLocalInstrument({instrument: newInstrument.instrument, skill: newInstrument.skillLevel}));
+        handleCloseModal();
         setTimeout(() => {
             setNewInstrument({instrument: '', skillLevel: ''});
         }, 1000)
-        
-    }
+    };
 
     const handleSelectInstrument = (e) => {
         setNewInstrument({...newInstrument, instrument: e});
@@ -48,11 +48,11 @@ const AddInstrument = () => {
     return (
         <div className="add-instrument-card">
             <h3>Add New</h3>
-            <Button variant="dark" onClick={() => handleShow()}>
+            <Button variant="dark" onClick={() => handleShowModal()}>
                 +
             </Button>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Add Instrument</Modal.Title>
                 </Modal.Header>
@@ -83,7 +83,7 @@ const AddInstrument = () => {
                     </DropdownButton>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="secondary" onClick={handleCloseModal}>
                         Close
                     </Button>
                     <Button

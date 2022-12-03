@@ -53,13 +53,10 @@ export const usersSlice = createSlice({
     initialState,
     extraReducers: {
         [addInstrument.pending]: (state, action) => {
-            console.log('loading')
             state.status = 'loading';
         },
         [addInstrument.fulfilled]: (state, action) => {
             state.status = 'succeeded';
-            console.log(action.payload)
-            // state.users[0].instruments.push(action.payload)
         },
         [addInstrument.rejected]: (state, action) => {
             state.status = 'failed';

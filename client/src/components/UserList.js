@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsers } from './stateSlices/usersSlice';
 import { useNavigate } from 'react-router-dom';
-import { Link } from "react-router-dom";
 
 const UserList = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
@@ -40,7 +39,7 @@ const UserList = () => {
                         .map((user) => (
                                 <tr>
                                     <NavLink to={`/users/${user._id}`} exact activeClassName="active">{user.firstName}</NavLink>
-                                    <td>{Object.keys(user.instruments[0])}</td>
+                                    {/* <td>{Object.keys(user.instruments[0])}</td> */}
                                 </tr>
                             ))
                             }

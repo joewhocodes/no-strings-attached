@@ -34,7 +34,7 @@ const Signin = () => {
         localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
         navigate('/');
     }
-    
+
     return (
         <>
             <h1>Welcome to No Strings Attached!</h1>
@@ -98,7 +98,7 @@ const Signin = () => {
             </div>
             <h3>Don't have an account yet?</h3>
             <NavLink to={'/'} exact activeClassName="active">
-                            Sign Up Here
+                Sign Up Here
             </NavLink>
         </>
     );
