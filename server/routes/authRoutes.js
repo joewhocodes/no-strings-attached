@@ -32,7 +32,7 @@ router.get(
 );
 
 router.post(
-    '/api/users',
+    '/api/users/addInstrument',
     // requireAuth,
     // requireAdmin,
     asyncHandler(async (req, res) => {
@@ -63,6 +63,27 @@ router.post(
             User.findOneAndUpdate({id: req.body.id}, {$set: {instruments: req.body.instruments}}, function(err,doc) {
                 if (err) { throw err; }
                 else { console.log("Instrument deleted"); }
+            })  
+            res.json(req.body)
+        } else {
+            const err = new Error('Users not found.');
+            console.log('errors ahoy')
+        }
+    })
+);
+
+router.post(
+    '/api/users/updateBio',
+    // requireAuth,
+    // requireAdmin,
+    asyncHandler(async (req, res) => {
+        console.log(req.body)
+        const newBio =  (req.body.bio)
+        console.log(newBio)
+        if (req.body) {
+            User.findOneAndUpdate({id: req.body.id}, {$set: {bio: req.body.bio}}, function(err,doc) {
+                if (err) { throw err; }
+                else { console.log("bio updated"); }
             })  
             res.json(req.body)
         } else {

@@ -28,7 +28,7 @@ export const addInstrument = createAsyncThunk(
     'users/addInstrument',
     async ({instrument, skill, id}) => {
         try {
-            const { data } = await axios.post('/api/users', {instrument, skill, id});
+            const { data } = await axios.post('/api/users/addInstrument', {instrument, skill, id});
             return data;
         } catch (err) {
             console.log(err)
@@ -41,6 +41,18 @@ export const deleteInstrument = createAsyncThunk(
     async ({instruments, id}) => {
         try {
             const { data } = await axios.post('/api/users/deleteInstrument', {instruments, id});
+            return data;
+        } catch (err) {
+            console.log(err)
+        }
+    }
+);
+
+export const updateBio = createAsyncThunk(
+    'users/updateBio',
+    async ({bio, id}) => {
+        try {
+            const { data } = await axios.post('/api/users/updateBio', {bio, id});
             return data;
         } catch (err) {
             console.log(err)

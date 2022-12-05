@@ -39,7 +39,7 @@ const UserList = () => {
                         .map((user) => (
                                 <tr>
                                     <NavLink to={`/users/${user._id}`} exact activeClassName="active">{user.firstName}</NavLink>
-                                    {/* <td>{Object.keys(user.instruments[0])}</td> */}
+                                    <td>{user.instruments > 0 && Object.keys(user.instruments[0])}</td>
                                 </tr>
                             ))
                             }
