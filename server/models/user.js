@@ -10,16 +10,18 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
     },
+    bio: {
+        type: String,
+    },
+    location: {
+        type: String,
+    },
     instruments: {
         type: Array,
     },
     genres: {
         type: Array,
     },
-    bio: {
-        type: String,
-    },
-    
 });
 userSchema.methods.matchPassword = async function (incomingPassword) {
     return await bcrypt.compare(incomingPassword, this.password);

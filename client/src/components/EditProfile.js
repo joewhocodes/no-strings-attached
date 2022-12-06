@@ -1,12 +1,13 @@
 import './AddInstrument.css';
 import { Button } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
-import { updateBio } from './stateSlices/usersSlice';
-import { addLocalInstrument } from './stateSlices/signinSlice';
+import { updateProfile } from './stateSlices/usersSlice';
+import { updateLocalProfile } from './stateSlices/signinSlice';
 
 const EditProfile = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
@@ -22,20 +23,16 @@ const EditProfile = () => {
     const handleCloseModal = () => setShow(false);
     const handleShowModal = () => setShow(true);
 
-
-    const handleEditProfile = () => {
-        dispatch(updateBio({bio: profile.bio, location: profile.location}))
+    const handleUpdateProfile = () => {
+        dispatch(updateProfile({bio: profile.bio, location: profile.location, id: loggedInUser.id}))
+        dispatch(updateLocalProfile({bio: profile.bio, location: profile.location}))
         handleCloseModal();
         // setTimeout(() => {
         //     setProfile({instrument: '', skillLevel: ''});
         // }, 1000)
     };
 
-    const handleUpdateBio = (e) => {
-        setProfile({...profile, bio: e});
-    };
-
-    const handleUpdateLocation = (e) => {
+    const handleSelectLocation = (e) => {
         setProfile({...profile, location: e});
     };
 
@@ -47,33 +44,37 @@ const EditProfile = () => {
 
             <Modal show={show} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Bio</Modal.Title>
+                    <Modal.Title>Edit Profile</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <DropdownButton
-                        variant="info"
-                        title={
-                            setProfile.bio
-                                ? setProfile.bio
-                                : 'Enter Bio'
-                        }
-                        id="dropdown-menu-align-right"
-                        onSelect={handleUpdateBio}
-                    >
-                    {/* {instrumentList.map(e => <Dropdown.Item eventKey={e} key={e}>{e}</Dropdown.Item>)} */}
-                    </DropdownButton>
-                    <DropdownButton
-                        variant="info"
-                        title={
-                            setProfile.location
-                                ? setProfile.location
-                                : 'Enter Location'
-                        }
-                        id="dropdown-menu-align-right"
-                        onSelect={handleUpdateLocation}
-                    >
-                    {/* {skillList.map(e => <Dropdown.Item eventKey={e} key={e}>{e}</Dropdown.Item>)} */}
-                    </DropdownButton>
+                    <Form>
+                        <Form.Group
+                        className="mb-3"
+                        controlId="exampleForm.ControlTextarea1"
+                        >
+                            <Form.Label>Bio</Form.Label>
+                            <Form.Control as="textarea" rows={3} value={profile.bio} onChange={e => setProfile({...profile, bio: e.target.value})} />
+                        </Form.Group>
+                        <Form.Group
+                        className="mb-3"
+                        controlId="exampleForm.ControlTextarea1"
+                        >
+                            <Form.Label>Location</Form.Label>
+                            <DropdownButton
+                            variant="info"
+                            title={
+                                profile.location
+                                    ? profile.location
+                                    : 'Choose Location'
+                            }
+                            id="dropdown-menu-align-right"
+                            onSelect={handleSelectLocation}
+                            >
+                                <Dropdown.Item eventKey={'Bristol, UK'}>Bristol, UK</Dropdown.Item>
+                                <Dropdown.Item eventKey={'London, UK'}>London, UK</Dropdown.Item>
+                            </DropdownButton>
+                        </Form.Group>
+                    </Form>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseModal}>
@@ -81,9 +82,9 @@ const EditProfile = () => {
                     </Button>
                     <Button
                         variant="outline-success"
-                        onClick={handleEditProfile}
+                        onClick={handleUpdateProfile}
                     >
-                        Add
+                        Update
                     </Button>
                 </Modal.Footer>
             </Modal>
