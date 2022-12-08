@@ -48,11 +48,11 @@ export const deleteInstrument = createAsyncThunk(
     }
 );
 
-export const updateBio = createAsyncThunk(
-    'users/updateBio',
-    async ({bio, id}) => {
+export const updateProfile = createAsyncThunk(
+    'users/updateProfile',
+    async ({bio, location, id}) => {
         try {
-            const { data } = await axios.post('/api/users/updateBio', {bio, id});
+            const { data } = await axios.post('/api/users/updateProfile', {bio, location, id});
             return data;
         } catch (err) {
             console.log(err)

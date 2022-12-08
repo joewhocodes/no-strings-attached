@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import Header from './Header';
 import AddInstrument from './AddInstrument';
-import EditProfile from './EditProfile';
+import EditProfile from './UpdateProfile';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom"
 import { deleteInstrument } from './stateSlices/usersSlice';

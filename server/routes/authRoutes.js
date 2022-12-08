@@ -73,17 +73,16 @@ router.post(
 );
 
 router.post(
-    '/api/users/updateBio',
+    '/api/users/updateProfile',
     // requireAuth,
     // requireAdmin,
     asyncHandler(async (req, res) => {
-        console.log(req.body)
-        const newBio =  (req.body.bio)
-        console.log(newBio)
+        const newProfile = {bio: req.body.bio, location: req.body.location}
+        console.log(req.body.id)
         if (req.body) {
-            User.findOneAndUpdate({id: req.body.id}, {$set: {bio: req.body.bio}}, function(err,doc) {
+            User.findOneAndUpdate({_id: req.body.id}, {$set: newProfile}, function(err,doc) {
                 if (err) { throw err; }
-                else { console.log("bio updated"); }
+                else { console.log('profile updated'); }
             })  
             res.json(req.body)
         } else {
@@ -125,6 +124,7 @@ router.post(
                 email: user.email,
                 isAdmin: user.isAdmin,
                 instruments: user.instruments,
+                bio: user.bio,
                 id: user._id,
                 token: generateToken(user._id),
             });
