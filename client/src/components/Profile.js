@@ -37,9 +37,7 @@ const Profile = () => {
             {id === loggedInUser.id && <EditProfile/>}
             <h2>Bio</h2>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Similique rem libero voluptatibus magnam ex ea?
-                
+            {id === loggedInUser.id ? loggedInUser.bio : userInfo.bio}
             </p>
             <h2>Location</h2>
             <p>Bristol, UK</p>
