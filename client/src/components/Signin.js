@@ -97,7 +97,7 @@ const Signin = () => {
                 </form>
             </div>
             <h3>Don't have an account yet?</h3>
-            <NavLink to={'/'} exact activeClassName="active">
+            <NavLink to={'/'}>
                 Sign Up Here
             </NavLink>
         </>
