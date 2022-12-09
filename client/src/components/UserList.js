@@ -37,8 +37,8 @@ const UserList = () => {
                         {users
                         .filter(e => e._id !== loggedInUser.id)
                         .map((user) => (
-                                <tr>
-                                    <NavLink to={`/users/${user._id}`}>{user.firstName}</NavLink>
+                                <tr key = {user._id}>
+                                    <td><NavLink to={`/users/${user._id}`}>{user.firstName}</NavLink></td>
                                     <td>{user.instruments > 0 && Object.keys(user.instruments[0])}</td>
                                 </tr>
                             ))
