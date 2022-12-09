@@ -24,12 +24,9 @@ const UpdateProfile = () => {
     const handleShowModal = () => setShow(true);
 
     const handleUpdateProfile = () => {
-        dispatch(updateProfile({bio: profile.bio, location: profile.location, id: loggedInUser.id}))
-        dispatch(updateLocalProfile({bio: profile.bio, location: profile.location}))
+        dispatch(updateProfile({bio: profile.bio, location: profile.location, id: loggedInUser.id}));
+        dispatch(updateLocalProfile({bio: profile.bio, location: profile.location}));
         handleCloseModal();
-        // setTimeout(() => {
-        //     setProfile({instrument: '', skillLevel: ''});
-        // }, 1000)
     };
 
     const handleSelectLocation = (e) => {

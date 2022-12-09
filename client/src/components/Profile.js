@@ -24,6 +24,7 @@ const Profile = () => {
         }
     }, [dispatch, loggedInUser, navigate]);
 
+    
     const handleDeleteInstrument = (ins) => {
         const filteredInstruments = loggedInUser.instruments.filter(e => e !== ins);
         dispatch(deleteInstrument({instruments: filteredInstruments, id: loggedInUser.id}));
@@ -34,17 +35,14 @@ const Profile = () => {
         <>
             <Header />
             <h1>{userInfo.firstName}</h1>
-            {id === loggedInUser.id && <EditProfile/>}
-            <h2>Bio</h2>
-            <p>
-            {id === loggedInUser.id ? loggedInUser.bio : userInfo.bio}
-            </p>
-            <h2>Location</h2>
-            <p>Bristol, UK</p>
-            <h1>Instruments</h1>
-            <p>
-                { id === loggedInUser.id ? 
-                    <>
+            {id === loggedInUser.id ?
+                <>
+                    <EditProfile/>
+                    <h2>Bio</h2>
+                    <p>{loggedInUser.bio ? loggedInUser.bio : 'You haven\'t written a bio yet... write a little bit about yourself so others can get to know you!'}</p>
+                    <h2>Location</h2>
+                    <p>{loggedInUser.location}</p>
+                    <h1>Instruments</h1>
                     {loggedInUser.instruments.map((e, i) => (
                         <p key={i}>
                             {Object.keys(e)} - {Object.values(e)} 
@@ -52,15 +50,21 @@ const Profile = () => {
                         </p>
                     ))}
                     <AddInstrument/>
-                    </>
-                :
-                    userInfo.instruments.map((e, i) => (
+                </>
+            :
+                <>
+                    <h2>Bio</h2>
+                    <p>{userInfo.bio ? userInfo.bio : `${userInfo.firstName} hasn\'t written a bio yet... guess you\'ll just have to ask!`}</p>
+                    <h2>Location</h2>
+                    <p>{userInfo.location}</p>
+                    <h1>Instruments</h1>
+                    {userInfo.instruments.map((e, i) => (
                         <p key={i}>
                             {Object.keys(e)} - {Object.values(e)} 
                         </p>
-                    ))
-                }
-            </p>
+                    ))}
+                </>
+            }
         </>
     );
 };
