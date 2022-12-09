@@ -7,7 +7,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { updateProfile } from './stateSlices/usersSlice';
-// import { updateLocalProfile } from './stateSlices/signinSlice';
+import { updateLocalProfile } from './stateSlices/signinSlice';
 
 const UpdateProfile = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
@@ -25,7 +25,7 @@ const UpdateProfile = () => {
 
     const handleUpdateProfile = () => {
         dispatch(updateProfile({bio: profile.bio, location: profile.location, id: loggedInUser.id}))
-        // dispatch(updateLocalProfile({bio: profile.bio, location: profile.location}))
+        dispatch(updateLocalProfile({bio: profile.bio, location: profile.location}))
         handleCloseModal();
         // setTimeout(() => {
         //     setProfile({instrument: '', skillLevel: ''});

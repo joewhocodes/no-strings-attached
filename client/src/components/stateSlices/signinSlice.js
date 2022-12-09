@@ -27,14 +27,21 @@ export const signinSlice = createSlice({
             state.loggedInUser = null;
         },
         addLocalInstrument(state, action) {
-            const instrument =  (action.payload.instrument);
-            const newInstrument = {[instrument]: action.payload.skill};
+            const instrument = action.payload.instrument;
+            const newInstrument = { [instrument]: action.payload.skill };
             state.loggedInUser.instruments.push(newInstrument);
         },
         deleteLocalInstrument(state, action) {
-            const filteredInstruments =  (action.payload.instruments);
-            state.loggedInUser.instruments = (filteredInstruments);
-        }
+            const filteredInstruments = action.payload.instruments;
+            state.loggedInUser.instruments = filteredInstruments;
+        },
+        updateLocalProfile(state, action) {
+            const newBio = action.payload.bio;
+            const newLocation = action.payload.location;
+            console.log(action.payload.bio)
+            state.loggedInUser.bio = newBio;
+            state.loggedInUser.location = newLocation;
+        },
     },
     extraReducers: {
         [signinUser.pending]: (state, action) => {
@@ -51,5 +58,5 @@ export const signinSlice = createSlice({
     },
 });
 
-export const { logout, addLocalInstrument, deleteLocalInstrument } = signinSlice.actions;
+export const { logout, addLocalInstrument, deleteLocalInstrument, updateLocalProfile } = signinSlice.actions;
 export default signinSlice.reducer;
