@@ -55,7 +55,7 @@ const Profile = () => {
                 <>
                     <h1>{userInfo.firstName}</h1>
                     <h2>Bio</h2>
-                    <p>{userInfo.bio ? userInfo.bio : `${userInfo.firstName} hasn\'t written a bio yet... guess you\'ll just have to ask!`}</p>
+                    <p>{userInfo.bio ? userInfo.bio : `${userInfo.firstName} hasn't written a bio yet... guess you'll just have to ask!`}</p>
                     <h2>Location</h2>
                     <p>{userInfo.location}</p>
                     <h1>Instruments</h1>
