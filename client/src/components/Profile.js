@@ -34,9 +34,9 @@ const Profile = () => {
     return (
         <>
             <Header />
-            <h1>{userInfo.firstName}</h1>
             {id === loggedInUser.id ?
                 <>
+                    <h1>{loggedInUser.firstName}</h1>
                     <EditProfile/>
                     <h2>Bio</h2>
                     <p>{loggedInUser.bio ? loggedInUser.bio : 'You haven\'t written a bio yet... write a little bit about yourself so others can get to know you!'}</p>
@@ -53,6 +53,7 @@ const Profile = () => {
                 </>
             :
                 <>
+                    <h1>{userInfo.firstName}</h1>
                     <h2>Bio</h2>
                     <p>{userInfo.bio ? userInfo.bio : `${userInfo.firstName} hasn\'t written a bio yet... guess you\'ll just have to ask!`}</p>
                     <h2>Location</h2>
