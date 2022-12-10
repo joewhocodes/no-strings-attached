@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
 dotenv.config();
+mongoose.set('strictQuery', false);
 
 const connectDB = async () => {
     try {
@@ -9,6 +10,7 @@ const connectDB = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
+        // mongoose.set('strictQuery', false);
         console.log(`MongoDB connected: ${conn.connection.host}`);
     } catch (error) {
         console.error(`Error: ${error.message}`);
