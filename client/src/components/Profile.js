@@ -34,38 +34,50 @@ const Profile = () => {
     return (
         <>
             <Header />
-            {id === loggedInUser.id ?
+            {id === loggedInUser.id ? (
                 <>
                     <h1>{loggedInUser.firstName}</h1>
-                    <EditProfile/>
+                    <EditProfile />
                     <h2>Bio</h2>
-                    <p>{loggedInUser.bio ? loggedInUser.bio : 'You haven\'t written a bio yet... write a little bit about yourself so others can get to know you!'}</p>
+                    <p>
+                        {loggedInUser.bio
+                            ? loggedInUser.bio
+                            : "You haven't written a bio yet... write a little bit about yourself so others can get to know you!"}
+                    </p>
                     <h2>Location</h2>
                     <p>{loggedInUser.location}</p>
                     <h1>Instruments</h1>
                     {loggedInUser.instruments.map((e, i) => (
                         <p key={i}>
-                            {Object.keys(e)} - {Object.values(e)} 
-                            <Button onClick={() => handleDeleteInstrument(e)}>X</Button>
+                            {Object.keys(e)} - {Object.values(e)}
+                            <Button onClick={() => handleDeleteInstrument(e)}>
+                                X
+                            </Button>
                         </p>
                     ))}
-                    <AddInstrument/>
+                    <AddInstrument />
                 </>
-            :
+            ) : (
                 <>
                     <h1>{userInfo.firstName}</h1>
                     <h2>Bio</h2>
-                    <p>{userInfo.bio ? userInfo.bio : `${userInfo.firstName} hasn't written a bio yet... guess you'll just have to ask!`}</p>
+                    <p>
+                        {userInfo.bio
+                            ? userInfo.bio
+                            : `${userInfo.firstName} hasn't written a bio yet... guess you'll just have to ask!`}
+                    </p>
                     <h2>Location</h2>
                     <p>{userInfo.location}</p>
                     <h1>Instruments</h1>
-                    {userInfo.instruments.map((e, i) => (
-                        <p key={i}>
-                            {Object.keys(e)} - {Object.values(e)} 
-                        </p>
-                    ))}
+                    {userInfo.instruments.length === 0
+                        ? `${userInfo.firstName} still needs to add some instruments!`
+                        : userInfo.instruments.map((e, i) => (
+                            <p key={i}>
+                                {Object.keys(e)} - {Object.values(e)}
+                            </p>
+                        ))}
                 </>
-            }
+            )}
         </>
     );
 };
