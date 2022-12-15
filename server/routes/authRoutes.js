@@ -39,7 +39,7 @@ router.post(
         const instrument =  (req.body.instrument)
         const newInstrument = {[instrument]: req.body.skill}
         if (req.body) {
-            User.findOneAndUpdate({id: req.body.id}, {$push: {instruments: newInstrument}}, function(err,doc) {
+            User.findOneAndUpdate({_id: req.body.id}, {$push: {instruments: newInstrument}}, function(err,doc) {
                 if (err) { throw err; }
                 else { console.log("Instruments Updated"); }
             })  
@@ -60,7 +60,7 @@ router.post(
         const newInstruments =  (req.body.instruments)
         console.log(newInstruments)
         if (req.body) {
-            User.findOneAndUpdate({id: req.body.id}, {$set: {instruments: req.body.instruments}}, function(err,doc) {
+            User.findOneAndUpdate({_id: req.body.id}, {$set: {instruments: req.body.instruments}}, function(err,doc) {
                 if (err) { throw err; }
                 else { console.log("Instrument deleted"); }
             })  

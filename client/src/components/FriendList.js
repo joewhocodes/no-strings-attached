@@ -37,13 +37,12 @@ const FriendList = () => {
                                 </tr>
                             </thead>
                             <tbody>
-
                             {users
                                 .filter(e => loggedInUser.friends.includes(e._id))
                                 .map((user) => (
                                         <tr key = {user._id}>
                                             <td><NavLink to={`/users/${user._id}`}>{user.firstName}</NavLink></td>
-                                            <td>{user.instruments > 0 && Object.keys(user.instruments[0])}</td>
+                                            <td>{user.instruments.length === 0 ? 'None added yet' : Object.keys(user.instruments)[0]}</td>
                                         </tr>
                                     ))
                             }
