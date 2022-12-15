@@ -67,16 +67,16 @@ const Profile = () => {
             ) : (
                 <>
                     <h1>{userInfo.firstName}</h1>
-                    {loggedInUser.friends.includes(e => userInfo._id) 
+                    {loggedInUser.friends.includes(userInfo._id) 
                     ?
+                        <h2>Friends &#10004;</h2>
+                    :
                         <>
                             <h3>Add Friend</h3>
                             <Button variant="dark" onClick={() => handleAddFriend()}>
                                 +
                             </Button>
                         </>
-                    :
-                        <h2>Friends &#10004;</h2>
                     }
                     <h2>Bio</h2>
                     <p>

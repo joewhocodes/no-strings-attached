@@ -42,7 +42,16 @@ const FriendList = () => {
                                 .map((user) => (
                                         <tr key = {user._id}>
                                             <td><NavLink to={`/users/${user._id}`}>{user.firstName}</NavLink></td>
-                                            <td>{user.instruments.length === 0 ? 'None added yet' : Object.keys(user.instruments)[0]}</td>
+                                            <td>{user.instruments.length === 0 
+                                            ? 
+                                                'None added yet' 
+                                            :
+                                            user.instruments.map((e, i) => (
+                                                <p key={i}>
+                                                    {Object.keys(e)} - {Object.values(e)}
+                                                </p>
+                                            ))}
+                                            </td>
                                         </tr>
                                     ))
                             }
