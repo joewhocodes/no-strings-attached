@@ -40,23 +40,21 @@ const FriendList = () => {
                             {users
                                 .filter(e => loggedInUser.friends.includes(e._id))
                                 .map((user) => (
-                                        <tr key = {user._id}>
-                                            <td><NavLink to={`/users/${user._id}`}>{user.firstName}</NavLink></td>
-                                            <td>{user.instruments.length === 0 
-                                            ? 
-                                                'None added yet' 
-                                            :
-                                            user.instruments.map((e, i) => (
-                                                <p key={i}>
-                                                    {Object.keys(e)} - {Object.values(e)}
-                                                </p>
-                                            ))}
-                                            </td>
-                                        </tr>
-                                    ))
+                                    <tr key = {user._id}>
+                                        <td><NavLink to={`/users/${user._id}`}>{user.firstName}</NavLink></td>
+                                        <td>{user.instruments.length === 0 
+                                        ? 
+                                            'None added yet' 
+                                        :
+                                        user.instruments.map((e, i) => (
+                                            <p key={i}>
+                                                {Object.keys(e)} - {Object.values(e)}
+                                            </p>
+                                        ))}
+                                        </td>
+                                    </tr>
+                                ))
                             }
-                            
-
                             </tbody>
                         </table>
                 }
