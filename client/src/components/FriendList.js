@@ -25,7 +25,7 @@ const FriendList = () => {
         <>
             <Header />
             <div className="col-10, col-sm-8, col-md-6 mx-auto">
-                <h1>All users</h1>
+                <h1>Friends</h1>
                 <table className="table table-striped table-bordered table-hover mt-3">
                     <thead>
                         <tr>
@@ -34,15 +34,15 @@ const FriendList = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {users
-                        .filter(e => e._id !== loggedInUser.id)
+                    {users
+                        .filter(e => loggedInUser.friends.includes(e._id))
                         .map((user) => (
                                 <tr key = {user._id}>
                                     <td><NavLink to={`/users/${user._id}`}>{user.firstName}</NavLink></td>
                                     <td>{user.instruments > 0 && Object.keys(user.instruments[0])}</td>
                                 </tr>
                             ))
-                            }
+                    }
                     </tbody>
                 </table>
             </div>

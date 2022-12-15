@@ -26,7 +26,6 @@ const userSchema = new mongoose.Schema({
     },
     friends: {
         type: Array,
-        strict: false,
     },
 });
 userSchema.methods.matchPassword = async function (incomingPassword) {
