@@ -5,6 +5,8 @@ import AddInstrument from './AddInstrument';
 import EditProfile from './UpdateProfile';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom"
+import { addFriend } from './stateSlices/usersSlice';
+import { addLocalFriend } from './stateSlices/signinSlice';
 import { deleteInstrument } from './stateSlices/usersSlice';
 import { deleteLocalInstrument } from './stateSlices/signinSlice';
 import { useParams } from "react-router-dom";
@@ -29,6 +31,11 @@ const Profile = () => {
         const filteredInstruments = loggedInUser.instruments.filter(e => e !== ins);
         dispatch(deleteInstrument({instruments: filteredInstruments, id: loggedInUser.id}));
         dispatch(deleteLocalInstrument({instruments: filteredInstruments}));
+    };
+
+    const handleAddFriend = () => {
+        dispatch(addFriend({friendId: userInfo._id, loggedInUserId: loggedInUser.id}));
+        dispatch(addLocalFriend({friendId: userInfo._id, loggedInUserId: loggedInUser.id}));
     };
 
     return (
@@ -60,6 +67,10 @@ const Profile = () => {
             ) : (
                 <>
                     <h1>{userInfo.firstName}</h1>
+                    <h3>Add Friend</h3>
+                    <Button variant="dark" onClick={() => handleAddFriend()}>
+                        +
+                    </Button>
                     <h2>Bio</h2>
                     <p>
                         {userInfo.bio

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsers } from './stateSlices/usersSlice';
 import { useNavigate } from 'react-router-dom';
 
-const UserList = () => {
+const FriendList = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
     const { users } = useSelector((state) => state.users);
 
@@ -50,4 +50,4 @@ const UserList = () => {
     );
 };
 
-export default UserList;
+export default FriendList;

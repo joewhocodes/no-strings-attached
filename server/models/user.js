@@ -24,6 +24,10 @@ const userSchema = new mongoose.Schema({
     genres: {
         type: Array,
     },
+    friends: {
+        type: Array,
+        strict: false,
+    },
 });
 userSchema.methods.matchPassword = async function (incomingPassword) {
     return await bcrypt.compare(incomingPassword, this.password);

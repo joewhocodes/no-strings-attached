@@ -73,6 +73,23 @@ router.post(
 );
 
 router.post(
+    '/api/users/addFriend',
+    asyncHandler(async (req, res) => {
+        console.log(req.body.loggedInUserId);
+        console.log(req.body.friendId)
+        if (req.body) {
+            User.findOneAndUpdate({_id: req.body.loggedInUserId}, {$push: {friends: req.body.friendId}}, function(err,doc) {
+                if (err) { throw err; }
+                else { console.log('friend added'); }
+            })  
+            res.json(req.body)
+        } else {
+            console.log('errors ahoy')
+        }
+    })
+);
+
+router.post(
     '/api/users/updateProfile',
     // requireAuth,
     // requireAdmin,
@@ -125,6 +142,7 @@ router.post(
                 isAdmin: user.isAdmin,
                 instruments: user.instruments,
                 bio: user.bio,
+                friends: user.friends,
                 id: user._id,
                 token: generateToken(user._id),
             });
