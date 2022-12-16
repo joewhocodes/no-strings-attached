@@ -4,6 +4,8 @@ const User = require('../models/user');
 const { generateToken } = require('../utils/generateToken');
 const { requireAuth, requireAdmin } = require('../middleware/authMiddleware');
 const router = express.Router();
+const cloudinary = require("../utils/cloudinary");
+const upload = require("../utils/multer");
 
 router.get(
     '/api',
@@ -56,9 +58,6 @@ router.post(
     // requireAuth,
     // requireAdmin,
     asyncHandler(async (req, res) => {
-        console.log(req.body)
-        const newInstruments =  (req.body.instruments)
-        console.log(newInstruments)
         if (req.body) {
             User.findOneAndUpdate({_id: req.body.id}, {$set: {instruments: req.body.instruments}}, function(err,doc) {
                 if (err) { throw err; }
@@ -80,7 +79,22 @@ router.post(
         if (req.body) {
             User.findOneAndUpdate({_id: req.body.loggedInUserId}, {$push: {friends: req.body.friendId}}, function(err,doc) {
                 if (err) { throw err; }
-                else { console.log('friend added'); }
+                else { console.log('Friend added'); }
+            })  
+            res.json(req.body)
+        } else {
+            console.log('errors ahoy')
+        }
+    })
+);
+
+router.post(
+    '/api/users/removeFriend',
+    asyncHandler(async (req, res) => {
+        if (req.body) {
+            User.findOneAndUpdate({_id: req.body.loggedInUserId}, {$set: {friends: req.body.filteredFriends}}, function(err,doc) {
+                if (err) { throw err; }
+                else { console.log('Friend removed'); }
             })  
             res.json(req.body)
         } else {

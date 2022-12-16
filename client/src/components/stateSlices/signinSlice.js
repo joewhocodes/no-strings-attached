@@ -36,13 +36,16 @@ export const signinSlice = createSlice({
             state.loggedInUser.instruments = filteredInstruments;
         },
         addLocalFriend(state, action) {
-            const friend = action.payload.friendId
+            const friend = action.payload.friendId;
             state.loggedInUser.friends.push(friend);
+        },
+        removeLocalFriend(state, action) {
+            const filteredFriends = action.payload.filteredFriends;
+            state.loggedInUser.friends = (filteredFriends);
         },
         updateLocalProfile(state, action) {
             const newBio = action.payload.bio;
             const newLocation = action.payload.location;
-            console.log(action.payload.bio)
             state.loggedInUser.bio = newBio;
             state.loggedInUser.location = newLocation;
         },
@@ -62,5 +65,5 @@ export const signinSlice = createSlice({
     },
 });
 
-export const { logout, addLocalInstrument, deleteLocalInstrument, addLocalFriend, updateLocalProfile } = signinSlice.actions;
+export const { logout, addLocalInstrument, deleteLocalInstrument, addLocalFriend, updateLocalProfile, removeLocalFriend } = signinSlice.actions;
 export default signinSlice.reducer;

@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
+import { Button } from 'react-bootstrap';
 import Header from './Header';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsers } from './stateSlices/usersSlice';
 import { useNavigate } from 'react-router-dom';
+import { removeFriend } from './stateSlices/usersSlice';
+import { removeLocalFriend } from './stateSlices/signinSlice';
 
 const FriendList = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
@@ -21,6 +24,12 @@ const FriendList = () => {
         }
     }, [dispatch, loggedInUser, navigate]);
 
+    const handleRemoveFriend = (i) => {
+        const filteredFriends = loggedInUser.friends.filter(e => e !== i)
+        dispatch(removeFriend({filteredFriends: filteredFriends, loggedInUserId: loggedInUser.id}));
+        dispatch(removeLocalFriend({filteredFriends: filteredFriends, loggedInUserId: loggedInUser.id}));
+    };
+
     return (
         <>
             <Header />
@@ -34,6 +43,7 @@ const FriendList = () => {
                                 <tr>
                                     <th scope="col">Name</th>
                                     <th scope="col">Main Instrument</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,6 +62,12 @@ const FriendList = () => {
                                             </p>
                                         ))}
                                         </td>
+                                        <td>
+                                            <Button onClick={() => handleRemoveFriend(user._id)}>
+                                                X
+                                            </Button>
+                                        </td>
+                                        
                                     </tr>
                                 ))
                             }

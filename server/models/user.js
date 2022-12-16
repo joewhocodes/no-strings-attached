@@ -27,6 +27,12 @@ const userSchema = new mongoose.Schema({
     friends: {
         type: Array,
     },
+    profile_img: {
+        type: String,
+    },
+    cloudinary_id: {
+        type: String,
+    },
 });
 userSchema.methods.matchPassword = async function (incomingPassword) {
     return await bcrypt.compare(incomingPassword, this.password);
