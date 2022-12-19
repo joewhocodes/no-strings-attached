@@ -124,7 +124,7 @@ router.post(
 );
 
 router.post(
-    '/api/signup',
+    '/api/signup', upload.single("image"),
     asyncHandler(async (req, res, next) => {
         const { firstName, email, password } = req.body;
         const userExists = await User.findOne({ email });
@@ -133,13 +133,21 @@ router.post(
             err.status = 400;
             next(err);
         }
+        const result = await cloudinary.uploader.upload(req.file.path);
         const user = await User.create({
             firstName,
             email,
             password,
+            // profile_img: result.secure_url,
+            // cloudinary_id: result.public_id,
         });
         res.json({
             token: generateToken(user._id),
+            user
+        });
+        res.status(200)
+        .send({
+            user
         });
     })
 );
