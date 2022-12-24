@@ -4,8 +4,9 @@ const User = require('../models/user');
 const { generateToken } = require('../utils/generateToken');
 const { requireAuth, requireAdmin } = require('../middleware/authMiddleware');
 const router = express.Router();
-const cloudinary = require("../utils/cloudinary");
 const upload = require("../utils/multer");
+const cloudinary = require("../utils/cloudinary");
+const { MulterError } = require('multer');
 
 router.get(
     '/api',
@@ -124,22 +125,24 @@ router.post(
 );
 
 router.post(
-    '/api/signup', upload.single("image"),
-    asyncHandler(async (req, res, next) => {
-        const { firstName, email, password } = req.body;
+    '/api/signup', upload.single("profileImg"),
+    (async (req, res, next) => {
+        const { firstName, email, password, profileImg } = req.body;
+        console.log(`img is ${profileImg}`)
+        console.log(multer.MulterError)
         const userExists = await User.findOne({ email });
         if (userExists) {
             const err = new Error('User already registered.');
             err.status = 400;
             next(err);
-        }
-        const result = await cloudinary.uploader.upload(req.file.path);
+        };
+        const result = await cloudinary.uploader.upload(req.files.path);
         const user = await User.create({
             firstName,
             email,
             password,
-            // profile_img: result.secure_url,
-            // cloudinary_id: result.public_id,
+            profile_img: result.secure_url,
+            cloudinary_id: result.public_id,
         });
         res.json({
             token: generateToken(user._id),

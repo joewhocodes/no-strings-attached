@@ -16,6 +16,7 @@ const Signup = () => {
             firstName: '',
             email: '',
             password: '',
+            profileImg: '',
         },
         validationSchema: Yup.object({
             firstName: Yup.string()
@@ -29,6 +30,7 @@ const Signup = () => {
                 .required('Please enter your password'),
         }),
         onSubmit: async (values) => {
+            console.log(values)
             dispatch(signupUser(values));
             dispatch(signinUser(values));
         },
@@ -80,6 +82,20 @@ const Signup = () => {
                                 {formik.errors.email}
                             </small>
                         ) : null}
+                    </div>
+                    <div className="form-group col-10 col-sm-8 col-md-4 mx-auto mt-3">
+                        <label htmlFor="profileImg">Profile Image</label>
+                        <input
+                            className="form-control form-control-lg"
+                            id="profileImg"
+                            name="profileImg"
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) =>
+                            formik.setFieldValue('profileImg', e.currentTarget.files[0])
+                                }
+                            // {...formik.getFieldProps('profileImg')}
+                        />
                     </div>
                     <div className="form-group col-10 col-sm-8 col-md-4 mx-auto mt-3">
                         <label htmlFor="password">Password</label>
