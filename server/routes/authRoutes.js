@@ -7,6 +7,12 @@ const router = express.Router();
 const upload = require("../utils/multer");
 const cloudinary = require("../utils/cloudinary");
 const { MulterError } = require('multer');
+const multer = require('multer');
+
+
+
+
+
 
 router.get(
     '/api',
@@ -125,11 +131,12 @@ router.post(
 );
 
 router.post(
-    '/api/signup', upload.single("profileImg"),
+    '/api/signup', upload.uploadImg.single('image'),
     (async (req, res, next) => {
-        const { firstName, email, password, profileImg } = req.body;
-        console.log(`img is ${profileImg}`)
-        console.log(multer.MulterError)
+        const { firstName, email, password, image } = req.body;
+        console.log(firstName + email + password + image)
+        console.log(upload)
+        console.log(req.files)
         const userExists = await User.findOne({ email });
         if (userExists) {
             const err = new Error('User already registered.');

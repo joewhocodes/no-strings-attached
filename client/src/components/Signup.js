@@ -84,15 +84,15 @@ const Signup = () => {
                         ) : null}
                     </div>
                     <div className="form-group col-10 col-sm-8 col-md-4 mx-auto mt-3">
-                        <label htmlFor="profileImg">Profile Image</label>
+                        <label htmlFor='image'>Profile Image</label>
                         <input
                             className="form-control form-control-lg"
-                            id="profileImg"
-                            name="profileImg"
+                            id='image'
+                            name='image'
                             type="file"
                             accept="image/*"
                             onChange={(e) =>
-                            formik.setFieldValue('profileImg', e.currentTarget.files[0])
+                            formik.setFieldValue('image', e.currentTarget.files[0])
                                 }
                             // {...formik.getFieldProps('profileImg')}
                         />
