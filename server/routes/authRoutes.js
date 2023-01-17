@@ -3,16 +3,28 @@ const asyncHandler = require('express-async-handler');
 const User = require('../models/user');
 const { generateToken } = require('../utils/generateToken');
 const { requireAuth, requireAdmin } = require('../middleware/authMiddleware');
-const router = express.Router();
-const upload = require("../utils/multer");
-const cloudinary = require("../utils/cloudinary");
-const { MulterError } = require('multer');
 const multer = require('multer');
+const router = express.Router();
+// const multerUploads = require("../utils/multer");
+const cloudinary = require("../utils/cloudinary");
 
+// import multerUploads from('../utils/multer')
+// const upload = multer({ dest: "public/files" });
 
-
-
-
+// var multer = require('multer');
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, "./uploads");
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + "_" + file.originalname);
+    },
+  });
+  
+  const upload = multer({
+    storage: storage,
+    //   limits: { fileSize: 10 },
+});
 
 router.get(
     '/api',
@@ -131,19 +143,16 @@ router.post(
 );
 
 router.post(
-    '/api/signup', upload.uploadImg.single('image'),
+    '/api/signup', upload.single("image"),
     (async (req, res, next) => {
         const { firstName, email, password, image } = req.body;
-        console.log(firstName + email + password + image)
-        console.log(upload)
-        console.log(req.files)
         const userExists = await User.findOne({ email });
         if (userExists) {
             const err = new Error('User already registered.');
             err.status = 400;
             next(err);
         };
-        const result = await cloudinary.uploader.upload(req.files.path);
+        const result = await cloudinary.uploader.upload(req.file.path);
         const user = await User.create({
             firstName,
             email,
@@ -151,14 +160,14 @@ router.post(
             profile_img: result.secure_url,
             cloudinary_id: result.public_id,
         });
-        res.json({
+        res.status(200).json({
             token: generateToken(user._id),
-            user
+            user,
         });
-        res.status(200)
-        .send({
-            user
-        });
+        // res.status(200)
+        // .send({
+        //     user
+        // });
     })
 );
 

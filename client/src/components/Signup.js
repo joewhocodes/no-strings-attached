@@ -16,7 +16,7 @@ const Signup = () => {
             firstName: '',
             email: '',
             password: '',
-            profileImg: '',
+            image: '',
         },
         validationSchema: Yup.object({
             firstName: Yup.string()
@@ -30,8 +30,12 @@ const Signup = () => {
                 .required('Please enter your password'),
         }),
         onSubmit: async (values) => {
-            console.log(values)
-            dispatch(signupUser(values));
+            // console.log(values)
+            const formData = new FormData();
+            for (let value in values) {
+                formData.append(value, values[value]);
+            }
+            dispatch(signupUser(formData));
             dispatch(signinUser(values));
         },
     });
@@ -42,12 +46,69 @@ const Signup = () => {
 
     return (
         <>
+            {/* <form
+                class="uploadForm"
+                action="/api/signup"
+                method="post"
+                enctype="multipart/form-data"
+            >
+                <label class="control-label">Select File</label>
+                <input name="image" id="image" type="file" class="file" />
+                <label for="firstName">First name:</label>
+                <input type="text" id="firstName" name="firstName" />
+                <label for="email">email</label>
+                <input type="text" id="email" name="email" />
+                <label for="password">password</label>
+                <input type="text" id="password" name="password" />
+                <input type="submit" value="submit" />
+            </form> */}
+            {/* <form onSubmit={formik.handleSubmit}>
+                <div>
+                    <label> Name</label>
+                    <input
+                        type="text"
+                        name="firstName"
+                        onChange={formik.handleChange}
+                        value={formik.values.firstName}
+                    />
+                </div>
+                <div>
+                    <label> Email</label>
+                    <input
+                        type="text"
+                        name="email"
+                        onChange={formik.handleChange}
+                        value={formik.values.email}
+                    />
+                </div>
+                <div>
+                    <label> Password</label>
+                    <input
+                        type="text"
+                        name="password"
+                        onChange={formik.handleChange}
+                        value={formik.values.password}
+                    />
+                </div>
+                <div>
+                    <label> Upload File</label>
+                    <input
+                        type="file"
+                        name="image"
+                        accept="image/*"
+                        onChange={(e) =>
+                            formik.setFieldValue('image',e.currentTarget.files[0])
+                        }
+                    />
+                </div>
+                <button type="submit">Submit</button>
+            </form> */}
             <h1>Welcome to No Strings Attached!</h1>
             <div className="register-form-container">
                 <div className="col-10 col-sm-8 col-md-4 mx-auto">
                     <h1 className="font-weight-bold">Register</h1>
                 </div>
-                <form onSubmit={formik.handleSubmit}>
+                <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
                     <div className="form-group col-10 col-sm-8 col-md-4 mx-auto mt-5">
                         {error && (
                             <div className="alert alert-danger" role="alert">
@@ -94,7 +155,6 @@ const Signup = () => {
                             onChange={(e) =>
                             formik.setFieldValue('image', e.currentTarget.files[0])
                                 }
-                            // {...formik.getFieldProps('profileImg')}
                         />
                     </div>
                     <div className="form-group col-10 col-sm-8 col-md-4 mx-auto mt-3">
@@ -131,9 +191,7 @@ const Signup = () => {
                 </form>
             </div>
             <h3>Already have an account?</h3>
-            <NavLink to={'/Signin'}>
-                                Sign In Here
-            </NavLink>
+            <NavLink to={'/Signin'}>Sign In Here</NavLink>
         </>
     );
 };
