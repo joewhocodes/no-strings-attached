@@ -14,14 +14,14 @@ const cloudinary = require("../utils/cloudinary");
 // var multer = require('multer');
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, "./uploads");
+        cb(null, './uploads');
     },
     filename: function (req, file, cb) {
-      cb(null, Date.now() + "_" + file.originalname);
+        cb(null, Date.now() + '_' + file.originalname);
     },
-  });
-  
-  const upload = multer({
+});
+
+const upload = multer({
     storage: storage,
     //   limits: { fileSize: 10 },
 });
@@ -178,13 +178,13 @@ router.post(
         console.log(email, password)
         const user = await User.findOne({ email });
         if (user && (await user.matchPassword(password))) {
-            console.log('it worked')
             res.json({
                 firstName: user.firstName,
                 email: user.email,
                 isAdmin: user.isAdmin,
                 instruments: user.instruments,
                 bio: user.bio,
+                profileImg: user.profile_img,
                 friends: user.friends,
                 id: user._id,
                 token: generateToken(user._id),

@@ -43,6 +43,7 @@ const Profile = () => {
             <Header />
             {id === loggedInUser.id ? (
                 <>
+                    <img src={(`${loggedInUser.profileImg}`)} alt="Profile" />
                     <h1>{loggedInUser.firstName}</h1>
                     <EditProfile />
                     <h2>Bio</h2>
@@ -66,6 +67,7 @@ const Profile = () => {
                 </>
             ) : (
                 <>
+                    <img src={(`${userInfo.profileImg}`)} alt="Profile" />
                     <h1>{userInfo.firstName}</h1>
                     {loggedInUser.friends.includes(userInfo._id) 
                     ?
