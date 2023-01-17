@@ -157,7 +157,7 @@ router.post(
             firstName,
             email,
             password,
-            profile_img: result.secure_url,
+            profileImg: result.secure_url,
             cloudinary_id: result.public_id,
         });
         res.status(200).json({
@@ -184,7 +184,7 @@ router.post(
                 isAdmin: user.isAdmin,
                 instruments: user.instruments,
                 bio: user.bio,
-                profileImg: user.profile_img,
+                profileImg: user.profileImg,
                 friends: user.friends,
                 id: user._id,
                 token: generateToken(user._id),

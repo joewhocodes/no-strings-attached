@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
     bio: {
         type: String,
     },
-    image: {
+    profileImg: {
         type: String,
     },
     location: {
@@ -29,9 +29,6 @@ const userSchema = new mongoose.Schema({
     },
     friends: {
         type: Array,
-    },
-    profile_img: {
-        type: String,
     },
     cloudinary_id: {
         type: String,
