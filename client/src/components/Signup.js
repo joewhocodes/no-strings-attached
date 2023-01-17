@@ -11,6 +11,13 @@ const Signup = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
     const dispatch = useDispatch();
 
+    const FILE_SIZE = 160 * 1024;
+    const SUPPORTED_FORMATS = [
+        'image/jpg',
+        'image/jpeg',
+        'image/png',
+    ];
+
     const formik = useFormik({
         initialValues: {
             firstName: '',
@@ -28,14 +35,27 @@ const Signup = () => {
             password: Yup.string()
                 .min(5, 'Must be 5 characters or more')
                 .required('Please enter your password'),
-        }),
+            image: Yup.mixed()
+                .test('required', "Please upload a Profile Photo", (value) => value != null)
+                // .test(
+                //     'fileSize',
+                //     'File Size is too large',
+                //     (value) => value.size > FILE_SIZE
+                //     )
+                // .test('fileType', 'Unsupported File Format', (value) =>
+                //     SUPPORTED_FORMATS.includes(value.type)
+                //     )
+            }),
         onSubmit: async (values) => {
-            // console.log(values)
+            // console.log(values.image)
             const formData = new FormData();
             for (let value in values) {
                 formData.append(value, values[value]);
             }
-            const signInData = {email: values.email, password: values.password}
+            const signInData = {
+                email: values.email,
+                password: values.password,
+            };
             dispatch(signupUser(formData));
             setTimeout(() => {
                 dispatch(signinUser(signInData));
@@ -159,6 +179,11 @@ const Signup = () => {
                             formik.setFieldValue('image', e.currentTarget.files[0])
                                 }
                         />
+                        {formik.touched.image && formik.errors.image ? (
+                            <small className="form-text text-danger">
+                                {formik.errors.image}
+                            </small>
+                        ) : null}
                     </div>
                     <div className="form-group col-10 col-sm-8 col-md-4 mx-auto mt-3">
                         <label htmlFor="password">Password</label>
