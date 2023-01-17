@@ -175,8 +175,10 @@ router.post(
     '/api/signin',
     asyncHandler(async (req, res, next) => {
         const { email, password } = req.body;
+        console.log(email, password)
         const user = await User.findOne({ email });
         if (user && (await user.matchPassword(password))) {
+            console.log('it worked')
             res.json({
                 firstName: user.firstName,
                 email: user.email,
@@ -190,6 +192,7 @@ router.post(
         } else {
             const err = new Error('Invalid email or password');
             err.status = 401;
+            console.log(err)
             next(err);
         }
     })

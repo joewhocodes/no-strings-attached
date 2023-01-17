@@ -27,6 +27,7 @@ const Signin = () => {
         }),
         onSubmit: async (values) => {
             dispatch(signinUser(values));
+            console.log(values)
         },
     });
 

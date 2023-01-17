@@ -35,8 +35,11 @@ const Signup = () => {
             for (let value in values) {
                 formData.append(value, values[value]);
             }
+            const signInData = {email: values.email, password: values.password}
             dispatch(signupUser(formData));
-            dispatch(signinUser(values));
+            setTimeout(() => {
+                dispatch(signinUser(signInData));
+            }, 2000);
         },
     });
     
