@@ -5,13 +5,8 @@ const { generateToken } = require('../utils/generateToken');
 const { requireAuth, requireAdmin } = require('../middleware/authMiddleware');
 const multer = require('multer');
 const router = express.Router();
-// const multerUploads = require("../utils/multer");
 const cloudinary = require("../utils/cloudinary");
 
-// import multerUploads from('../utils/multer')
-// const upload = multer({ dest: "public/files" });
-
-// var multer = require('multer');
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './uploads');
@@ -164,10 +159,6 @@ router.post(
             token: generateToken(user._id),
             user,
         });
-        // res.status(200)
-        // .send({
-        //     user
-        // });
     })
 );
 

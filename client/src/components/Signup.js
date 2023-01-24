@@ -11,13 +11,6 @@ const Signup = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
     const dispatch = useDispatch();
 
-    const FILE_SIZE = 160 * 1024;
-    const SUPPORTED_FORMATS = [
-        'image/jpg',
-        'image/jpeg',
-        'image/png',
-    ];
-
     const formik = useFormik({
         initialValues: {
             firstName: '',
@@ -37,17 +30,8 @@ const Signup = () => {
                 .required('Please enter your password'),
             image: Yup.mixed()
                 .test('required', "Please upload a Profile Photo", (value) => value != null)
-                // .test(
-                //     'fileSize',
-                //     'File Size is too large',
-                //     (value) => value.size > FILE_SIZE
-                //     )
-                // .test('fileType', 'Unsupported File Format', (value) =>
-                //     SUPPORTED_FORMATS.includes(value.type)
-                //     )
             }),
         onSubmit: async (values) => {
-            // console.log(values.image)
             const formData = new FormData();
             for (let value in values) {
                 formData.append(value, values[value]);
@@ -69,63 +53,6 @@ const Signup = () => {
 
     return (
         <>
-            {/* <form
-                class="uploadForm"
-                action="/api/signup"
-                method="post"
-                enctype="multipart/form-data"
-            >
-                <label class="control-label">Select File</label>
-                <input name="image" id="image" type="file" class="file" />
-                <label for="firstName">First name:</label>
-                <input type="text" id="firstName" name="firstName" />
-                <label for="email">email</label>
-                <input type="text" id="email" name="email" />
-                <label for="password">password</label>
-                <input type="text" id="password" name="password" />
-                <input type="submit" value="submit" />
-            </form> */}
-            {/* <form onSubmit={formik.handleSubmit}>
-                <div>
-                    <label> Name</label>
-                    <input
-                        type="text"
-                        name="firstName"
-                        onChange={formik.handleChange}
-                        value={formik.values.firstName}
-                    />
-                </div>
-                <div>
-                    <label> Email</label>
-                    <input
-                        type="text"
-                        name="email"
-                        onChange={formik.handleChange}
-                        value={formik.values.email}
-                    />
-                </div>
-                <div>
-                    <label> Password</label>
-                    <input
-                        type="text"
-                        name="password"
-                        onChange={formik.handleChange}
-                        value={formik.values.password}
-                    />
-                </div>
-                <div>
-                    <label> Upload File</label>
-                    <input
-                        type="file"
-                        name="image"
-                        accept="image/*"
-                        onChange={(e) =>
-                            formik.setFieldValue('image',e.currentTarget.files[0])
-                        }
-                    />
-                </div>
-                <button type="submit">Submit</button>
-            </form> */}
             <h1>Welcome to No Strings Attached!</h1>
             <div className="register-form-container">
                 <div className="col-10 col-sm-8 col-md-4 mx-auto">
