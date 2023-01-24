@@ -31,6 +31,7 @@ app.use(
 );
 
 app.use(authRoutes);
+
 app.use(globalErrorHandler);
 
 const PORT = process.env.PORT || 3000;

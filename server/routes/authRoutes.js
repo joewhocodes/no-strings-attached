@@ -18,7 +18,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({
     storage: storage,
-    //   limits: { fileSize: 10 },
 });
 
 router.get(
@@ -140,7 +139,7 @@ router.post(
 router.post(
     '/api/signup', upload.single("image"),
     (async (req, res, next) => {
-        const { firstName, email, password, image } = req.body;
+        const { firstName, email, password } = req.body;
         const userExists = await User.findOne({ email });
         if (userExists) {
             const err = new Error('User already registered.');
