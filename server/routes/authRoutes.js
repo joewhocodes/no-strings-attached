@@ -4,21 +4,23 @@ const User = require('../models/user');
 const { generateToken } = require('../utils/generateToken');
 const { requireAuth, requireAdmin } = require('../middleware/authMiddleware');
 const multer = require('multer');
+const upload = multer()
+let streamifier = require('streamifier');
+
 const router = express.Router();
 const cloudinary = require("../utils/cloudinary");
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './uploads');
-    },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + '_' + file.originalname);
-    },
-});
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         cb(null, './uploads');
+//     },
+//     filename: function (req, file, cb) {
+//         cb(null, Date.now() + '_' + file.originalname);
+//     },
+// });
 
-const upload = multer({
-    storage: storage,
-});
+
+// const upload = multer()
 
 router.get(
     '/api',
@@ -140,24 +142,30 @@ router.post(
     '/api/signup', upload.single("image"),
     (async (req, res, next) => {
         const { firstName, email, password } = req.body;
+
         const userExists = await User.findOne({ email });
         if (userExists) {
             const err = new Error('User already registered.');
             err.status = 400;
             next(err);
         };
-        const result = await cloudinary.uploader.upload(req.file.path);
-        const user = await User.create({
-            firstName,
-            email,
-            password,
-            profileImg: result.secure_url,
-            cloudinary_id: result.public_id,
+        
+        // use streamifier to enable buffer upload to cloudinary
+        let cld_upload_stream = cloudinary.uploader.upload_stream({folder: "no-strings-attached"}, function (error, result) {     
+            const user = User.create({
+                firstName,
+                email,
+                password,
+                profileImg: result.secure_url,
+                cloudinary_id: result.public_id,
+            });   
+            res.status(200).json({
+                token: generateToken(user._id),
+                user,
+            });
         });
-        res.status(200).json({
-            token: generateToken(user._id),
-            user,
-        });
+
+        streamifier.createReadStream(req.file.buffer).pipe(cld_upload_stream);
     })
 );
 
