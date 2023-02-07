@@ -42,6 +42,7 @@ const FriendList = () => {
                             <thead>
                                 <tr>
                                     <th scope="col">Name</th>
+                                    <th scope="col">Location</th>
                                     <th scope="col">Main Instrument</th>
                                     <th scope="col"></th>
                                 </tr>
@@ -52,6 +53,7 @@ const FriendList = () => {
                                 .map((user) => (
                                     <tr key = {user._id}>
                                         <td><NavLink to={`/users/${user._id}`}>{user.firstName}</NavLink></td>
+                                        <td>{user.location}</td>
                                         <td>{user.instruments.length === 0 
                                         ? 
                                             'None added yet' 
@@ -64,7 +66,7 @@ const FriendList = () => {
                                         </td>
                                         <td>
                                             <Button onClick={() => handleRemoveFriend(user._id)}>
-                                                X
+                                                Remove Friend
                                             </Button>
                                         </td>
                                         

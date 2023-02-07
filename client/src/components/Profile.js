@@ -10,6 +10,8 @@ import { addLocalFriend } from './stateSlices/signinSlice';
 import { deleteInstrument } from './stateSlices/usersSlice';
 import { deleteLocalInstrument } from './stateSlices/signinSlice';
 import { useParams } from "react-router-dom";
+import { removeFriend } from './stateSlices/usersSlice';
+import { removeLocalFriend } from './stateSlices/signinSlice';
 
 const Profile = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
@@ -36,6 +38,12 @@ const Profile = () => {
     const handleAddFriend = () => {
         dispatch(addFriend({friendId: userInfo._id, loggedInUserId: loggedInUser.id}));
         dispatch(addLocalFriend({friendId: userInfo._id, loggedInUserId: loggedInUser.id}));
+    };
+
+    const handleRemoveFriend = (i) => {
+        const filteredFriends = loggedInUser.friends.filter(e => e !== i)
+        dispatch(removeFriend({filteredFriends: filteredFriends, loggedInUserId: loggedInUser.id}));
+        dispatch(removeLocalFriend({filteredFriends: filteredFriends, loggedInUserId: loggedInUser.id}));
     };
 
     return (
@@ -71,12 +79,16 @@ const Profile = () => {
                     <h1>{userInfo.firstName}</h1>
                     {loggedInUser.friends.includes(userInfo._id) 
                     ?
-                        <h2>Friends &#10004;</h2>
+                        <>
+                            <h2>Friends &#10004;</h2>
+                            <Button onClick={() => handleRemoveFriend(userInfo._id)}>
+                                Remove Friend
+                            </Button>
+                        </>
                     :
                         <>
-                            <h3>Add Friend</h3>
                             <Button variant="dark" onClick={() => handleAddFriend()}>
-                                +
+                                Add Friend
                             </Button>
                         </>
                     }

@@ -30,6 +30,7 @@ const UserList = () => {
                     <thead>
                         <tr>
                             <th scope="col">Name</th>
+                            <th scope="col">Location</th>
                             <th scope="col">Main Instrument</th>
                         </tr>
                     </thead>
@@ -39,6 +40,7 @@ const UserList = () => {
                         .map((user) => (
                             <tr key = {user._id}>
                                 <td><NavLink to={`/users/${user._id}`}>{user.firstName}</NavLink></td>
+                                <td>{user.location}</td>
                                 <td>{user.instruments.length === 0 
                                 ? 
                                     'None added yet' 
