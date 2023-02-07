@@ -81,6 +81,10 @@ const Signup = () => {
         validationSchema: Yup.object({
             firstName: Yup.string()
                 .max(20, 'Must be 20 characters or less')
+                .matches(
+                    /^[a-zA-Z0-9']+$/,
+                    "No special characters or spaces"
+                )
                 .required('Please enter your first name'),
             email: Yup.string()
                 .email('Invalid email address')
