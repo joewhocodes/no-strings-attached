@@ -140,7 +140,7 @@ router.post(
         // use streamifier to enable buffer upload to cloudinary
         let cld_upload_stream = cloudinary.uploader.upload_stream({folder: "no-strings-attached"}, function (error, result) {     
             const user = User.create({
-                firstName,
+                firstName: `${firstName.charAt(0).toUpperCase()} ${firstName.slice(1).toLowerCase()}`,
                 email,
                 location,
                 password,
