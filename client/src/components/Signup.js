@@ -12,6 +12,7 @@ const Signup = () => {
     const dispatch = useDispatch();
 
     const cities = [
+        "Select One",
         "Bath",
         "Birmingham",
         'Bradford',
@@ -84,6 +85,8 @@ const Signup = () => {
             email: Yup.string()
                 .email('Invalid email address')
                 .required('Please enter your email address'),
+            location: Yup.string()
+                .required('Please select a city'),
             password: Yup.string()
                 .min(5, 'Must be 5 characters or more')
                 .required('Please enter your password'),
@@ -164,6 +167,11 @@ const Signup = () => {
                         >
                             {cities.map(e => <option>{e}</option>)}
                         </select>
+                        {formik.touched.location && formik.errors.location ? (
+                            <small className="form-text text-danger">
+                                {formik.errors.location}
+                            </small>
+                        ) : null}
                     </div>
                     <div className="form-group col-10 col-sm-8 col-md-4 mx-auto mt-3">
                         <label htmlFor='image'>Profile Image</label>
