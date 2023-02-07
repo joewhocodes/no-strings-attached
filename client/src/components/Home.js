@@ -24,7 +24,7 @@ const Home = () => {
             <Header />
             <h1>Home</h1>
             <div className="col-10, col-sm-8, col-md-6 mx-auto">
-                <h1>Welcome back {loggedInUser.firstName}!</h1>
+                <h1>Hey {loggedInUser.firstName}!</h1>
             </div>
         </>
     );

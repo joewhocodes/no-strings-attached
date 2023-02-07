@@ -11,10 +11,69 @@ const Signup = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
     const dispatch = useDispatch();
 
+    const cities = [
+        "Bath",
+        "Birmingham",
+        'Bradford',
+        "Brighton & Hove",
+        "Bristol",
+        "Cambridge",
+        "Canterbury",
+        "Carlisle",
+        "Chelmsford",
+        "Chester",
+        "Chichester",
+        "Colchester",
+        "Coventry",
+        "Derby",
+        "Doncaster",
+        "Durham",
+        "Ely",
+        "Exeter",
+        "Gloucester",
+        "Hereford",
+        "Kingston-upon-Hull",
+        "Lancaster",
+        "Leeds",
+        "Leicester",
+        "Lichfield",
+        "Lincoln",
+        "Liverpool",
+        "London",
+        "Manchester",
+        "Milton Keynes",
+        "Newcastle-upon-Tyne",
+        "Norwich",
+        "Nottingham",
+        "Oxford",
+        "Peterborough",
+        "Plymouth",
+        "Portsmouth",
+        "Preston",
+        "Ripon",
+        "Salford",
+        "Salisbury",
+        "Sheffield",
+        "Southampton",
+        "Southend-on-Sea",
+        "St Albans",
+        "Stoke on Trent",
+        "Sunderland",
+        "Truro",
+        "Wakefield",
+        "Wells",
+        "Westminster",
+        "Winchester",
+        "Wolverhampton",
+        "Worcester",
+        "York",
+    ]
+
     const formik = useFormik({
         initialValues: {
             firstName: '',
             email: '',
+            location: '',
             password: '',
             image: '',
         },
@@ -93,6 +152,18 @@ const Signup = () => {
                                 {formik.errors.email}
                             </small>
                         ) : null}
+                    </div>
+                    <div className="form-group col-10 col-sm-8 col-md-4 mx-auto mt-3">
+                        <label htmlFor="location">Location</label>
+                        <select
+                            className="form-control form-control-lg"
+                            id="location"
+                            name="location"
+                            type="location"
+                            {...formik.getFieldProps('location')}
+                        >
+                            {cities.map(e => <option>{e}</option>)}
+                        </select>
                     </div>
                     <div className="form-group col-10 col-sm-8 col-md-4 mx-auto mt-3">
                         <label htmlFor='image'>Profile Image</label>
