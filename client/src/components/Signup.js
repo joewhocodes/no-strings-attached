@@ -105,10 +105,11 @@ const Signup = () => {
             dispatch(signupUser(formData));
             setTimeout(() => {
                 dispatch(signinUser(signInData));
-            }, 2000);
+            }, 5000);
         },
     });
     
+    // Keeps user logged in on local storage
     if (loggedInUser || userRegistered) {
         localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
     };
