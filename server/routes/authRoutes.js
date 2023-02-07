@@ -10,18 +10,6 @@ let streamifier = require('streamifier');
 const router = express.Router();
 const cloudinary = require("../utils/cloudinary");
 
-// const storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//         cb(null, './uploads');
-//     },
-//     filename: function (req, file, cb) {
-//         cb(null, Date.now() + '_' + file.originalname);
-//     },
-// });
-
-
-// const upload = multer()
-
 router.get(
     '/api',
     requireAuth,
@@ -141,8 +129,7 @@ router.post(
 router.post(
     '/api/signup', upload.single("image"),
     (async (req, res, next) => {
-        const { firstName, email, password } = req.body;
-
+        const { firstName, email, location, password } = req.body;
         const userExists = await User.findOne({ email });
         if (userExists) {
             const err = new Error('User already registered.');
@@ -155,6 +142,7 @@ router.post(
             const user = User.create({
                 firstName,
                 email,
+                location,
                 password,
                 profileImg: result.secure_url,
                 cloudinary_id: result.public_id,
@@ -179,6 +167,7 @@ router.post(
             res.json({
                 firstName: user.firstName,
                 email: user.email,
+                location: user.location,
                 isAdmin: user.isAdmin,
                 instruments: user.instruments,
                 bio: user.bio,
