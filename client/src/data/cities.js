@@ -1,5 +1,4 @@
 export const cities = [
-    'Select One',
     'Bath',
     'Birmingham',
     'Bradford',

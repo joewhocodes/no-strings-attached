@@ -13,8 +13,8 @@ import { cities } from '../data/cities';
 const UpdateProfile = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
     const [profile, setProfile] = useState({
-        bio: '',
-        location: '',
+        bio: loggedInUser.bio,
+        location: loggedInUser.location,
     });
 
     const dispatch = useDispatch();
@@ -63,7 +63,7 @@ const UpdateProfile = () => {
                             title={
                                 profile.location
                                     ? profile.location
-                                    : cities[0]
+                                    : loggedInUser.location
                             }
                             id="dropdown-menu-align-right"
                             onSelect={handleSelectLocation}
