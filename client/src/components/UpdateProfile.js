@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { updateProfile } from './stateSlices/usersSlice';
 import { updateLocalProfile } from './stateSlices/signinSlice';
+import { cities } from '../data/cities';
 
 const UpdateProfile = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
@@ -62,13 +63,14 @@ const UpdateProfile = () => {
                             title={
                                 profile.location
                                     ? profile.location
-                                    : 'Choose Location'
+                                    : cities[0]
                             }
                             id="dropdown-menu-align-right"
                             onSelect={handleSelectLocation}
                             >
-                                <Dropdown.Item eventKey={'Bristol, UK'}>Bristol, UK</Dropdown.Item>
-                                <Dropdown.Item eventKey={'London, UK'}>London, UK</Dropdown.Item>
+                                {cities.map(e => <Dropdown.Item eventKey={e}>{e}</Dropdown.Item>)}
+                                {/* <Dropdown.Item eventKey={'Bristol, UK'}>Bristol, UK</Dropdown.Item> */}
+                                {/* <Dropdown.Item eventKey={'London, UK'}>London, UK</Dropdown.Item> */}
                             </DropdownButton>
                         </Form.Group>
                     </Form>
