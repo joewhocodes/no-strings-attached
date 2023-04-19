@@ -1,5 +1,5 @@
 {
-  "name": "jarjam",
+  "name": "no-strings-attached",
   "version": "1.0.0",
   "description": "An app to connect you to other music makers in your area",
   "main": "index.js",
@@ -31,6 +31,7 @@
     "mongoose": "^6.6.3",
     "multer": "^1.4.5-lts.1",
     "multer-storage-cloudinary": "^4.0.0",
+    "sharp": "^0.31.3",
     "streamifier": "^0.1.1"
   },
   "devDependencies": {

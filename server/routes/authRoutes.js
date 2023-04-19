@@ -4,8 +4,10 @@ const User = require('../models/user');
 const { generateToken } = require('../utils/generateToken');
 const { requireAuth, requireAdmin } = require('../middleware/authMiddleware');
 const multer = require('multer');
-const upload = multer()
-let streamifier = require('streamifier');
+const upload = multer();
+// const sharp = require('sharp');
+const fs = require('fs');
+const streamifier = require('streamifier');
 
 const router = express.Router();
 const cloudinary = require("../utils/cloudinary");
@@ -136,6 +138,15 @@ router.post(
             err.status = 400;
             next(err);
         };
+        
+        // resize uploaded image with sharp
+        // await sharp(req.file.path)
+        // .resize(200, 200)
+        // .jpeg({ quality: 90 })
+        // .toFile(
+        //     path.resolve(req.file.destination,'resized',image)
+        // )
+        // fs.unlinkSync(req.file.path)
         
         // use streamifier to enable buffer upload to cloudinary
         let cld_upload_stream = cloudinary.uploader.upload_stream({folder: "no-strings-attached"}, function (error, result) {     

@@ -12,7 +12,7 @@ const App = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
 
     return (
-        <>  
+        <>
             <main>
                 <Routes>
                     <Route path="/" element={loggedInUser ? <Home /> : <Signup />} />
