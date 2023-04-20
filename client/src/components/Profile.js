@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
 import Header from './Header';
 import AddInstrument from './AddInstrument';
 import EditProfile from './UpdateProfile';
 import FriendList from './FriendList';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from "react-router-dom"
 import { addFriend } from './stateSlices/usersSlice';
 import { addLocalFriend } from './stateSlices/signinSlice';
 import { deleteInstrument } from './stateSlices/usersSlice';
@@ -16,19 +15,11 @@ import { removeLocalFriend } from './stateSlices/signinSlice';
 
 const Profile = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
-    const { id } = useParams();
     const { users } = useSelector((state) => state.users);
+    const { id } = useParams();
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const userInfo = users.find(e => e._id === id);
-
-    useEffect(() => {
-        if (!loggedInUser) {
-            navigate('/signin');
-        }
-    }, [dispatch, loggedInUser, navigate]);
-
     
     const handleDeleteInstrument = (ins) => {
         const filteredInstruments = loggedInUser.instruments.filter(e => e !== ins);
@@ -41,10 +32,12 @@ const Profile = () => {
         dispatch(addLocalFriend({friendId: userInfo._id, loggedInUserId: loggedInUser.id}));
     };
 
-    const handleRemoveFriend = (i) => {
-        const filteredFriends = loggedInUser.friends.filter(e => e !== i)
-        dispatch(removeFriend({filteredFriends: filteredFriends, loggedInUserId: loggedInUser.id}));
-        dispatch(removeLocalFriend({filteredFriends: filteredFriends, loggedInUserId: loggedInUser.id}));
+    const handleRemoveFriend = i => {
+        const friendId = users.find(e => e._id === i);
+        const loggedInUserFilteredFriends = loggedInUser.friends.filter(e => e !== i);
+        const friendFilteredFriends = friendId.friends.filter(e => e !== loggedInUser.id);
+        dispatch(removeFriend({friendId, loggedInUserFilteredFriends, friendFilteredFriends, loggedInUserId: loggedInUser.id}));
+        dispatch(removeLocalFriend({loggedInUserFilteredFriends, friendFilteredFriends, loggedInUserId: loggedInUser.id}));
     };
 
     return (

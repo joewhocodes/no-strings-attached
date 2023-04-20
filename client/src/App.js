@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import Home from './components/Home';
-import UserList from './components/UserList';
-import FriendPage from './components/FriendPage';
 import Signup from './components/Signup';
 import Signin from './components/Signin';
 import Profile from './components/Profile';
-import { useSelector } from 'react-redux';
-import { Routes, Route } from 'react-router-dom';
+import FriendPage from './components/FriendPage';
+import UserList from './components/UserList';
 
 const App = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
+    const navigate = useNavigate();
+    const page = window.location.pathname;
 
+    useEffect(() => {
+        if (!loggedInUser && page !== '/Signin') {
+            return navigate('/');
+        }
+    }, [loggedInUser, navigate, page]);
+    
     return (
         <>
             <main>

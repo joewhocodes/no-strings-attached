@@ -17,7 +17,7 @@ const AddInstrument = () => {
 
     const dispatch = useDispatch();
 
-    // Filters user instruments so only new ones appear in Modal
+    // Filter user instruments so only new ones appear in Modal
     const instrumentList = ['Guitar', 'Bass', 'Vocals', 'Drums', 'Keyboard'].filter(e => !loggedInUser.instruments.map(e => Object.keys(e)[0]).includes(e));
     const skillList = ['Beginner', 'Intermediate', 'Professional'];
 
@@ -25,7 +25,6 @@ const AddInstrument = () => {
     const [show, setShow] = useState(false);
     const handleCloseModal = () => setShow(false);
     const handleShowModal = () => setShow(true);
-
 
     const handleAddInstrument = () => {
         if (!newInstrument.instrument || !newInstrument.skillLevel)  {return}
@@ -37,13 +36,9 @@ const AddInstrument = () => {
         }, 1000)
     };
 
-    const handleSelectInstrument = (e) => {
-        setNewInstrument({...newInstrument, instrument: e});
-    };
+    const handleSelectInstrument = e => setNewInstrument({...newInstrument, instrument: e});
 
-    const handleSelectSkillLevel = (e) => {
-        setNewInstrument({...newInstrument, skillLevel: e});
-    };
+    const handleSelectSkillLevel = e => setNewInstrument({...newInstrument, skillLevel: e});
 
     return (
         <div className="add-instrument-card">

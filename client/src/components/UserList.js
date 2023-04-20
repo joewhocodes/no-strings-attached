@@ -3,23 +3,16 @@ import Header from './Header';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsers } from './stateSlices/usersSlice';
-import { useNavigate } from 'react-router-dom';
 
 const UserList = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
     const { users } = useSelector((state) => state.users);
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     useEffect(() => {
-        if (!loggedInUser) {
-            navigate('/signin');
-        }
-        if (loggedInUser) {
             dispatch(fetchUsers({ token: loggedInUser.token }));
-        }
-    }, [dispatch, loggedInUser, navigate]);
+    }, [dispatch, loggedInUser]);
 
     return (
         <>
