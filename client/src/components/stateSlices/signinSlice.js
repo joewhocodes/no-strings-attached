@@ -40,7 +40,8 @@ export const signinSlice = createSlice({
             state.loggedInUser.friends.push(friend);
         },
         removeLocalFriend(state, action) {
-            const filteredFriends = action.payload.filteredFriends;
+            const filteredFriends = action.payload.loggedInUserFilteredFriends;
+            console.log(`filtered friends = ${filteredFriends}`)
             state.loggedInUser.friends = (filteredFriends);
         },
         updateLocalProfile(state, action) {

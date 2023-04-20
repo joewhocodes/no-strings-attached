@@ -79,13 +79,15 @@ router.post(
 router.post(
     '/api/users/addFriend',
     asyncHandler(async (req, res) => {
-        console.log(req.body.loggedInUserId);
-        console.log(req.body.friendId)
         if (req.body) {
+            User.findOneAndUpdate({_id: req.body.friendId}, {$push: {friends: req.body.loggedInUserId}}, function(err,doc) {
+                if (err) { throw err; }
+                else { console.log('User added to Friend\'s friend list');}
+            })  
             User.findOneAndUpdate({_id: req.body.loggedInUserId}, {$push: {friends: req.body.friendId}}, function(err,doc) {
                 if (err) { throw err; }
                 else { console.log('Friend added'); }
-            })  
+            })
             res.json(req.body)
         } else {
             console.log('errors ahoy')
@@ -97,9 +99,13 @@ router.post(
     '/api/users/removeFriend',
     asyncHandler(async (req, res) => {
         if (req.body) {
-            User.findOneAndUpdate({_id: req.body.loggedInUserId}, {$set: {friends: req.body.filteredFriends}}, function(err,doc) {
+            User.findOneAndUpdate({_id: req.body.loggedInUserId}, {$set: {friends: req.body.loggedInUserFilteredFriends}}, function(err,doc) {
                 if (err) { throw err; }
-                else { console.log('Friend removed'); }
+                else { console.log(`your friends are ${req.body.loggedInUserFilteredFriends}`); }
+            })  
+            User.findOneAndUpdate({_id: req.body.friendId}, {$set: {friends: req.body.friendFilteredFriends}}, function(err,doc) {
+                if (err) { throw err; }
+                else { console.log(`friends friends are ${req.body.friendFilteredFriends}`); }
             })  
             res.json(req.body)
         } else {

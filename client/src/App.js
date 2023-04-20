@@ -1,7 +1,7 @@
 import React from 'react';
 import Home from './components/Home';
 import UserList from './components/UserList';
-import FriendList from './components/FriendList';
+import FriendPage from './components/FriendPage';
 import Signup from './components/Signup';
 import Signin from './components/Signin';
 import Profile from './components/Profile';
@@ -18,7 +18,7 @@ const App = () => {
                     <Route path="/" element={loggedInUser ? <Home /> : <Signup />} />
                     <Route path="/users/:id" element={<Profile />} />
                     <Route path="/Signin" element={<Signin />} />
-                    <Route path="/FriendList" element={<FriendList />} />
+                    <Route path="/FriendPage" element={<FriendPage />} />
                     <Route path="/UserList" element={<UserList />} />
                 </Routes>
             </main>

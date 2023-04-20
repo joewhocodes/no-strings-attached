@@ -26,7 +26,7 @@ const Header = () => {
                         <NavLink to={`/users/${loggedInUser.id}`} >
                             Profile
                         </NavLink>
-                        <NavLink to="/FriendList" >
+                        <NavLink to="/FriendPage" >
                             Friends
                         </NavLink>
                         <NavLink to="/UserList" >

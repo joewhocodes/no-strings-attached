@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap';
 import Header from './Header';
 import AddInstrument from './AddInstrument';
 import EditProfile from './UpdateProfile';
+import FriendList from './FriendList';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom"
 import { addFriend } from './stateSlices/usersSlice';
@@ -72,6 +73,7 @@ const Profile = () => {
                         </p>
                     ))}
                     <AddInstrument />
+                    <FriendList/>
                 </>
             ) : (
                 <>
@@ -108,6 +110,7 @@ const Profile = () => {
                                 {Object.keys(e)} - {Object.values(e)}
                             </p>
                         ))}
+                    <FriendList/>
                 </>
             )}
         </>
