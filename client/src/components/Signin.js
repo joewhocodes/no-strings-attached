@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { signinUser } from './stateSlices/signinSlice';
@@ -7,9 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
 const Signin = () => {
-    const { status, loggedInUser, error } = useSelector(
-        (state) => state.signin
-    );
+    const { status, loggedInUser, error } = useSelector((state) => state.signin);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -31,10 +29,12 @@ const Signin = () => {
         },
     });
 
-    if (loggedInUser) {
-        localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
-        navigate('/');
-    }
+    useEffect(() => {
+        if (loggedInUser) {
+            localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+            navigate('/');
+        }
+    }, [loggedInUser, navigate]);
 
     return (
         <>

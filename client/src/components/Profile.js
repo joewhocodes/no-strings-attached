@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import Header from './Header';
 import AddInstrument from './AddInstrument';
@@ -20,6 +20,13 @@ const Profile = () => {
 
     const dispatch = useDispatch();
     const userInfo = users.find(e => e._id === id);
+
+    useEffect(() => {
+        if (loggedInUser) {
+            
+        }
+        console.log(`user id is ${userInfo._id}`)
+    }, [userInfo])
     
     const handleDeleteInstrument = (ins) => {
         const filteredInstruments = loggedInUser.instruments.filter(e => e !== ins);
@@ -46,7 +53,7 @@ const Profile = () => {
             {id === loggedInUser.id ? (
                 <>
                     <img src={(`${loggedInUser.profileImg}`)} alt="Profile" />
-                    <h1>{loggedInUser.firstName}</h1>
+                    <h1>{userInfo.firstName}</h1>
                     <EditProfile />
                     <h2>Bio</h2>
                     <p>
