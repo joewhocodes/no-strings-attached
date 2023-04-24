@@ -31,7 +31,6 @@ const Signin = () => {
 
     useEffect(() => {
         if (loggedInUser) {
-            localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
             navigate('/');
         }
     }, [loggedInUser, navigate]);

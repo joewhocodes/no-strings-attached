@@ -11,7 +11,9 @@ const UserList = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        if (loggedInUser) {
             dispatch(fetchUsers({ token: loggedInUser.token }));
+        }
     }, [dispatch, loggedInUser]);
 
     return (
