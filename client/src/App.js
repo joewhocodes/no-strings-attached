@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Routes, Route, useNavigate, Navigate, Outlet } from 'react-router-dom';
+import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import Home from './components/Home';
 import Signup from './components/Signup';
 import Signin from './components/Signin';
@@ -10,7 +10,6 @@ import UserList from './components/UserList';
 
 const App = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
-    const navigate = useNavigate();
 
     useEffect(() => {
         if (loggedInUser) {
@@ -29,6 +28,7 @@ const App = () => {
                         <Route path="/FriendPage" element={<FriendPage />} />
                         <Route path="/UserList" element={<UserList />} />
                     </Route>
+                    <Route path="*" element={<Navigate to="/"/>} />
                 </Routes>
             </main>
         </>
