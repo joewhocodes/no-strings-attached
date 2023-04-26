@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Header from './Header';
 import AddInstrument from './AddInstrument';
@@ -14,20 +14,21 @@ import { removeFriend } from './stateSlices/usersSlice';
 import { removeLocalFriend } from './stateSlices/signinSlice';
 
 const Profile = () => {
+    const [userInfo, setUserInfo] = useState();
+    const [loading, setLoading] = useState(true)
     const { loggedInUser } = useSelector((state) => state.signin);
     const { users } = useSelector((state) => state.users);
     const { id } = useParams();
-
     const dispatch = useDispatch();
-    const userInfo = users.find(e => e._id === id);
 
     useEffect(() => {
-        if (loggedInUser) {
-            
-        }
-        console.log(`user id is ${userInfo._id}`)
-    }, [userInfo])
+        const currentUser = users.find(e => e._id === id);
+        setUserInfo(currentUser);
+        setLoading(false)
+    }, [id, users])
+
     
+
     const handleDeleteInstrument = (ins) => {
         const filteredInstruments = loggedInUser.instruments.filter(e => e !== ins);
         dispatch(deleteInstrument({instruments: filteredInstruments, id: loggedInUser.id}));
@@ -50,10 +51,10 @@ const Profile = () => {
     return (
         <>
             <Header />
-            {id === loggedInUser.id ? (
+            {/* {id === loggedInUser.id ? (
                 <>
                     <img src={(`${loggedInUser.profileImg}`)} alt="Profile" />
-                    <h1>{userInfo.firstName}</h1>
+                    <h1>{loggedInUser.firstName}</h1>
                     <EditProfile />
                     <h2>Bio</h2>
                     <p>
@@ -75,7 +76,8 @@ const Profile = () => {
                     <AddInstrument />
                     <FriendList/>
                 </>
-            ) : (
+            ) : ( */}
+                {!loading &&
                 <>
                     <img src={(`${userInfo.profileImg}`)} alt="Profile" />
                     <h1>{userInfo.firstName}</h1>
@@ -103,16 +105,16 @@ const Profile = () => {
                     <h2>Location</h2>
                     <p>{userInfo.location}</p>
                     <h1>Instruments</h1>
-                    {userInfo.instruments.length === 0
+                    {/* {userInfo.instruments.length === 0
                         ? `${userInfo.firstName} still needs to add some instruments!`
                         : userInfo.instruments.map((e, i) => (
                             <p key={i}>
                                 {Object.keys(e)} - {Object.values(e)}
                             </p>
-                        ))}
+                        ))} */}
                     <FriendList/>
                 </>
-            )}
+                }
         </>
     );
 };
