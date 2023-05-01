@@ -35,8 +35,8 @@ const Profile = () => {
     };
 
     const handleAddFriend = () => {
-        dispatch(addFriend({friendId: currentUser._id, loggedInUserId: loggedInUser.id}));
-        dispatch(addLocalFriend({friendId: currentUser._id, loggedInUserId: loggedInUser.id}));
+        dispatch(addFriend({friendId: id, loggedInUserId: loggedInUser.id}));
+        dispatch(addLocalFriend({friendId: id, loggedInUserId: loggedInUser.id}));
     };
 
     const handleRemoveFriend = i => {
@@ -45,6 +45,7 @@ const Profile = () => {
         const friendFilteredFriends = friendId.friends.filter(e => e !== loggedInUser.id);
         dispatch(removeFriend({friendId, loggedInUserFilteredFriends, friendFilteredFriends, loggedInUserId: loggedInUser.id}));
         dispatch(removeLocalFriend({loggedInUserFilteredFriends, friendFilteredFriends, loggedInUserId: loggedInUser.id}));
+
     };
 
     return (
