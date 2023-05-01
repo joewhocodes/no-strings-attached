@@ -5,7 +5,7 @@ import AddInstrument from './AddInstrument';
 import EditProfile from './UpdateProfile';
 import FriendList from './FriendList';
 import { useDispatch, useSelector } from 'react-redux';
-import { addFriend } from './stateSlices/usersSlice';
+import { addFriend, fetchUsers } from './stateSlices/usersSlice';
 import { addLocalFriend } from './stateSlices/signinSlice';
 import { deleteInstrument } from './stateSlices/usersSlice';
 import { deleteLocalInstrument } from './stateSlices/signinSlice';
@@ -14,20 +14,19 @@ import { removeFriend } from './stateSlices/usersSlice';
 import { removeLocalFriend } from './stateSlices/signinSlice';
 
 const Profile = () => {
-    const [userInfo, setUserInfo] = useState();
-    const [loading, setLoading] = useState(true)
+    const [currentUser, setCurrentUser] = useState([]);
     const { loggedInUser } = useSelector((state) => state.signin);
     const { users } = useSelector((state) => state.users);
     const { id } = useParams();
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const currentUser = users.find(e => e._id === id);
-        setUserInfo(currentUser);
-        setLoading(false)
-    }, [id, users])
+        dispatch(fetchUsers({ token: loggedInUser.token }));
+    }, [dispatch, loggedInUser.token]);
 
-    
+    useEffect(() => {
+        setCurrentUser(users.filter(user => user._id === id));
+    }, [id, users])
 
     const handleDeleteInstrument = (ins) => {
         const filteredInstruments = loggedInUser.instruments.filter(e => e !== ins);
@@ -36,8 +35,8 @@ const Profile = () => {
     };
 
     const handleAddFriend = () => {
-        dispatch(addFriend({friendId: userInfo._id, loggedInUserId: loggedInUser.id}));
-        dispatch(addLocalFriend({friendId: userInfo._id, loggedInUserId: loggedInUser.id}));
+        dispatch(addFriend({friendId: currentUser._id, loggedInUserId: loggedInUser.id}));
+        dispatch(addLocalFriend({friendId: currentUser._id, loggedInUserId: loggedInUser.id}));
     };
 
     const handleRemoveFriend = i => {
@@ -51,7 +50,7 @@ const Profile = () => {
     return (
         <>
             <Header />
-            {/* {id === loggedInUser.id ? (
+            {id === loggedInUser.id ? (
                 <>
                     <img src={(`${loggedInUser.profileImg}`)} alt="Profile" />
                     <h1>{loggedInUser.firstName}</h1>
@@ -76,45 +75,50 @@ const Profile = () => {
                     <AddInstrument />
                     <FriendList/>
                 </>
-            ) : ( */}
-                {!loading &&
+            ) : (
+            <>
+            {currentUser.map((e) => (
                 <>
-                    <img src={(`${userInfo.profileImg}`)} alt="Profile" />
-                    <h1>{userInfo.firstName}</h1>
-                    {loggedInUser.friends.includes(userInfo._id) 
-                    ?
+                    <img src={`${e.profileImg}`} alt="Profile" />
+                    <h1>{e.firstName}</h1>
+                    {loggedInUser.friends.includes(e._id) ? (
                         <>
                             <h2>Friends &#10004;</h2>
-                            <Button onClick={() => handleRemoveFriend(userInfo._id)}>
+                            <Button onClick={() => handleRemoveFriend(e._id)}>
                                 Remove Friend
                             </Button>
                         </>
-                    :
+                    ) : (
                         <>
-                            <Button variant="dark" onClick={() => handleAddFriend()}>
+                            <Button
+                                variant="dark"
+                                onClick={() => handleAddFriend()}
+                            >
                                 Add Friend
                             </Button>
                         </>
-                    }
+                    )}
                     <h2>Bio</h2>
                     <p>
-                        {userInfo.bio
-                            ? userInfo.bio
-                            : `${userInfo.firstName} hasn't written a bio yet... guess you'll just have to ask!`}
+                        {e.bio
+                            ? e.bio
+                            : `${e.firstName} hasn't written a bio yet... guess you'll just have to ask!`}
                     </p>
                     <h2>Location</h2>
-                    <p>{userInfo.location}</p>
+                    <p>{e.location}</p>
                     <h1>Instruments</h1>
-                    {/* {userInfo.instruments.length === 0
-                        ? `${userInfo.firstName} still needs to add some instruments!`
-                        : userInfo.instruments.map((e, i) => (
+                    {e.instruments.length === 0
+                        ? `${e.firstName} still needs to add some instruments!`
+                        : e.instruments.map((e, i) => (
                             <p key={i}>
                                 {Object.keys(e)} - {Object.values(e)}
                             </p>
-                        ))} */}
-                    <FriendList/>
+                        ))}
+                    <FriendList />
                 </>
-                }
+            ))}
+            </>
+            )}
         </>
     );
 };
