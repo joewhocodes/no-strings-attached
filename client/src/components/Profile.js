@@ -28,7 +28,7 @@ const Profile = () => {
         setCurrentUser(users.filter(user => user._id === id));
     }, [id, users])
 
-    const handleDeleteInstrument = (ins) => {
+    const handleDeleteInstrument = ins => {
         const filteredInstruments = loggedInUser.instruments.filter(e => e !== ins);
         dispatch(deleteInstrument({instruments: filteredInstruments, id: loggedInUser.id}));
         dispatch(deleteLocalInstrument({instruments: filteredInstruments}));
@@ -37,6 +37,7 @@ const Profile = () => {
     const handleAddFriend = () => {
         dispatch(addFriend({friendId: id, loggedInUserId: loggedInUser.id}));
         dispatch(addLocalFriend({friendId: id, loggedInUserId: loggedInUser.id}));
+        dispatch(fetchUsers({ token: loggedInUser.token }));
     };
 
     const handleRemoveFriend = i => {
@@ -45,6 +46,7 @@ const Profile = () => {
         const friendFilteredFriends = friendId.friends.filter(e => e !== loggedInUser.id);
         dispatch(removeFriend({friendId, loggedInUserFilteredFriends, friendFilteredFriends, loggedInUserId: loggedInUser.id}));
         dispatch(removeLocalFriend({loggedInUserFilteredFriends, friendFilteredFriends, loggedInUserId: loggedInUser.id}));
+        dispatch(fetchUsers({ token: loggedInUser.token }));
 
     };
 
