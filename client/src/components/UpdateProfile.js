@@ -69,8 +69,6 @@ const UpdateProfile = () => {
                             onSelect={handleSelectLocation}
                             >
                                 {cities.map(e => <Dropdown.Item eventKey={e}>{e}</Dropdown.Item>)}
-                                {/* <Dropdown.Item eventKey={'Bristol, UK'}>Bristol, UK</Dropdown.Item> */}
-                                {/* <Dropdown.Item eventKey={'London, UK'}>London, UK</Dropdown.Item> */}
                             </DropdownButton>
                         </Form.Group>
                     </Form>
