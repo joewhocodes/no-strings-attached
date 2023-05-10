@@ -25,8 +25,14 @@ const UserList = () => {
     }, [dispatch, loggedInUser]);
 
     useEffect(() => {
-        setFilteredResults(users.filter(user => user.location === filters.location));
-        setFilteredResults(users.filter(user => user.instruments.find(instrument => instrument.instrument === filters.instrument)));
+        let filteredUsers = users;
+        if (filters.location !== 'All') {
+            filteredUsers = filteredUsers.filter(user => user.location === filters.location);
+        }
+        if (filters.instrument !== 'All') {
+            filteredUsers = filteredUsers.filter(user => user.instruments.find(instrument => instrument.instrument === filters.instrument));
+        }
+        setFilteredResults(filteredUsers);
     }, [filters, users])
 
     return (
@@ -35,7 +41,6 @@ const UserList = () => {
             <div className="col-10, col-sm-8, col-md-6 mx-auto">
                 <h1>All users</h1>
                 <h4>Filter By...</h4>
-                <p>Location</p>
                 <DropdownButton
                             variant="info"
                             title={filters.location}
@@ -60,7 +65,7 @@ const UserList = () => {
                         <tr>
                             <th scope="col">Name</th>
                             <th scope="col">Location</th>
-                            <th scope="col">Main Instrument</th>
+                            <th scope="col">Instruments</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -76,7 +81,7 @@ const UserList = () => {
                                 :
                                 user.instruments.map((e, i) => (
                                     <p key={i}>
-                                        {Object.keys(e)} - {Object.values(e)}
+                                        {e.instrument} - {e.skill}
                                     </p>
                                 ))}
                                 </td>

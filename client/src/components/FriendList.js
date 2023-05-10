@@ -50,7 +50,7 @@ const FriendList = () => {
                                     :
                                     user.instruments.map((e, i) => (
                                         <p key={i}>
-                                            {Object.keys(e)} - {Object.values(e)}
+                                            {e.instrument} - {e.skill}
                                         </p>
                                     ))}
                                     </td>

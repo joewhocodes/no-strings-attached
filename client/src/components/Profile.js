@@ -114,7 +114,7 @@ const Profile = () => {
                         ? `${e.firstName} still needs to add some instruments!`
                         : e.instruments.map((e, i) => (
                             <p key={i}>
-                                {Object.keys(e)} - {Object.values(e)}
+                                {e.instrument} - {e.skill}
                             </p>
                         ))}
                     <FriendList />
