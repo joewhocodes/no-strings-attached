@@ -11,6 +11,10 @@ const UserList = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
     const { users } = useSelector((state) => state.users);
     const [filteredResults, setFilteredResults] = useState([]);
+    const [filters, setFilters] = useState({
+        location: 'All',
+        instrument: 'All',
+    });
 
     const dispatch = useDispatch();
 
@@ -20,19 +24,10 @@ const UserList = () => {
         }
     }, [dispatch, loggedInUser]);
 
-    const filterByLocation = loc => {
-        if (loc === "All") {
-            setFilteredResults(users)
-        } else {
-            setFilteredResults(users.filter(e => e.location === loc));
-        }
-    };
-
-    const filterAll = () => {
-
-        setFilteredResults(users);
-        // setActive("all")
-    };
+    useEffect(() => {
+        setFilteredResults(users.filter(user => user.location === filters.location));
+        setFilteredResults(users.filter(user => user.instruments.find(instrument => instrument.instrument === filters.instrument)));
+    }, [filters, users])
 
     return (
         <>
@@ -43,12 +38,21 @@ const UserList = () => {
                 <p>Location</p>
                 <DropdownButton
                             variant="info"
-                            title={ "All"}
+                            title={filters.location}
                             id="dropdown-menu-align-right"
-                            onSelect={e => filterByLocation(e)}
+                            onSelect={e => setFilters({...filters, location: e})}
                             >   
                                 <Dropdown.Item eventKey={'All'}><i>All</i></Dropdown.Item>
                                 {cities.map(e => <Dropdown.Item eventKey={e}>{e}</Dropdown.Item>)}
+                </DropdownButton>               
+                <DropdownButton
+                            variant="info"
+                            title={filters.instrument}
+                            id="dropdown-menu-align-right"
+                            onSelect={e => setFilters({...filters, instrument: e})}
+                            >   
+                                <Dropdown.Item eventKey={'All'}><i>All</i></Dropdown.Item>
+                                {['Guitar', 'Bass', 'Vocals', 'Drums', 'Keyboard'].map(e => <Dropdown.Item eventKey={e}>{e}</Dropdown.Item>)}
                 </DropdownButton>
 
                 <table className="table table-striped table-bordered table-hover mt-3">
