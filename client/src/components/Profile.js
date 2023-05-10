@@ -4,6 +4,8 @@ import Header from './Header';
 import AddInstrument from './AddInstrument';
 import EditProfile from './UpdateProfile';
 import FriendList from './FriendList';
+import Comments from './Comments';
+import AddComment from './AddComment';
 import { useDispatch, useSelector } from 'react-redux';
 import { addFriend, fetchUsers } from './stateSlices/usersSlice';
 import { addLocalFriend } from './stateSlices/signinSlice';
@@ -47,7 +49,6 @@ const Profile = () => {
         dispatch(removeFriend({friendId, loggedInUserFilteredFriends, friendFilteredFriends, loggedInUserId: loggedInUser.id}));
         dispatch(removeLocalFriend({loggedInUserFilteredFriends, friendFilteredFriends, loggedInUserId: loggedInUser.id}));
         dispatch(fetchUsers({ token: loggedInUser.token }));
-
     };
 
     return (
@@ -77,6 +78,7 @@ const Profile = () => {
                     ))}
                     <AddInstrument />
                     <FriendList/>
+                    <Comments />
                 </>
             ) : (
             <>
@@ -118,6 +120,13 @@ const Profile = () => {
                             </p>
                         ))}
                     <FriendList />
+                    {e.comments.map(c => 
+                    <>
+                        <p>{c.comment}</p>
+                        <p>{c.user}</p>
+                    </>    
+                    )}
+                    <AddComment/>
                 </>
             ))}
             </>

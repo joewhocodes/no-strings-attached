@@ -115,6 +115,26 @@ router.post(
 );
 
 router.post(
+    '/api/users/addComment',
+    // requireAuth,
+    // requireAdmin,
+    asyncHandler(async (req, res) => {
+        // const instrument =  (req.body.instrument)
+        if (req.body) {
+            const newComment = {comment: req.body.comment, owner: req.body.loggedInUserId}
+            User.findOneAndUpdate({_id: req.body.friendId}, {$push: {comments: newComment}}, function(err,doc) {
+                if (err) { throw err; }
+                else { console.log(req.body.loggedInUserId); }
+            })  
+            res.json(req.body)
+        } else {
+            const err = new Error('Users not found.');
+            console.log('errors ahoy')
+        }
+    })
+);
+
+router.post(
     '/api/users/updateProfile',
     // requireAuth,
     // requireAdmin,

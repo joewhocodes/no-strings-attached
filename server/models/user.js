@@ -27,6 +27,9 @@ const userSchema = new mongoose.Schema({
     genres: {
         type: Array,
     },
+    comments: {
+        type: Array,
+    },
     friends: {
         type: Array,
     },
@@ -34,6 +37,7 @@ const userSchema = new mongoose.Schema({
         type: String,
     },
 });
+
 userSchema.methods.matchPassword = async function (incomingPassword) {
     return await bcrypt.compare(incomingPassword, this.password);
 };

@@ -41,6 +41,7 @@ const UserList = () => {
             <div className="col-10, col-sm-8, col-md-6 mx-auto">
                 <h1>All users</h1>
                 <h4>Filter By...</h4>
+                <p>Location</p>
                 <DropdownButton
                             variant="info"
                             title={filters.location}
@@ -50,6 +51,7 @@ const UserList = () => {
                                 <Dropdown.Item eventKey={'All'}><i>All</i></Dropdown.Item>
                                 {cities.map(e => <Dropdown.Item eventKey={e}>{e}</Dropdown.Item>)}
                 </DropdownButton>               
+                <p>Instrument</p>
                 <DropdownButton
                             variant="info"
                             title={filters.instrument}
