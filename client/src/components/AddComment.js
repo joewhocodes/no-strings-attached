@@ -20,7 +20,15 @@ const AddComment = () => {
     const handleShowModal = () => setShow(true);
 
     const handleAddComment = () => {
-        dispatch(addComment({friendId: id, loggedInUserId: loggedInUser.id, comment}));
+        dispatch(
+            addComment({
+                friendId: id,
+                loggedInUserId: loggedInUser.id,
+                firstName: loggedInUser.firstName,
+                profileImg: loggedInUser.profileImg,
+                comment,
+            })
+        );
         dispatch(fetchUsers({ token: loggedInUser.token }));
         handleCloseModal();
     };

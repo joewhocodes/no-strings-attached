@@ -74,9 +74,9 @@ export const removeFriend = createAsyncThunk(
 
 export const addComment = createAsyncThunk(
     'users/addComment',
-    async ({friendId, loggedInUserId, comment}) => {
+    async ({friendId, loggedInUserId, firstName, profileImg, comment}) => {
         try {
-            const { data } = await axios.post('/api/users/addComment', {friendId, loggedInUserId, comment});
+            const { data } = await axios.post('/api/users/addComment', {friendId, loggedInUserId, firstName, profileImg, comment});
             return data;
         } catch (err) {
             console.log(err)

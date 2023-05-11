@@ -120,11 +120,15 @@ const Profile = () => {
                             </p>
                         ))}
                     <FriendList />
+                    <h1>Comments</h1>
                     {e.comments.map(c => 
-                    <>
-                        <p>{c.comment}</p>
-                        <p>{c.user}</p>
-                    </>    
+                        <>
+                            <p>{c.firstName}</p> 
+                            <p>
+                                <img src={(`${c.profileImg}`)} width='100px' alt='profile of commment owner'/>
+                                {c.comment}
+                            </p> 
+                        </>    
                     )}
                     <AddComment/>
                 </>

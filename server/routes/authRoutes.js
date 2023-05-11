@@ -119,12 +119,11 @@ router.post(
     // requireAuth,
     // requireAdmin,
     asyncHandler(async (req, res) => {
-        // const instrument =  (req.body.instrument)
         if (req.body) {
-            const newComment = {comment: req.body.comment, owner: req.body.loggedInUserId}
+            const newComment = {firstName: req.body.firstName, profileImg: req.body.profileImg, comment: req.body.comment, userId: req.body.loggedInUserId}
             User.findOneAndUpdate({_id: req.body.friendId}, {$push: {comments: newComment}}, function(err,doc) {
                 if (err) { throw err; }
-                else { console.log(req.body.loggedInUserId); }
+                else { console.log(newComment); }
             })  
             res.json(req.body)
         } else {
