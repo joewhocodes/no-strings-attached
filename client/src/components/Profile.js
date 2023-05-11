@@ -78,7 +78,16 @@ const Profile = () => {
                     ))}
                     <AddInstrument />
                     <FriendList/>
-                    <Comments />
+                    <h1>Comments</h1>
+                    {loggedInUser.comments.map(c =>
+                        <>
+                            <p>{c.firstName}</p> 
+                            <p>
+                                <img src={(`${c.profileImg}`)} width='100px' alt='profile of commment owner'/>
+                                {c.comment}
+                            </p> 
+                        </>    
+                    )}
                 </>
             ) : (
             <>

@@ -30,6 +30,7 @@ const AddComment = () => {
             })
         );
         dispatch(fetchUsers({ token: loggedInUser.token }));
+        setComment('');
         handleCloseModal();
     };
 

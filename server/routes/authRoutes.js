@@ -209,6 +209,7 @@ router.post(
                 instruments: user.instruments,
                 bio: user.bio,
                 profileImg: user.profileImg,
+                comments: user.comments,
                 friends: user.friends,
                 id: user._id,
                 token: generateToken(user._id),
