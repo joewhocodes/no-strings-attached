@@ -4,6 +4,7 @@ import axios from 'axios';
 const initialState = {
     status: 'idle',
     users: [],
+    currentProfile: {},
     error: null,
 };
 
@@ -20,6 +21,18 @@ export const fetchUsers = createAsyncThunk(
             return data;
         } catch (err) {
             return rejectWithValue(err.response.data);
+        }
+    }
+);
+
+export const setCurrentProfile = createAsyncThunk(
+    'users/setCurrentProfile',
+    async ({currentProfileId}) => {
+        try {
+            const { data } = await axios.get(`/api/user/${currentProfileId}`);
+            return data;
+        } catch (err) {
+            console.log(err)
         }
     }
 );
@@ -74,9 +87,21 @@ export const removeFriend = createAsyncThunk(
 
 export const addComment = createAsyncThunk(
     'users/addComment',
-    async ({friendId, loggedInUserId, firstName, profileImg, comment}) => {
+    async ({commentId, friendId, loggedInUserId, firstName, profileImg, comment}) => {
         try {
-            const { data } = await axios.post('/api/users/addComment', {friendId, loggedInUserId, firstName, profileImg, comment});
+            const { data } = await axios.post('/api/users/addComment', {commentId, friendId, loggedInUserId, firstName, profileImg, comment});
+            return data;
+        } catch (err) {
+            console.log(err)
+        }
+    }
+);
+
+export const deleteComment = createAsyncThunk(
+    'users/deleteComment',
+    async ({commentId}) => {
+        try {
+            const { data } = await axios.post('/api/users/deleteComment', {commentId});
             return data;
         } catch (err) {
             console.log(err)
@@ -115,6 +140,10 @@ export const usersSlice = createSlice({
         [fetchUsers.fulfilled]: (state, action) => {
             state.status = 'succeeded';
             state.users = [...action.payload];
+        },
+        [setCurrentProfile.fulfilled]: (state, action) => {
+            state.status = 'succeeded';
+            state.currentProfile = action.payload;
         },
         [fetchUsers.rejected]: (state, action) => {
             state.status = 'failed';

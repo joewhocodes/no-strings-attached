@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useParams } from "react-router-dom";
 import { addComment, fetchUsers } from './stateSlices/usersSlice';
+import { nanoid } from 'nanoid';
 
 const AddComment = () => {
     const [comment, setComment] = useState('');
@@ -22,6 +23,7 @@ const AddComment = () => {
     const handleAddComment = () => {
         dispatch(
             addComment({
+                commentId: nanoid(),
                 friendId: id,
                 loggedInUserId: loggedInUser.id,
                 firstName: loggedInUser.firstName,

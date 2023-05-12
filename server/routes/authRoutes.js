@@ -13,16 +13,6 @@ const router = express.Router();
 const cloudinary = require("../utils/cloudinary");
 
 router.get(
-    '/api',
-    requireAuth,
-    asyncHandler(async (req, res) => {
-        res.send({
-            status: 'You can download the book now.',
-        });
-    })
-);
-
-router.get(
     '/api/users',
     requireAuth,
     // requireAdmin,
@@ -38,6 +28,19 @@ router.get(
     })
 );
 
+router.get(
+    '/api/user/:id',
+    asyncHandler(async (req, res) => {
+        const user = await User.findOne({_id: req.params.id});
+        if (req.body) {
+            res.json(user)
+        } else {
+            const err = new Error('Users not found.');
+            console.log('errors ahoy')
+        }
+    })
+);
+
 router.post(
     '/api/users/addInstrument',
     // requireAuth,
@@ -48,8 +51,7 @@ router.post(
         if (req.body) {
             User.findOneAndUpdate({_id: req.body.id}, {$push: {instruments: newInstrument}}, function(err,doc) {
                 if (err) { throw err; }
-                else { console.log(newInstrument); }
-            })  
+            })
             res.json(req.body)
         } else {
             const err = new Error('Users not found.');
@@ -120,8 +122,26 @@ router.post(
     // requireAdmin,
     asyncHandler(async (req, res) => {
         if (req.body) {
-            const newComment = {firstName: req.body.firstName, profileImg: req.body.profileImg, comment: req.body.comment, userId: req.body.loggedInUserId}
+            const newComment = {commentId: req.body.commentId, firstName: req.body.firstName, profileImg: req.body.profileImg, comment: req.body.comment, userId: req.body.loggedInUserId}
             User.findOneAndUpdate({_id: req.body.friendId}, {$push: {comments: newComment}}, function(err,doc) {
+                if (err) { throw err; }
+                else { console.log(newComment); }
+            })  
+            res.json(req.body)
+        } else {
+            const err = new Error('Users not found.');
+            console.log('errors ahoy')
+        }
+    })
+);
+
+router.post(
+    '/api/users/deleteComment',
+    // requireAuth,
+    // requireAdmin,
+    asyncHandler(async (req, res) => {
+        if (req.body) {
+            User.findOneAndUpdate({_id: req.body.id}, {$set: {comments: req.body.comments}}, function(err,doc) {
                 if (err) { throw err; }
                 else { console.log(newComment); }
             })  
