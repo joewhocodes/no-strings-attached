@@ -5,7 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useParams } from "react-router-dom";
-import { addComment, fetchUsers } from './stateSlices/usersSlice';
+import { addComment, fetchUsers, setCurrentProfile } from './stateSlices/usersSlice';
 import { nanoid } from 'nanoid';
 
 const AddComment = () => {
@@ -31,7 +31,8 @@ const AddComment = () => {
                 comment,
             })
         );
-        dispatch(fetchUsers({ token: loggedInUser.token }));
+        // dispatch(fetchUsers({ token: loggedInUser.token }));
+        dispatch(setCurrentProfile({ currentProfileId: id }))
         setComment('');
         handleCloseModal();
     };

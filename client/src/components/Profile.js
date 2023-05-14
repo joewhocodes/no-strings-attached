@@ -5,6 +5,7 @@ import AddInstrument from './AddInstrument';
 import EditProfile from './UpdateProfile';
 import FriendList from './FriendList';
 import AddComment from './AddComment';
+import Comments from './Comments';
 import { useDispatch, useSelector } from 'react-redux';
 import { addFriend, fetchUsers, setCurrentProfile, deleteInstrument, removeFriend, deleteComment } from './stateSlices/usersSlice';
 import { addLocalFriend, deleteLocalInstrument, removeLocalFriend } from './stateSlices/signinSlice';
@@ -71,23 +72,7 @@ const Profile = () => {
                         </p>
                         <h2>Location</h2>
                         <p>{loggedInUser.location}</p>                            
-                        {/* {loggedInUser.friends.includes(currentProfile._id) ? (
-                                <>
-                                    <h2>Friends &#10004;</h2>
-                                    <Button onClick={() => handleRemoveFriend(currentProfile._id)}>
-                                        Remove Friend
-                                    </Button>
-                                </>
-                            ) : (
-                                <>
-                                    <Button
-                                        variant="dark"
-                                        onClick={() => handleAddFriend()}
-                                    >
-                                        Add Friend
-                                    </Button>
-                                </>
-                        )} */}
+
                         <h1>Instruments</h1>
                         {loggedInUser.instruments.map((e, i) => (
                             <p key={i}>
@@ -132,12 +117,28 @@ const Profile = () => {
                                             {e.instrument} - {e.skill}
                                         </p>
                                     ))} */}
+
+                                {loggedInUser.friends.includes(currentProfile._id) ? (
+                                    <>
+                                        <h2>Friends &#10004;</h2>
+                                        <Button onClick={() => handleRemoveFriend(currentProfile._id)}>
+                                            Remove Friend
+                                        </Button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <Button
+                                            variant="dark"
+                                            onClick={() => handleAddFriend()}
+                                        >
+                                            Add Friend
+                                        </Button>
+                                    </>
+                                )}
                                 <FriendList />
                                 <h1>Comments</h1>
-
-                                X 
                                 <AddComment/>
-                                {/* <DeleteComment/> */}
+                                <Comments/>
                             </>
                         )}
                     </>
