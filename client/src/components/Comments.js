@@ -1,15 +1,17 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteComment } from './stateSlices/usersSlice';
+import { deleteComment, fetchUsers } from './stateSlices/usersSlice';
 import { Button } from 'react-bootstrap';
 
 const Comments = () => {
+    const { loggedInUser } = useSelector((state) => state.signin);
     const { currentProfile } = useSelector((state) => state.users);
     const dispatch = useDispatch();
 
     const handleDeleteComment = commentId => {
         const filteredComments = currentProfile.comments.filter(e => e.commentId !== commentId);
         dispatch(deleteComment({id : currentProfile._id, filteredComments}));
+        dispatch(fetchUsers({ token: loggedInUser.token }));
     }
 
     return (
