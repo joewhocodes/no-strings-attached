@@ -99,9 +99,9 @@ export const addComment = createAsyncThunk(
 
 export const deleteComment = createAsyncThunk(
     'users/deleteComment',
-    async ({commentId}) => {
+    async ({id, filteredComments}) => {
         try {
-            const { data } = await axios.post('/api/users/deleteComment', {commentId});
+            const { data } = await axios.post('/api/users/deleteComment', {id, filteredComments});
             return data;
         } catch (err) {
             console.log(err)

@@ -8,17 +8,14 @@ const Comments = () => {
     const dispatch = useDispatch();
 
     const handleDeleteComment = commentId => {
-        console.log(`comment id is ${commentId}`)
-        console.log(`current user comments are ${currentProfile.map(e => e.comments)}`)
         const filteredComments = currentProfile.comments.filter(e => e.commentId !== commentId);
-        console.log(`filtered comments are ${filteredComments}`)
-        dispatch(deleteComment({filteredComments}));
+        dispatch(deleteComment({id : currentProfile._id, filteredComments}));
     }
 
     return (
         <>
-            {currentProfile && currentProfile.comments.map(c => 
-                <React.Fragment key={c.firstName}>
+            {currentProfile.comments && currentProfile.comments.map(c => 
+                <React.Fragment>
                         <p>{c.firstName}</p> 
                         <p>
                             <img src={(`${c.profileImg}`)} width='100px' alt='profile of commment owner'/>

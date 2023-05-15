@@ -141,9 +141,10 @@ router.post(
     // requireAdmin,
     asyncHandler(async (req, res) => {
         if (req.body) {
-            User.findOneAndUpdate({_id: req.body.id}, {$set: {comments: req.body.comments}}, function(err,doc) {
+            console.log(req.body.filteredComments)
+            User.findOneAndUpdate({_id: req.body.id,}, {$set: {comments: req.body.filteredComments}}, function(err,doc) {
                 if (err) { throw err; }
-                else { console.log(newComment); }
+                else {}
             })  
             res.json(req.body)
         } else {
