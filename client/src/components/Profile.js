@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import Header from './Header';
 import AddInstrument from './AddInstrument';
@@ -7,12 +7,11 @@ import FriendList from './FriendList';
 import AddComment from './AddComment';
 import Comments from './Comments';
 import { useDispatch, useSelector } from 'react-redux';
-import { addFriend, fetchUsers, setCurrentProfile, deleteInstrument, removeFriend, deleteComment } from './stateSlices/usersSlice';
+import { addFriend, fetchUsers, setCurrentProfile, deleteInstrument, removeFriend } from './stateSlices/usersSlice';
 import { addLocalFriend, deleteLocalInstrument, removeLocalFriend } from './stateSlices/signinSlice';
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
 const Profile = () => {
-    const [isLoading, setLoading] = useState([]);
     const { loggedInUser } = useSelector((state) => state.signin);
     const { users } = useSelector((state) => state.users);
     const { currentProfile } = useSelector((state) => state.users);
@@ -48,13 +47,7 @@ const Profile = () => {
         dispatch(fetchUsers({ token: loggedInUser.token }));
     };
 
-    const handleDeleteComment = commentId => {
-        console.log(`comment id is ${commentId}`)
-        console.log(`current user comments are ${currentProfile.map(e => e.comments)}`)
-        const filteredComments = currentProfile.comments.filter(e => e.commentId !== commentId);
-        console.log(`filtered comments are ${filteredComments}`)
-        dispatch(deleteComment({filteredComments}));
-    }
+
 
     return (
         <>

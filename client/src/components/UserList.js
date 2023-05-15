@@ -49,7 +49,7 @@ const UserList = () => {
                             onSelect={e => setFilters({...filters, location: e})}
                             >   
                                 <Dropdown.Item eventKey={'All'}><i>All</i></Dropdown.Item>
-                                {cities.map(e => <Dropdown.Item eventKey={e}>{e}</Dropdown.Item>)}
+                                {cities.map(e => <Dropdown.Item eventKey={e} key = {e}>{e}</Dropdown.Item>)}
                 </DropdownButton>               
                 <p>Instrument</p>
                 <DropdownButton
@@ -59,7 +59,7 @@ const UserList = () => {
                             onSelect={e => setFilters({...filters, instrument: e})}
                             >   
                                 <Dropdown.Item eventKey={'All'}><i>All</i></Dropdown.Item>
-                                {['Guitar', 'Bass', 'Vocals', 'Drums', 'Keyboard'].map(e => <Dropdown.Item eventKey={e}>{e}</Dropdown.Item>)}
+                                {['Guitar', 'Bass', 'Vocals', 'Drums', 'Keyboard'].map(e => <Dropdown.Item eventKey={e} key={e}>{e}</Dropdown.Item>)}
                 </DropdownButton>
 
                 <table className="table table-striped table-bordered table-hover mt-3">
