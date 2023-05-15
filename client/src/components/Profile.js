@@ -79,13 +79,13 @@ const Profile = () => {
                         <FriendList/>
                         <h1>Comments</h1>
                         {loggedInUser.comments.map(c =>
-                            <>
+                            <React.Fragment key = {c.firstName}>
                                 <p>{c.firstName}</p> 
                                 <p>
                                     <img src={(`${c.profileImg}`)} width='100px' alt='profile of commment owner'/>
                                     {c.comment}
                                 </p> 
-                            </>    
+                            </React.Fragment>    
                         )}
                     </>
                 ) : (

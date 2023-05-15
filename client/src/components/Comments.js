@@ -16,20 +16,20 @@ const Comments = () => {
     }
 
     return (
-    <>
-        {currentProfile && currentProfile.comments.map(c => 
-            <>
-                    <p>{c.firstName}</p> 
-                    <p>
-                        <img src={(`${c.profileImg}`)} width='100px' alt='profile of commment owner'/>
-                        {c.comment}
-                    </p> 
-                    <Button onClick={() => handleDeleteComment(c.commentId)}>
-                        X
-                    </Button>
-            </>
-        )}
-    </>
+        <>
+            {currentProfile && currentProfile.comments.map(c => 
+                <React.Fragment key={c.firstName}>
+                        <p>{c.firstName}</p> 
+                        <p>
+                            <img src={(`${c.profileImg}`)} width='100px' alt='profile of commment owner'/>
+                            {c.comment}
+                        </p> 
+                        <Button onClick={() => handleDeleteComment(c.commentId)}>
+                            X
+                        </Button>
+                </React.Fragment>
+            )}
+        </>
     )
 }
 

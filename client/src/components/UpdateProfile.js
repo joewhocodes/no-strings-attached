@@ -68,7 +68,7 @@ const UpdateProfile = () => {
                             id="dropdown-menu-align-right"
                             onSelect={handleSelectLocation}
                             >
-                                {cities.map(e => <Dropdown.Item eventKey={e}>{e}</Dropdown.Item>)}
+                                {cities.map(e => <Dropdown.Item eventKey={e} key ={e}>{e}</Dropdown.Item>)}
                             </DropdownButton>
                         </Form.Group>
                     </Form>
