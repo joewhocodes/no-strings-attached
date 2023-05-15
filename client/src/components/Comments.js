@@ -23,9 +23,11 @@ const Comments = () => {
                             <img src={(`${c.profileImg}`)} width='100px' alt='profile of commment owner'/>
                             {c.comment}
                         </p> 
-                        <Button onClick={() => handleDeleteComment(c.commentId)}>
-                            X
-                        </Button>
+                        {loggedInUser.id === c.userId &&
+                            <Button onClick={() => handleDeleteComment(c.commentId)}>
+                                X
+                            </Button>
+                        }
                 </React.Fragment>
             )}
         </>
