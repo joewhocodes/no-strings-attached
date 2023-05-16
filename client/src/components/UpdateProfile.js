@@ -1,13 +1,13 @@
-import './AddInstrument.css';
-import { Button } from 'react-bootstrap';
-import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
-import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateProfile } from './stateSlices/usersSlice';
 import { updateLocalProfile } from './stateSlices/signinSlice';
+import { Button } from 'react-bootstrap';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
+import './AddInstrument.css';
 import { cities } from '../data/cities';
 
 const UpdateProfile = () => {
@@ -37,7 +37,7 @@ const UpdateProfile = () => {
     return (
         <div className="add-instrument-card">
             <Button variant="dark" onClick={() => handleShowModal()}>
-            Edit Profile
+                Edit Profile
             </Button>
 
             <Modal show={show} onHide={handleCloseModal}>
@@ -47,28 +47,42 @@ const UpdateProfile = () => {
                 <Modal.Body>
                     <Form>
                         <Form.Group
-                        className="mb-3"
-                        controlId="exampleForm.ControlTextarea1"
+                            className="mb-3"
+                            controlId="exampleForm.ControlTextarea1"
                         >
                             <Form.Label>Bio</Form.Label>
-                            <Form.Control as="textarea" rows={3} value={profile.bio} onChange={e => setProfile({...profile, bio: e.target.value})} />
+                            <Form.Control
+                                as="textarea"
+                                rows={3}
+                                value={profile.bio}
+                                onChange={(e) =>
+                                    setProfile({
+                                        ...profile,
+                                        bio: e.target.value,
+                                    })
+                                }
+                            />
                         </Form.Group>
                         <Form.Group
-                        className="mb-3"
-                        controlId="exampleForm.ControlTextarea1"
+                            className="mb-3"
+                            controlId="exampleForm.ControlTextarea1"
                         >
                             <Form.Label>Location</Form.Label>
                             <DropdownButton
-                            variant="info"
-                            title={
-                                profile.location
-                                    ? profile.location
-                                    : loggedInUser.location
-                            }
-                            id="dropdown-menu-align-right"
-                            onSelect={handleSelectLocation}
+                                variant="info"
+                                title={
+                                    profile.location
+                                        ? profile.location
+                                        : loggedInUser.location
+                                }
+                                id="dropdown-menu-align-right"
+                                onSelect={handleSelectLocation}
                             >
-                                {cities.map(e => <Dropdown.Item eventKey={e} key ={e}>{e}</Dropdown.Item>)}
+                                {cities.map((e) => (
+                                    <Dropdown.Item eventKey={e} key={e}>
+                                        {e}
+                                    </Dropdown.Item>
+                                ))}
                             </DropdownButton>
                         </Form.Group>
                     </Form>

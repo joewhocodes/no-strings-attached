@@ -1,12 +1,12 @@
-import './AddInstrument.css';
+import { useState } from 'react';
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { addComment, setCurrentProfile } from './stateSlices/usersSlice';
 import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
-import { useParams } from "react-router-dom";
-import { addComment, fetchUsers, setCurrentProfile } from './stateSlices/usersSlice';
 import { nanoid } from 'nanoid';
+import './AddInstrument.css';
 
 const AddComment = () => {
     const [comment, setComment] = useState('');
@@ -31,7 +31,6 @@ const AddComment = () => {
                 comment,
             })
         );
-        // dispatch(fetchUsers({ token: loggedInUser.token }));
         dispatch(setCurrentProfile({ currentProfileId: id }))
         setComment('');
         handleCloseModal();
@@ -40,7 +39,7 @@ const AddComment = () => {
     return (
         <div className="add-instrument-card">
             <Button variant="dark" onClick={() => handleShowModal()}>
-            Add Comment
+                Add Comment
             </Button>
             <Modal show={show} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
@@ -49,11 +48,16 @@ const AddComment = () => {
                 <Modal.Body>
                     <Form>
                         <Form.Group
-                        className="mb-3"
-                        controlId="exampleForm.ControlTextarea1"
+                            className="mb-3"
+                            controlId="exampleForm.ControlTextarea1"
                         >
                             <Form.Label>Comment</Form.Label>
-                            <Form.Control as="textarea" rows={3} value={comment} onChange={e => setComment(e.target.value)} />
+                            <Form.Control
+                                as="textarea"
+                                rows={3}
+                                value={comment}
+                                onChange={(e) => setComment(e.target.value)}
+                            />
                         </Form.Group>
                     </Form>
                 </Modal.Body>

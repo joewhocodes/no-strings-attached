@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { addFriend, fetchUsers, setCurrentProfile, deleteInstrument, removeFriend } from './stateSlices/usersSlice';
+import { addLocalFriend, deleteLocalInstrument, removeLocalFriend } from './stateSlices/signinSlice';
 import Header from './Header';
 import AddInstrument from './AddInstrument';
 import EditProfile from './UpdateProfile';
 import FriendList from './FriendList';
 import AddComment from './AddComment';
 import Comments from './Comments';
-import { useDispatch, useSelector } from 'react-redux';
-import { addFriend, fetchUsers, setCurrentProfile, deleteInstrument, removeFriend } from './stateSlices/usersSlice';
-import { addLocalFriend, deleteLocalInstrument, removeLocalFriend } from './stateSlices/signinSlice';
-import { useParams } from 'react-router-dom';
 
 const Profile = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
@@ -47,8 +47,6 @@ const Profile = () => {
         dispatch(fetchUsers({ token: loggedInUser.token }));
     };
 
-
-
     return (
         <>
             <Header />
@@ -65,7 +63,6 @@ const Profile = () => {
                         </p>
                         <h2>Location</h2>
                         <p>{loggedInUser.location}</p>                            
-
                         <h1>Instruments</h1>
                         {loggedInUser.instruments.map((e, i) => (
                             <p key={i}>
@@ -76,7 +73,7 @@ const Profile = () => {
                             </p>
                         ))}
                         <AddInstrument />
-                        <FriendList/>
+                        <FriendList />
                         <h1>Comments</h1>
                         {loggedInUser.comments.map(c =>
                             <React.Fragment key = {c.firstName}>

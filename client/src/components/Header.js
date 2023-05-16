@@ -1,8 +1,7 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from './stateSlices/signinSlice';
-import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
@@ -20,18 +19,12 @@ const Header = () => {
             <nav>
                 <ul>
                     <li>
-                        <NavLink to="/" >
-                            Home
-                        </NavLink>
-                        <NavLink to={`/users/${loggedInUser.id}`} >
+                        <NavLink to="/">Home</NavLink>
+                        <NavLink to={`/users/${loggedInUser.id}`}>
                             Profile
                         </NavLink>
-                        <NavLink to="/FriendPage" >
-                            Friends
-                        </NavLink>
-                        <NavLink to="/UserList" >
-                            All Users
-                        </NavLink>
+                        <NavLink to="/FriendPage">Friends</NavLink>
+                        <NavLink to="/UserList">All Users</NavLink>
                     </li>
                     <li>
                         {loggedInUser && (

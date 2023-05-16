@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import Header from './Header';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsers } from './stateSlices/usersSlice';
-import { cities } from '../data/cities';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
+import Header from './Header';
+import { cities } from '../data/cities';
 
 const UserList = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
@@ -43,23 +43,37 @@ const UserList = () => {
                 <h4>Filter By...</h4>
                 <p>Location</p>
                 <DropdownButton
-                            variant="info"
-                            title={filters.location}
-                            id="dropdown-menu-align-right"
-                            onSelect={e => setFilters({...filters, location: e})}
-                            >   
-                                <Dropdown.Item eventKey={'All'}><i>All</i></Dropdown.Item>
-                                {cities.map(e => <Dropdown.Item eventKey={e} key = {e}>{e}</Dropdown.Item>)}
-                </DropdownButton>               
+                    variant="info"
+                    title={filters.location}
+                    id="dropdown-menu-align-right"
+                    onSelect={(e) => setFilters({ ...filters, location: e })}
+                >
+                    <Dropdown.Item eventKey={'All'}>
+                        <i>All</i>
+                    </Dropdown.Item>
+                    {cities.map((e) => (
+                        <Dropdown.Item eventKey={e} key={e}>
+                            {e}
+                        </Dropdown.Item>
+                    ))}
+                </DropdownButton>
                 <p>Instrument</p>
                 <DropdownButton
-                            variant="info"
-                            title={filters.instrument}
-                            id="dropdown-menu-align-right"
-                            onSelect={e => setFilters({...filters, instrument: e})}
-                            >   
-                                <Dropdown.Item eventKey={'All'}><i>All</i></Dropdown.Item>
-                                {['Guitar', 'Bass', 'Vocals', 'Drums', 'Keyboard'].map(e => <Dropdown.Item eventKey={e} key={e}>{e}</Dropdown.Item>)}
+                    variant="info"
+                    title={filters.instrument}
+                    id="dropdown-menu-align-right"
+                    onSelect={(e) => setFilters({ ...filters, instrument: e })}
+                >
+                    <Dropdown.Item eventKey={'All'}>
+                        <i>All</i>
+                    </Dropdown.Item>
+                    {['Guitar', 'Bass', 'Vocals', 'Drums', 'Keyboard'].map(
+                        (e) => (
+                            <Dropdown.Item eventKey={e} key={e}>
+                                {e}
+                            </Dropdown.Item>
+                        )
+                    )}
                 </DropdownButton>
 
                 <table className="table table-striped table-bordered table-hover mt-3">
@@ -71,25 +85,27 @@ const UserList = () => {
                         </tr>
                     </thead>
                     <tbody>
-                    {filteredResults
-                        .filter(e => e._id !== loggedInUser.id)
-                        .map((user) => (
-                            <tr key = {user._id}>
-                                <td><NavLink to={`/users/${user._id}`}>{user.firstName}</NavLink></td>
-                                <td>{user.location}</td>
-                                <td>{user.instruments.length === 0 
-                                ? 
-                                    'None added yet' 
-                                :
-                                user.instruments.map((e, i) => (
-                                    <p key={i}>
-                                        {e.instrument} - {e.skill}
-                                    </p>
-                                ))}
-                                </td>
-                            </tr>
-                        ))
-                    }
+                        {filteredResults
+                            .filter((e) => e._id !== loggedInUser.id)
+                            .map((user) => (
+                                <tr key={user._id}>
+                                    <td>
+                                        <NavLink to={`/users/${user._id}`}>
+                                            {user.firstName}
+                                        </NavLink>
+                                    </td>
+                                    <td>{user.location}</td>
+                                    <td>
+                                        {user.instruments.length === 0
+                                            ? 'None added yet'
+                                            : user.instruments.map((e, i) => (
+                                                <p key={i}>
+                                                    {e.instrument} - {e.skill}
+                                                </p>
+                                            ))}
+                                    </td>
+                                </tr>
+                            ))}
                     </tbody>
                 </table>
             </div>

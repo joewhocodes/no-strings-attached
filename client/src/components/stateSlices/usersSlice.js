@@ -125,16 +125,16 @@ export const usersSlice = createSlice({
     name: 'users',
     initialState,
     extraReducers: {
-        [addInstrument.pending]: (state, action) => {
+        [addInstrument.pending]: (state) => {
             state.status = 'loading';
         },
-        [addInstrument.fulfilled]: (state, action) => {
+        [addInstrument.fulfilled]: (state) => {
             state.status = 'succeeded';
         },
-        [addInstrument.rejected]: (state, action) => {
+        [addInstrument.rejected]: (state) => {
             state.status = 'failed';
         },
-        [fetchUsers.pending]: (state, action) => {
+        [fetchUsers.pending]: (state) => {
             state.status = 'loading';
         },
         [fetchUsers.fulfilled]: (state, action) => {

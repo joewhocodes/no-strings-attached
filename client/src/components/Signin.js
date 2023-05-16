@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
+import { useNavigate, NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { signinUser } from './stateSlices/signinSlice';
-import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
 
 const Signin = () => {
     const { status, loggedInUser, error } = useSelector((state) => state.signin);
@@ -97,9 +96,7 @@ const Signin = () => {
                 </form>
             </div>
             <h3>Don't have an account yet?</h3>
-            <NavLink to={'/'}>
-                Sign Up Here
-            </NavLink>
+            <NavLink to={'/'}>Sign Up Here</NavLink>
         </>
     );
 };

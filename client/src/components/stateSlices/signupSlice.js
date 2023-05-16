@@ -24,10 +24,10 @@ export const signupSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: {
-        [signupUser.pending]: (state, action) => {
+        [signupUser.pending]: (state) => {
             state.status = 'loading';
         },
-        [signupUser.fulfilled]: (state, action) => {
+        [signupUser.fulfilled]: (state) => {
             state.status = 'succeeded';
             state.userRegistered = true;
         },

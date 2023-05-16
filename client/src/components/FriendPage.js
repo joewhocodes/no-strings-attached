@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import Header from './Header';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsers } from './stateSlices/usersSlice';
-import { useNavigate } from 'react-router-dom';
+import Header from './Header';
 import FriendList from './FriendList';
 
 const FriendPage = () => {
@@ -22,9 +22,9 @@ const FriendPage = () => {
 
     return (
         <>
-            <Header/>
+            <Header />
             <div className="col-10, col-sm-8, col-md-6 mx-auto">
-                <FriendList/>
+                <FriendList />
             </div>
         </>
     );

@@ -1,10 +1,10 @@
 import React from 'react';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signupUser } from './stateSlices/signupSlice';
 import { signinUser } from './stateSlices/signinSlice';
-import { NavLink } from 'react-router-dom';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import { cities } from '../data/cities';
 
 const Signup = () => {
@@ -67,7 +67,10 @@ const Signup = () => {
                 <div className="col-10 col-sm-8 col-md-4 mx-auto">
                     <h1 className="font-weight-bold">Register</h1>
                 </div>
-                <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
+                <form
+                    onSubmit={formik.handleSubmit}
+                    encType="multipart/form-data"
+                >
                     <div className="form-group col-10 col-sm-8 col-md-4 mx-auto mt-5">
                         {error && (
                             <div className="alert alert-danger" role="alert">
@@ -112,7 +115,9 @@ const Signup = () => {
                             type="location"
                             {...formik.getFieldProps('location')}
                         >
-                            {cities.map(e => <option>{e}</option>)}
+                            {cities.map((e) => (
+                                <option>{e}</option>
+                            ))}
                         </select>
                         {formik.touched.location && formik.errors.location ? (
                             <small className="form-text text-danger">
@@ -121,16 +126,19 @@ const Signup = () => {
                         ) : null}
                     </div>
                     <div className="form-group col-10 col-sm-8 col-md-4 mx-auto mt-3">
-                        <label htmlFor='image'>Profile Image</label>
+                        <label htmlFor="image">Profile Image</label>
                         <input
                             className="form-control form-control-lg"
-                            id='image'
-                            name='image'
+                            id="image"
+                            name="image"
                             type="file"
                             accept="image/*"
                             onChange={(e) =>
-                            formik.setFieldValue('image', e.currentTarget.files[0])
-                                }
+                                formik.setFieldValue(
+                                    'image',
+                                    e.currentTarget.files[0]
+                                )
+                            }
                         />
                         {formik.touched.image && formik.errors.image ? (
                             <small className="form-text text-danger">

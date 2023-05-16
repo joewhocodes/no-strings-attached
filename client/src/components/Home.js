@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from './Header';
 import { useSelector } from 'react-redux';
+import Header from './Header';
 
 const Home = () => {
     const { loggedInUser } = useSelector((state) => state.signin);

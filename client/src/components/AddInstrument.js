@@ -1,12 +1,12 @@
-import './AddInstrument.css';
-import { Button } from 'react-bootstrap';
-import Modal from 'react-bootstrap/Modal';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
-import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { addInstrument } from './stateSlices/usersSlice';
 import { addLocalInstrument } from './stateSlices/signinSlice';
+import { Button } from 'react-bootstrap';
+import Modal from 'react-bootstrap/Modal';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import './AddInstrument.css';
 
 const AddInstrument = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
@@ -27,7 +27,7 @@ const AddInstrument = () => {
     const handleShowModal = () => setShow(true);
 
     const handleAddInstrument = () => {
-        if (!newInstrument.instrument || !newInstrument.skillLevel)  {return}
+        if (!newInstrument.instrument || !newInstrument.skillLevel) return;
         dispatch(addInstrument({instrument: newInstrument.instrument, skill: newInstrument.skillLevel, id: loggedInUser.id}));
         dispatch(addLocalInstrument({instrument: newInstrument.instrument, skill: newInstrument.skillLevel}));
         handleCloseModal();
@@ -46,7 +46,6 @@ const AddInstrument = () => {
             <Button variant="dark" onClick={() => handleShowModal()}>
                 +
             </Button>
-
             <Modal show={show} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Add Instrument</Modal.Title>
