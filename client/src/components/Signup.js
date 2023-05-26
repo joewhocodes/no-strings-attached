@@ -63,15 +63,15 @@ const Signup = () => {
     return (
         <>
             <h1>Welcome to No Strings Attached!</h1>
-            <div className="register-form-container">
-                <div className="col-10 col-sm-8 col-md-4 mx-auto">
-                    <h1 className="font-weight-bold">Register</h1>
+            <div>
+                <div>
+                    <h1>Register</h1>
                 </div>
                 <form
                     onSubmit={formik.handleSubmit}
                     encType="multipart/form-data"
                 >
-                    <div className="form-group col-10 col-sm-8 col-md-4 mx-auto mt-5">
+                    <div>
                         {error && (
                             <div className="alert alert-danger" role="alert">
                                 {error}
@@ -91,7 +91,7 @@ const Signup = () => {
                             </small>
                         ) : null}
                     </div>
-                    <div className="form-group col-10 col-sm-8 col-md-4 mx-auto mt-3">
+                    <div>
                         <label htmlFor="email">Email</label>
                         <input
                             className="form-control form-control-lg"
@@ -106,7 +106,7 @@ const Signup = () => {
                             </small>
                         ) : null}
                     </div>
-                    <div className="form-group col-10 col-sm-8 col-md-4 mx-auto mt-3">
+                    <div>
                         <label htmlFor="location">Location</label>
                         <select
                             className="form-control form-control-lg"
@@ -125,7 +125,7 @@ const Signup = () => {
                             </small>
                         ) : null}
                     </div>
-                    <div className="form-group col-10 col-sm-8 col-md-4 mx-auto mt-3">
+                    <div>
                         <label htmlFor="image">Profile Image</label>
                         <input
                             className="form-control form-control-lg"
@@ -146,7 +146,7 @@ const Signup = () => {
                             </small>
                         ) : null}
                     </div>
-                    <div className="form-group col-10 col-sm-8 col-md-4 mx-auto mt-3">
+                    <div>
                         <label htmlFor="password">Password</label>
                         <input
                             className="form-control form-control-lg"
@@ -161,10 +161,8 @@ const Signup = () => {
                             </small>
                         ) : null}
                     </div>
-                    <div className="col-10 col-sm-8 col-md-4 mx-auto mt-3">
+                    <div>
                         <button
-                            type="submit"
-                            className="btn btn-lg btn-primary btn-block register-button"
                         >
                             {status === 'loading' ? (
                                 <div

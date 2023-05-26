@@ -1,4 +1,4 @@
-* {
+/* * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -47,11 +47,16 @@ main {
 }
 .active {
   font-weight: 900;
-}
+} */
+
+
+
 /*****************************/
 /******* REGISTER & LOGIN*****/
 /*****************************/
-.login-form-container {
+
+
+/* .login-form-container {
   margin-top: 5rem;
 }
 .register-form-container {
@@ -59,7 +64,9 @@ main {
 }
 label {
   font-size: 1.5rem;
-}
+} */
+
+
 /***********************************/
 /*******END OF REGISTER & LOGIN*****/
 /***********************************/

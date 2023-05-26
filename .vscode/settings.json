@@ -1,0 +1,6 @@
+{
+    "prettier.jsxSingleQuote": true,
+    "prettier.arrowParens": "avoid",
+    "prettier.tabWidth": 4,
+    "prettier.singleQuote": true
+}
