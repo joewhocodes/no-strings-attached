@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { addComment, setCurrentProfile } from './stateSlices/usersSlice';
-import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { nanoid } from 'nanoid';
 import './AddInstrument.css';
+import { Button } from '@chakra-ui/react';
 
 const AddComment = () => {
     const [comment, setComment] = useState('');
@@ -37,9 +37,16 @@ const AddComment = () => {
     };
 
     return (
-        <div className="add-instrument-card">
-            <Button variant="dark" onClick={() => handleShowModal()}>
-                Add Comment
+        <>
+            <Button
+                onClick={() => handleShowModal()}
+                flex={1}
+                fontSize={'sm'}
+                rounded={'full'}
+                _focus={{
+                    bg: 'gray.200',
+                }}>
+                Message
             </Button>
             <Modal show={show} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
@@ -48,32 +55,30 @@ const AddComment = () => {
                 <Modal.Body>
                     <Form>
                         <Form.Group
-                            className="mb-3"
-                            controlId="exampleForm.ControlTextarea1"
-                        >
+                            className='mb-3'
+                            controlId='exampleForm.ControlTextarea1'>
                             <Form.Label>Comment</Form.Label>
                             <Form.Control
-                                as="textarea"
+                                as='textarea'
                                 rows={3}
                                 value={comment}
-                                onChange={(e) => setComment(e.target.value)}
+                                onChange={e => setComment(e.target.value)}
                             />
                         </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseModal}>
+                    <Button variant='secondary' onClick={handleCloseModal}>
                         Close
                     </Button>
                     <Button
-                        variant="outline-success"
-                        onClick={() => handleAddComment()}
-                    >
+                        variant='outline-success'
+                        onClick={() => handleAddComment()}>
                         Update
                     </Button>
                 </Modal.Footer>
             </Modal>
-        </div>
+        </>
     );
 };
 

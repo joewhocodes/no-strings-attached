@@ -17,11 +17,11 @@ import {
     Flex,
     Heading,
     Image,
-    Link,
     Stack,
     Text,
     useColorModeValue,
 } from '@chakra-ui/react';
+import { CheckIcon } from '@chakra-ui/icons'
 
 const Profile = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
@@ -29,6 +29,8 @@ const Profile = () => {
     const { currentProfile } = useSelector((state) => state.users);
     const { id } = useParams();
     const dispatch = useDispatch();
+
+    const loggedInUserProfile = loggedInUser.id === currentProfile._id;
 
     useEffect(() => {
         dispatch(fetchUsers({ token: loggedInUser.token }));
@@ -67,6 +69,7 @@ const Profile = () => {
                     borderWidth='1px'
                     borderRadius='lg'
                     w={{ sm: '100%', md: '540px' }}
+                    minH={'50vh'}
                     height={{ sm: '476px', md: '20rem' }}
                     direction={{ base: 'column', md: 'row' }}
                     bg={useColorModeValue('white', 'gray.900')}
@@ -84,6 +87,7 @@ const Profile = () => {
                         flexDirection='column'
                         justifyContent='center'
                         alignItems='center'
+                        spacing={8}
                         p={1}
                         pt={2}>
                         <Heading fontSize={'2xl'} fontFamily={'body'}>
@@ -102,71 +106,97 @@ const Profile = () => {
                             px={3}>
                             {currentProfile.bio}
                         </Text>
+                        {!loggedInUserProfile ? (
+                            <Stack
+                                width={'100%'}
+                                mt={'2rem'}
+                                direction={'row'}
+                                padding={2}
+                                justifyContent={'space-between'}
+                                alignItems={'center'}>
+                                <AddComment />
+                                {!loggedInUser.friends.includes(
+                                    currentProfile._id
+                                ) ? (
+                                    <Button
+                                        onClick={() => handleAddFriend()}
+                                        flex={1}
+                                        fontSize={'sm'}
+                                        rounded={'full'}
+                                        bg={'blue.400'}
+                                        color={'white'}
+                                        boxShadow={
+                                            '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
+                                        }
+                                        _hover={{
+                                            bg: 'blue.500',
+                                        }}
+                                        _focus={{
+                                            bg: 'blue.500',
+                                        }}>
+                                        Add Friend
+                                    </Button>
+                                ) : (
+                                    <>
+                                        <Button
+                                            onClick={() =>
+                                                handleRemoveFriend(
+                                                    currentProfile._id
+                                                )
+                                            }
+                                            flex={1}
+                                            fontSize={'sm'}
+                                            rounded={'full'}
+                                            bg={'green.400'}
+                                            color={'white'}
+                                            boxShadow={
+                                                '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
+                                            }
+                                            _hover={{
+                                                bg: 'green.500',
+                                            }}
+                                            _focus={{
+                                                bg: 'green.500',
+                                            }}>
+                                            Friends
+                                            <CheckIcon ml={2} />
+                                        </Button>
+                                    </>
+                                )}
+                            </Stack>
+                        ) : (
+                            <EditProfile />
+                        )}
                         <Stack
-                            align={'center'}
-                            justify={'center'}
-                            direction={'row'}
+                            align={'left'}
+                            justify={'left'}
+                            // direction={'c'}
                             mt={6}>
-                            <Badge
-                                px={2}
-                                py={1}
-                                bg={useColorModeValue('gray.50', 'gray.800')}
-                                fontWeight={'400'}>
-                                #art
-                            </Badge>
-                            <Badge
-                                px={2}
-                                py={1}
-                                bg={useColorModeValue('gray.50', 'gray.800')}
-                                fontWeight={'400'}>
-                                #photography
-                            </Badge>
-                            <Badge
-                                px={2}
-                                py={1}
-                                bg={useColorModeValue('gray.50', 'gray.800')}
-                                fontWeight={'400'}>
-                                #music
-                            </Badge>
-                        </Stack>
-
-                        <Stack
-                            width={'100%'}
-                            mt={'2rem'}
-                            direction={'row'}
-                            padding={2}
-                            justifyContent={'space-between'}
-                            alignItems={'center'}>
-                            <Button
-                                flex={1}
-                                fontSize={'sm'}
-                                rounded={'full'}
-                                _focus={{
-                                    bg: 'gray.200',
-                                }}>
-                                Message
-                            </Button>
-                            <Button
-                                flex={1}
-                                fontSize={'sm'}
-                                rounded={'full'}
-                                bg={'blue.400'}
-                                color={'white'}
-                                boxShadow={
-                                    '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
-                                }
-                                _hover={{
-                                    bg: 'blue.500',
-                                }}
-                                _focus={{
-                                    bg: 'blue.500',
-                                }}>
-                                Follow
-                            </Button>
+                            {loggedInUser.instruments.map((instrument, i) => (
+                                <Flex key={i}>
+                                    <Badge
+                                        px={2}
+                                        py={1}
+                                        bg={'gray.100'}
+                                        // bg={useColorModeValue('gray.50', 'gray.800')}
+                                        fontWeight={'600'}>
+                                        {instrument.instrument}
+                                    </Badge>
+                                    <Badge
+                                        px={2}
+                                        py={1}
+                                        bg={'gray.50'}
+                                        // bg={useColorModeValue('gray.50', 'gray.800')}
+                                        fontWeight={'400'}>
+                                        {instrument.skill}
+                                    </Badge>
+                                </Flex>
+                            ))}
                         </Stack>
                     </Stack>
                 </Stack>
             </Center>
+            <FriendList />
 
             {id === loggedInUser.id ? (
                 <>
