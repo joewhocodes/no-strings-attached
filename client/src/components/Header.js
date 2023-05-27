@@ -33,7 +33,7 @@ const Header = () => {
     };
 
     return (
-        <Box bg={useColorModeValue('backing.500', 'gray.900')} px={4}>
+        <Box bg={useColorModeValue('white', 'gray.900')} px={4}>
             <Flex h='65px' alignItems={'center'} justifyContent={'space-between'}>
                 <IconButton
                     size={'md'}

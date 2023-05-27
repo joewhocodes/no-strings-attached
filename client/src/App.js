@@ -7,6 +7,7 @@ import Signin from './components/Signin';
 import Profile from './components/Profile';
 import FriendPage from './components/FriendPage';
 import UserList from './components/UserList';
+import { Box } from '@chakra-ui/react';
 
 const App = () => {
     const { loggedInUser } = useSelector(state => state.signin);
@@ -20,7 +21,7 @@ const App = () => {
     return (
         <>
 
-                <main style={{ backgroundColor: '#FDF5DF'}}>
+                <Box bg='primary.10'>
                     <Routes>
                         <Route path="/" element={loggedInUser ? <Home /> : <Signup />} />
                         <Route path="/Signin" element={loggedInUser ? <Navigate to="/"/> : <Signin />} />
@@ -31,7 +32,7 @@ const App = () => {
                         </Route>
                         <Route path="*" element={<Navigate to="/"/>} />
                     </Routes>
-                </main>
+                </Box>
 
         </>
     );
