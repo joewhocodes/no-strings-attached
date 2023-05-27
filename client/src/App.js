@@ -20,7 +20,7 @@ const App = () => {
     return (
         <>
 
-                <main style={{ backgroundColor: '#EFEBE5'}}>
+                <main style={{ backgroundColor: '#FDF5DF'}}>
                     <Routes>
                         <Route path="/" element={loggedInUser ? <Home /> : <Signup />} />
                         <Route path="/Signin" element={loggedInUser ? <Navigate to="/"/> : <Signin />} />

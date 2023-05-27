@@ -6,7 +6,7 @@ import { signinUser } from './stateSlices/signinSlice';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { cities } from '../data/cities';
-import logo from '../images/logo.png';
+import logo from '../images/logo-full.png';
 import {
     Flex,
     Box,
@@ -82,14 +82,14 @@ const Signup = () => {
 
     return (
         <Flex
-            minH={'80vh'}
+            minH={'100vh'}
             align={'center'}
             justify={'center'}
             direction={'column'}>
             <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
                 <img src={logo} width='400px' alt='Logo' />
                 <Stack align={'center'}>
-                    <Heading fontSize={'4xl'} textAlign={'center'}>
+                    <Heading color='secondary.500' fontSize={'4xl'} textAlign={'center'}>
                         Sign up
                     </Heading>
                     <Text fontSize={'lg'} color={'gray.600'}>
@@ -110,14 +110,12 @@ const Signup = () => {
                         boxShadow={'lg'}
                         p={8}>
                         <Stack spacing={4}>
-                            <FormControl>
-                                <FormLabel>First Name</FormLabel>
-                                <Input
-                                    type='text'
-                                    {...formik.getFieldProps('firstName')}
-                                />
-                            </FormControl>
-                            <FormLabel>Location</FormLabel>
+                            <FormLabel color='secondary.500'>First Name</FormLabel>
+                            <Input
+                                type='text'
+                                {...formik.getFieldProps('firstName')}
+                            />
+                            <FormLabel color='secondary.500'>Location</FormLabel>
                             <select
                                 className='form-control form-control-lg'
                                 id='location'
@@ -134,7 +132,7 @@ const Signup = () => {
                                     {formik.errors.location}
                                 </small>
                             ) : null}
-                            <FormLabel>Image</FormLabel>
+                            <FormLabel color='secondary.500'>Image</FormLabel>
                             <Input
                                 className='form-control form-control-lg'
                                 id='image'
@@ -154,7 +152,7 @@ const Signup = () => {
                                 </small>
                             ) : null}
                             <FormControl id='email' isRequired>
-                                <FormLabel>Email address</FormLabel>
+                                <FormLabel color='secondary.500'>Email address</FormLabel>
                                 <Input
                                     type='email'
                                     {...formik.getFieldProps('email')}
@@ -166,7 +164,7 @@ const Signup = () => {
                                 ) : null}
                             </FormControl>
                             <FormControl>
-                                <FormLabel>Password</FormLabel>
+                                <FormLabel color='secondary.500'>Password</FormLabel>
                                 <InputGroup>
                                     <Input
                                         type={
@@ -212,10 +210,10 @@ const Signup = () => {
                                         type='submit'
                                         loadingText='Submitting'
                                         size='lg'
-                                        bg={'blue.400'}
+                                        bg={'secondary.500'}
                                         color={'white'}
                                         _hover={{
-                                            bg: 'blue.500',
+                                            bg: 'secondary.300',
                                         }}>
                                         Sign up
                                     </Button>
@@ -225,7 +223,7 @@ const Signup = () => {
                                 <Text align={'center'}>
                                     Already a user?{' '}
                                     <NavLink to={'/signin'}>
-                                        <Link color={'blue.400'}>Login</Link>
+                                        <Link color={'secondary.500'} _hover={{color: 'secondary.300'}}>Login</Link>
                                     </NavLink>
                                 </Text>
                             </Stack>
