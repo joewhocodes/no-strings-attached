@@ -28,8 +28,8 @@ export const signupSlice = createSlice({
             state.status = 'loading';
         },
         [signupUser.fulfilled]: (state) => {
-            state.status = 'succeeded';
             state.userRegistered = true;
+            state.status = 'succeeded';
         },
         [signupUser.rejected]: (state, action) => {
             state.status = 'failed';

@@ -98,33 +98,35 @@ const Signin = () => {
                                     </small>
                                 ) : null}
                             </FormControl>
-                            <Button
-                                type='submit'
-                                bg={'blue.400'}
-                                color={'white'}
-                                _hover={{
-                                    bg: 'blue.500',
-                                }}>
-                                {status === 'loading' ? (
-                                    <div
-                                        className='spinner-border text-light'
-                                        role='status'>
-                                        <span className='sr-only'></span>
-                                    </div>
-                                ) : null}{' '}
-                                Sign in
-                            </Button>
+                            {status === 'loading' ? (
+                                <Button
+                                    isLoading
+                                    loadingText='Signing in'
+                                    colorScheme='teal'
+                                    variant='outline'
+                                />
+                            ) : (
+                                <Button
+                                    type='submit'
+                                    bg={'blue.400'}
+                                    color={'white'}
+                                    _hover={{
+                                        bg: 'blue.500',
+                                    }}>
+                                    Sign in
+                                </Button>
+                            )}{' '}
+                        </Stack>
+                        <Stack pt={6}>
+                            <Text align={'center'}>
+                                Not yet a user?{' '}
+                                <NavLink to={'/'}>
+                                    <Link color={'blue.400'}>Sign Up</Link>
+                                </NavLink>
+                            </Text>
                         </Stack>
                     </Box>
                 </form>
-                <Stack pt={6}>
-                    <Text align={'center'}>
-                        Not yet a user?{' '}
-                        <NavLink to={'/'}>
-                            <Link color={'blue.400'}>Sign Up</Link>
-                        </NavLink>
-                    </Text>
-                </Stack>
             </Stack>
         </Flex>
     );
