@@ -3,9 +3,19 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signupUser } from './stateSlices/signupSlice';
 import { signinUser } from './stateSlices/signinSlice';
-import { useFormik } from 'formik';
+import { useFormik, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { cities } from '../data/cities';
+import logo from '../images/logo.png';
+import {
+    FormControl,
+    FormLabel,
+    FormErrorMessage,
+    FormHelperText,
+    Button,
+    Input,
+    validateName
+} from '@chakra-ui/react';
 
 const Signup = () => {
     const { status, userRegistered, error } = useSelector((state) => state.signup);
@@ -62,7 +72,7 @@ const Signup = () => {
 
     return (
         <>
-            <h1>Welcome to No Strings Attached!</h1>
+            <img src={logo} width='400px' alt='Logo'/>
             <div>
                 <div>
                     <h1>Register</h1>
@@ -78,7 +88,7 @@ const Signup = () => {
                             </div>
                         )}
                         <label htmlFor="firstName">First Name</label>
-                        <input
+                        <Input
                             className="form-control form-control-lg"
                             id="firstName"
                             name="firstName"
@@ -93,7 +103,7 @@ const Signup = () => {
                     </div>
                     <div>
                         <label htmlFor="email">Email</label>
-                        <input
+                        <Input
                             className="form-control form-control-lg"
                             id="email"
                             name="email"
@@ -127,7 +137,7 @@ const Signup = () => {
                     </div>
                     <div>
                         <label htmlFor="image">Profile Image</label>
-                        <input
+                        <Input
                             className="form-control form-control-lg"
                             id="image"
                             name="image"
@@ -148,7 +158,7 @@ const Signup = () => {
                     </div>
                     <div>
                         <label htmlFor="password">Password</label>
-                        <input
+                        <Input
                             className="form-control form-control-lg"
                             id="password"
                             name="password"
@@ -162,25 +172,63 @@ const Signup = () => {
                         ) : null}
                     </div>
                     <div>
-                        <button
+                        <Button
+                            type="submit"
                         >
                             {status === 'loading' ? (
                                 <div
                                     className="spinner-border text-light"
                                     role="status"
+                                    
                                 >
                                     <span className="sr-only"></span>
                                 </div>
                             ) : null}{' '}
                             Register
-                        </button>
+                        </Button>
                     </div>
                 </form>
             </div>
             <h3>Already have an account?</h3>
             <NavLink to={'/Signin'}>Sign In Here</NavLink>
+
+
+    <Formik
+      initialValues={{ name: 'Sasuke' }}
+      onSubmit={(values, actions) => {
+        setTimeout(() => {
+          alert(JSON.stringify(values, null, 2))
+          actions.setSubmitting(false)
+        }, 1000)
+      }}
+    >
+      {(props) => (
+        <Form>
+          <Field name='name'>
+            {({ field, form }) => (
+              <FormControl isInvalid={form.errors.name && form.touched.name}>
+                <FormLabel>First name</FormLabel>
+                <Input {...field} placeholder='name' />
+                <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
+          <Button
+            mt={4}
+            colorScheme='teal'
+            isLoading={props.isSubmitting}
+            type='submit'
+          >
+            Submit
+          </Button>
+        </Form>
+      )}
+    </Formik>
+
         </>
     );
 };
 
 export default Signup;
+
+

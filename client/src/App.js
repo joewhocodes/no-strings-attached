@@ -9,7 +9,7 @@ import FriendPage from './components/FriendPage';
 import UserList from './components/UserList';
 
 const App = () => {
-    const { loggedInUser } = useSelector((state) => state.signin);
+    const { loggedInUser } = useSelector(state => state.signin);
 
     useEffect(() => {
         if (loggedInUser) {
@@ -19,18 +19,20 @@ const App = () => {
 
     return (
         <>
-            <main>
-                <Routes>
-                    <Route path="/" element={loggedInUser ? <Home /> : <Signup />} />
-                    <Route path="/Signin" element={loggedInUser ? <Navigate to="/"/> : <Signin />} />
-                    <Route element={loggedInUser ? <Outlet/> : <Navigate to="/"/>}>
-                        <Route path="/users/:id" element={<Profile />} />
-                        <Route path="/FriendPage" element={<FriendPage />} />
-                        <Route path="/UserList" element={<UserList />} />
-                    </Route>
-                    <Route path="*" element={<Navigate to="/"/>} />
-                </Routes>
-            </main>
+
+                <main style={{ backgroundColor: '#EFEBE5'}}>
+                    <Routes>
+                        <Route path="/" element={loggedInUser ? <Home /> : <Signup />} />
+                        <Route path="/Signin" element={loggedInUser ? <Navigate to="/"/> : <Signin />} />
+                        <Route element={loggedInUser ? <Outlet/> : <Navigate to="/"/>}>
+                            <Route path="/users/:id" element={<Profile />} />
+                            <Route path="/FriendPage" element={<FriendPage />} />
+                            <Route path="/UserList" element={<UserList />} />
+                        </Route>
+                        <Route path="*" element={<Navigate to="/"/>} />
+                    </Routes>
+                </main>
+
         </>
     );
 };
