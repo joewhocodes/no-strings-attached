@@ -8,7 +8,9 @@ import UpdateProfile from './UpdateProfile';
 import AddComment from './AddComment';
 import AddInstrument from './AddInstrument';
 import Comments from './Comments';
+import AddFriend from './AddFriend';
 import {
+    Avatar,
     Badge,
     Button,
     Center,
@@ -21,7 +23,6 @@ import {
     useColorModeValue,
 } from '@chakra-ui/react';
 
-import { CheckIcon } from '@chakra-ui/icons'
 
 const Profile = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
@@ -74,12 +75,23 @@ const Profile = () => {
                 bg={useColorModeValue('white', 'gray.900')}
                 boxShadow={'2xl'}
                 padding={4}>
-                <Flex flex={1} bg='blue.200'>
+                <Flex flex={1}>
                     <Image
+                        borderRadius='md'
+                        boxSize='250px'
+                        // size={'xl'}
                         objectFit='cover'
-                        boxSize='100%'
+                        // boxSize='100%'
                         src={currentProfile.profileImg}
                     />
+                    {/* <Box as='div' position='relative' w={'260px'} h={'260px'}>
+                        <Avatar
+                            src={currentProfile.profileImg}
+                            size='full'
+                            // position='absolute'
+                            // top={0}
+                        />
+                    </Box> */}
                 </Flex>
                 <Stack
                     flex={1}
@@ -89,14 +101,13 @@ const Profile = () => {
                     spacing={8}
                     p={1}
                     pt={2}>
-                    <Heading fontSize={'2xl'} fontFamily={'body'} color={'backing.500'}>
+                    <Heading
+                        fontSize={'2xl'}
+                        fontFamily={'body'}
+                        color={'backing.500'}>
                         {currentProfile.firstName}
                     </Heading>
-                    <Text
-                        fontWeight={600}
-                        color={'black'}
-                        size='sm'
-                        mb={4}>
+                    <Text fontWeight={600} color={'black'} size='sm' mb={4}>
                         {currentProfile.location}
                     </Text>
                     <Text
@@ -114,54 +125,7 @@ const Profile = () => {
                             justifyContent={'space-between'}
                             alignItems={'center'}>
                             <AddComment />
-                            {!loggedInUser.friends.includes(
-                                currentProfile._id
-                            ) ? (
-                                <Button
-                                    onClick={() => handleAddFriend()}
-                                    flex={1}
-                                    fontSize={'sm'}
-                                    rounded={'full'}
-                                    bg={'blue.400'}
-                                    color={'white'}
-                                    boxShadow={
-                                        '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
-                                    }
-                                    _hover={{
-                                        bg: 'blue.500',
-                                    }}
-                                    _focus={{
-                                        bg: 'blue.500',
-                                    }}>
-                                    Add Friend
-                                </Button>
-                            ) : (
-                                <>
-                                    <Button
-                                        onClick={() =>
-                                            handleRemoveFriend(
-                                                currentProfile._id
-                                            )
-                                        }
-                                        flex={1}
-                                        fontSize={'sm'}
-                                        rounded={'full'}
-                                        bg={'green.400'}
-                                        color={'white'}
-                                        boxShadow={
-                                            '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
-                                        }
-                                        _hover={{
-                                            bg: 'green.500',
-                                        }}
-                                        _focus={{
-                                            bg: 'green.500',
-                                        }}>
-                                        Friends
-                                        <CheckIcon ml={2} />
-                                    </Button>
-                                </>
-                            )}
+                            <AddFriend />
                         </Stack>
                     ) : (
                         <Stack
@@ -171,8 +135,8 @@ const Profile = () => {
                             padding={2}
                             justifyContent={'space-between'}
                             alignItems={'center'}>
-                                <UpdateProfile />
-                                <AddInstrument />
+                            <UpdateProfile />
+                            <AddInstrument />
                         </Stack>
                     )}
                     <Stack

@@ -1,7 +1,8 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteComment, fetchUsers } from './stateSlices/usersSlice';
+import AddFriend from './AddFriend';
 import {
     Avatar,
     Badge,
@@ -16,6 +17,7 @@ import {
     Text,
     useColorModeValue,
 } from '@chakra-ui/react';
+
 
 const Comments = () => {
     const { loggedInUser } = useSelector(state => state.signin);
@@ -58,13 +60,13 @@ const Comments = () => {
                                     w={'96px'}
                                     h={'96px'}>
                                     <Avatar
-                                        src='https://i.pravatar.cc/300'
+                                        src={user.profileImg}
                                         size='full'
                                         position='absolute'
                                         top={0}
                                     />
                                 </Box>
-                                </Stack>
+                            </Stack>
                             <Stack
                                 flex={1}
                                 flexDirection='column'
@@ -97,12 +99,16 @@ const Comments = () => {
                                         flex={1}
                                         fontSize={'sm'}
                                         rounded={'full'}
+                                        bg={'gray.400'}
                                         _focus={{
                                             bg: 'gray.200',
                                         }}>
-                                        Reply
+                                        <NavLink to={`/users/${user.userId}`}>
+                                            View Profile
+                                        </NavLink>
                                     </Button>
-                                    {loggedInUser.id === user.userId || id === loggedInUser.id ? (
+                                    {loggedInUser.id === user.userId ||
+                                    id === loggedInUser.id ? (
                                         <Button
                                             flex={1}
                                             fontSize={'sm'}
@@ -119,24 +125,15 @@ const Comments = () => {
                                             Delete
                                         </Button>
                                     ) : (
-                                    <Button
-                                        flex={1}
-                                        fontSize={'sm'}
-                                        rounded={'full'}
-                                        bg={'blue.400'}
-                                        color={'white'}
-                                        boxShadow={
-                                            '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
-                                        }
-                                        _hover={{
-                                            bg: 'blue.500',
-                                        }}
-                                        _focus={{
-                                            bg: 'blue.500',
-                                        }}>
-                                        Follow
-                                    </Button>
-                                    
+                                        <Button
+                                            flex={1}
+                                            fontSize={'sm'}
+                                            rounded={'full'}
+                                            _focus={{
+                                                bg: 'gray.200',
+                                            }}>
+                                            Reply
+                                        </Button>
                                     )}
                                 </Stack>
                             </Stack>
