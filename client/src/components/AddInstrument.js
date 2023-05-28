@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addInstrument } from './stateSlices/usersSlice';
 import { addLocalInstrument } from './stateSlices/signinSlice';
-import { Button } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import './AddInstrument.css';
+import { Button } from '@chakra-ui/react';
 
 const AddInstrument = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
@@ -41,10 +41,24 @@ const AddInstrument = () => {
     const handleSelectSkillLevel = e => setNewInstrument({...newInstrument, skillLevel: e});
 
     return (
-        <div className="add-instrument-card">
-            <h3>Add New</h3>
-            <Button variant="dark" onClick={() => handleShowModal()}>
-                +
+        <>
+            <Button
+                onClick={() => handleShowModal()}
+                flex={1}
+                fontSize={'sm'}
+                rounded={'full'}
+                bg={'secondary.500'}
+                color={'white'}
+                boxShadow={
+                    '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
+                }
+                _hover={{
+                    bg: 'secondary.300',
+                }}
+                _focus={{
+                    bg: 'blue.500',
+                }}>
+                Add Instrument
             </Button>
             <Modal show={show} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
@@ -88,7 +102,7 @@ const AddInstrument = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
-        </div>
+        </>
     );
 };
 

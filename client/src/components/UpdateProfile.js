@@ -2,13 +2,13 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProfile } from './stateSlices/usersSlice';
 import { updateLocalProfile } from './stateSlices/signinSlice';
-import { Button } from 'react-bootstrap';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import './AddInstrument.css';
 import { cities } from '../data/cities';
+import { Button } from '@chakra-ui/react';
 
 const UpdateProfile = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
@@ -41,13 +41,13 @@ const UpdateProfile = () => {
                 flex={1}
                 fontSize={'sm'}
                 rounded={'full'}
-                bg={'blue.400'}
+                bg={'secondary.500'}
                 color={'white'}
                 boxShadow={
                     '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
                 }
                 _hover={{
-                    bg: 'blue.500',
+                    bg: 'secondary.300',
                 }}
                 _focus={{
                     bg: 'blue.500',

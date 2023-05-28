@@ -4,7 +4,7 @@ import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import Home from './components/Home';
 import Signup from './components/Signup';
 import Signin from './components/Signin';
-import Profile from './components/Profile';
+import Profile from './components/ProfilePage';
 import FriendPage from './components/FriendPage';
 import UserList from './components/UserList';
 import { Box } from '@chakra-ui/react';
