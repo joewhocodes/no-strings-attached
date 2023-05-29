@@ -1,24 +1,19 @@
 import React from 'react';
 import { useParams, NavLink } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { removeFriend } from './stateSlices/usersSlice';
-import { removeLocalFriend } from './stateSlices/signinSlice';
+import { useSelector } from 'react-redux';
+import AddFriend from './AddFriend';
 import {
     Heading,
     Avatar,
     Box,
     Center,
-    Image,
-    Flex,
     Text,
     Stack,
     Button,
     Link,
 } from '@chakra-ui/react';
-import AddFriend from './AddFriend';
 
 const FriendList = () => {
-    const { loggedInUser } = useSelector(state => state.signin);
     const { users } = useSelector(state => state.users);
     const { id } = useParams();
     const userInfo = users.find(e => e._id === id);
@@ -26,11 +21,7 @@ const FriendList = () => {
     return (
         <Box>
             {users
-                .filter(friend =>
-                    id === loggedInUser.id
-                        ? loggedInUser.friends.includes(friend._id)
-                        : userInfo.friends.includes(friend._id)
-                )
+                .filter(user => userInfo.friends.includes(user._id))
                 .map(user => {
                     return (
                     <Center py={6}>

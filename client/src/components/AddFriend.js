@@ -11,7 +11,7 @@ const AddFriend = props => {
     const { currentProfile } = useSelector((state) => state.users);
     const dispatch = useDispatch();
     const { id } = useParams();
-    let isFriend = loggedInUser.friends.includes(currentProfile._id);
+    let isFriend = loggedInUser.friends.includes(props.user._id);
 
     const handleAddFriend = () => {
         dispatch(addFriend({friendId: props.user._id, loggedInUserId: loggedInUser.id}));
@@ -29,7 +29,7 @@ const AddFriend = props => {
     };
 
     useEffect(() => {
-        isFriend = loggedInUser.friends.includes(currentProfile._id);
+        isFriend = loggedInUser.friends.includes(props.user._id);
         console.log(`isFriend: `, isFriend)
     }, [handleAddFriend, handleRemoveFriend]);
     
