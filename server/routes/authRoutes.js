@@ -104,11 +104,10 @@ router.post(
         if (req.body) {
             User.findOneAndUpdate({_id: req.body.loggedInUserId}, {$set: {friends: req.body.loggedInUserFilteredFriends}}, function(err,doc) {
                 if (err) { throw err; }
-                else { console.log(`your friends are ${req.body.loggedInUserFilteredFriends}`); }
+                else { console.log('friend removed'); }
             })  
             User.findOneAndUpdate({_id: req.body.friendId}, {$set: {friends: req.body.friendFilteredFriends}}, function(err,doc) {
                 if (err) { throw err; }
-                else { console.log(`friends friends are ${req.body.friendFilteredFriends}`); }
             })  
             res.json(req.body)
         } else {

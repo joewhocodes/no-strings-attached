@@ -125,7 +125,7 @@ const Profile = () => {
                             justifyContent={'space-between'}
                             alignItems={'center'}>
                             <AddComment />
-                            <AddFriend />
+                            <AddFriend user={currentProfile}/>
                         </Stack>
                     ) : (
                         <Stack

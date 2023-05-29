@@ -14,7 +14,6 @@ import {
     Stack,
     Button,
     Link,
-    Badge,
 } from '@chakra-ui/react';
 import AddFriend from './AddFriend';
 
@@ -24,33 +23,6 @@ const FriendList = () => {
     const { id } = useParams();
     const userInfo = users.find(e => e._id === id);
 
-    const dispatch = useDispatch();
-
-    const handleRemoveFriend = i => {
-        const friendId = users.find(e => e._id === i);
-        const loggedInUserFilteredFriends = loggedInUser.friends.filter(
-            e => e !== i
-        );
-        const friendFilteredFriends = friendId.friends.filter(
-            e => e !== loggedInUser.id
-        );
-        dispatch(
-            removeFriend({
-                friendId,
-                loggedInUserFilteredFriends,
-                friendFilteredFriends,
-                loggedInUserId: loggedInUser.id,
-            })
-        );
-        dispatch(
-            removeLocalFriend({
-                loggedInUserFilteredFriends,
-                friendFilteredFriends,
-                loggedInUserId: loggedInUser.id,
-            })
-        );
-    };
-
     return (
         <Box>
             {users
@@ -59,7 +31,8 @@ const FriendList = () => {
                         ? loggedInUser.friends.includes(friend._id)
                         : userInfo.friends.includes(friend._id)
                 )
-                .map(user => (
+                .map(user => {
+                    return (
                     <Center py={6}>
                         <Box
                             maxW={'320px'}
@@ -118,7 +91,7 @@ const FriendList = () => {
                             </Stack>
                         </Box>
                     </Center>
-                ))}
+                )})}
         </Box>
     );
 };
