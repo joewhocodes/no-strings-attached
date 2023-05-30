@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import { addFriend, fetchUsers, removeFriend } from './stateSlices/usersSlice';
 import { addLocalFriend, removeLocalFriend } from './stateSlices/signinSlice';
 import { Button } from '@chakra-ui/react';
@@ -8,9 +7,7 @@ import { CheckIcon } from '@chakra-ui/icons';
 
 const AddFriend = props => {
     const { loggedInUser } = useSelector(state => state.signin);
-    const { currentProfile } = useSelector((state) => state.users);
     const dispatch = useDispatch();
-    const { id } = useParams();
     let isFriend = loggedInUser.friends.includes(props.user._id);
 
     const handleAddFriend = () => {
@@ -22,7 +19,6 @@ const AddFriend = props => {
     const handleRemoveFriend = () => {
         const loggedInUserFilteredFriends = loggedInUser.friends.filter(friend => friend !== props.user._id);
         const friendFilteredFriends = props.user.friends.filter(friend => friend !== loggedInUser.id);
-        console.log(loggedInUserFilteredFriends.includes(props.user._id))
         dispatch(removeFriend({friendId: props.user._id, loggedInUserFilteredFriends, friendFilteredFriends, loggedInUserId: loggedInUser.id}));
         dispatch(removeLocalFriend({loggedInUserFilteredFriends, friendFilteredFriends, loggedInUserId: loggedInUser.id}));
         dispatch(fetchUsers({ token: loggedInUser.token }));
@@ -30,13 +26,12 @@ const AddFriend = props => {
 
     useEffect(() => {
         isFriend = loggedInUser.friends.includes(props.user._id);
-        console.log(`isFriend: `, isFriend)
     }, [handleAddFriend, handleRemoveFriend]);
     
     
     return (
         <>
-            {props && (
+            {props && loggedInUser.id !== props.user._id && (
                 <Button
                     onClick={() => !isFriend ? handleAddFriend() : handleRemoveFriend()}
                     flex={1}
