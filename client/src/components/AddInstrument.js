@@ -5,7 +5,6 @@ import { addLocalInstrument } from './stateSlices/signinSlice';
 import Modal from 'react-bootstrap/Modal';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import './AddInstrument.css';
 import { Button } from '@chakra-ui/react';
 
 const AddInstrument = () => {
@@ -18,7 +17,7 @@ const AddInstrument = () => {
     const dispatch = useDispatch();
 
     // Filter user instruments so only new ones appear in Modal
-    const instrumentList = ['Guitar', 'Bass', 'Vocals', 'Drums', 'Keyboard'].filter(e => !loggedInUser.instruments.map(e => Object.keys(e)[0]).includes(e));
+    const instrumentList = ['Guitar', 'Bass', 'Vocals', 'Drums', 'Keyboard'].filter(instrument => !loggedInUser.instruments.map(instrument => Object.keys(instrument)[0]).includes(instrument));
     const skillList = ['Beginner', 'Intermediate', 'Professional'];
 
     // Modal State
@@ -36,9 +35,9 @@ const AddInstrument = () => {
         }, 1000)
     };
 
-    const handleSelectInstrument = e => setNewInstrument({...newInstrument, instrument: e});
+    const handleSelectInstrument = instrument => setNewInstrument({...newInstrument, instrument: instrument});
 
-    const handleSelectSkillLevel = e => setNewInstrument({...newInstrument, skillLevel: e});
+    const handleSelectSkillLevel = skillLevel => setNewInstrument({...newInstrument, skillLevel: skillLevel});
 
     return (
         <>

@@ -5,7 +5,6 @@ import { addComment, setCurrentProfile } from './stateSlices/usersSlice';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { nanoid } from 'nanoid';
-import './AddInstrument.css';
 import { Button } from '@chakra-ui/react';
 
 const AddComment = () => {

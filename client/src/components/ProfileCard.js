@@ -1,19 +1,14 @@
 import React, { useEffect } from 'react';
-// import { Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addFriend, fetchUsers, setCurrentProfile, deleteInstrument, removeFriend } from './stateSlices/usersSlice';
-import { addLocalFriend, deleteLocalInstrument, removeLocalFriend } from './stateSlices/signinSlice';
+import { fetchUsers, setCurrentProfile, deleteInstrument } from './stateSlices/usersSlice';
+import { deleteLocalInstrument } from './stateSlices/signinSlice';
 import UpdateProfile from './UpdateProfile';
 import AddComment from './AddComment';
 import AddInstrument from './AddInstrument';
-import Comments from './Comments';
 import AddFriend from './AddFriend';
 import {
-    Avatar,
     Badge,
-    Button,
-    Center,
     Box,
     Flex,
     Heading,
@@ -23,10 +18,8 @@ import {
     useColorModeValue,
 } from '@chakra-ui/react';
 
-
 const Profile = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
-    const { users } = useSelector((state) => state.users);
     const { currentProfile } = useSelector((state) => state.users);
     const { id } = useParams();
     const dispatch = useDispatch();
@@ -47,24 +40,8 @@ const Profile = () => {
         dispatch(deleteLocalInstrument({instruments: filteredInstruments}));
     };
 
-    const handleAddFriend = () => {
-        dispatch(addFriend({friendId: id, loggedInUserId: loggedInUser.id}));
-        dispatch(addLocalFriend({friendId: id, loggedInUserId: loggedInUser.id}));
-        dispatch(fetchUsers({ token: loggedInUser.token }));
-    };
-
-    const handleRemoveFriend = i => {
-        const friendId = users.find(e => e._id === i);
-        const loggedInUserFilteredFriends = loggedInUser.friends.filter(e => e !== i);
-        const friendFilteredFriends = friendId.friends.filter(e => e !== loggedInUser.id);
-        dispatch(removeFriend({friendId, loggedInUserFilteredFriends, friendFilteredFriends, loggedInUserId: loggedInUser.id}));
-        dispatch(removeLocalFriend({loggedInUserFilteredFriends, friendFilteredFriends, loggedInUserId: loggedInUser.id}));
-        dispatch(fetchUsers({ token: loggedInUser.token }));
-    };
-
-
     return (
-        <Box py={6}>
+        <Flex py={6}>
             <Stack
                 borderWidth='1px'
                 borderRadius='lg'
@@ -84,14 +61,6 @@ const Profile = () => {
                         // boxSize='100%'
                         src={currentProfile.profileImg}
                     />
-                    {/* <Box as='div' position='relative' w={'260px'} h={'260px'}>
-                        <Avatar
-                            src={currentProfile.profileImg}
-                            size='full'
-                            // position='absolute'
-                            // top={0}
-                        />
-                    </Box> */}
                 </Flex>
                 <Stack
                     flex={1}
@@ -167,7 +136,7 @@ const Profile = () => {
                     </Stack>
                 </Stack>
             </Stack>
-        </Box>
+        </Flex>
     );
 };
 
