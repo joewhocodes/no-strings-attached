@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import AddFriend from './AddFriend';
+import AddRemoveFriend from './AddRemoveFriend';
 import {
     Heading,
     Avatar,
@@ -78,7 +78,7 @@ const FriendList = () => {
                                         View Profile
                                     </NavLink>
                                 </Button>
-                                <AddFriend user={user} />
+                                <AddRemoveFriend user={user} />
                             </Stack>
                         </Box>
                     </Center>

@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateProfile } from './stateSlices/usersSlice';
 import { updateLocalProfile } from './stateSlices/signinSlice';
 import { cities } from '../data/cities';
-import { Button } from '@chakra-ui/react';
 import {
+    Button,
     FormControl,
     FormLabel,
     Modal,
@@ -15,6 +15,7 @@ import {
     ModalBody,
     ModalCloseButton,
     Select,
+    Textarea,
     useDisclosure,
   } from '@chakra-ui/react'
 
@@ -34,108 +35,28 @@ const UpdateProfile = () => {
         onClose(true);
     };
 
-    const handleSelectLocation = e => {
-        setProfile({...profile, location: e.target.value});
-    };
-
     return (
         <>
-            <>
-                <Button
-                    onClick={onOpen}
-                    flex={1}
-                    fontSize={'sm'}
-                    rounded={'full'}
-                    bg={'secondary.500'}
-                    color={'white'}
-                    boxShadow={
-                        '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
-                    }
-                    _hover={{
-                        bg: 'secondary.300',
-                    }}
-                    _focus={{
-                        bg: 'blue.500',
-                    }}>
-                    Edit Profile
-                </Button>
-
-                <Modal isOpen={isOpen} onClose={onClose}>
-                    <ModalOverlay />
-                    <ModalContent>
-                        <ModalHeader>Edit Profile</ModalHeader>
-                        <ModalCloseButton />
-                        <ModalBody>
-                            <FormControl>
-                                <FormLabel>Bio</FormLabel>
-                                <FormControl
-                                as='textarea'
-                                rows={3}
-                                value={profile.bio}
-                                onChange={e =>
-                                    setProfile({
-                                        ...profile,
-                                        bio: e.target.value,
-                                        })
-                                    }
-                                />
-                            <FormLabel color='secondary.500'>Location</FormLabel>
-                                <select
-                                    className='form-control form-control-lg'
-                                    id='location'
-                                    name='location'
-                                    type='location'
-                                    onChange ={handleSelectLocation}>
-                                    {cities.map(e => (
-                                        <option value={e}>{e}</option>
-                                    ))}
-                                </select>
-                            </FormControl>
-                        </ModalBody>
-
-                        <ModalFooter>
-                            <Button colorScheme='blue' mr={3} onClick={onClose}>
-                                Close
-                            </Button>
-                            <Button variant='ghost' onClick={handleUpdateProfile}>Submit</Button>
-                        </ModalFooter>
-                    </ModalContent>
-                </Modal>
-            </>
-
-            {/* <Button
-                onClick={() => handleShowModal()}
-                flex={1}
-                fontSize={'sm'}
-                rounded={'full'}
-                bg={'secondary.500'}
-                color={'white'}
-                boxShadow={
-                    '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
-                }
-                _hover={{
-                    bg: 'secondary.300',
-                }}
-                _focus={{
-                    bg: 'blue.500',
-                }}>
+            <Button onClick={onOpen} flex={1}>
                 Edit Profile
             </Button>
 
-            <Modal show={show} onHide={handleCloseModal}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Edit Profile</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form>
-                        <Form.Group
-                            className='mb-3'
-                            controlId='exampleForm.ControlTextarea1'>
-                            <Form.Label>Bio</Form.Label>
-                            <Form.Control
-                                as='textarea'
-                                rows={3}
+            <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader color={'backing.500'}>
+                        Edit Profile
+                    </ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                        <FormControl>
+                            <FormLabel color='secondary.500'>Bio</FormLabel>
+                            <Textarea
+                                rows={5}
+                                mb={5}
                                 value={profile.bio}
+                                color={'secondary.800'}
+                                focusBorderColor={'secondary.300'}
                                 onChange={e =>
                                     setProfile({
                                         ...profile,
@@ -143,40 +64,33 @@ const UpdateProfile = () => {
                                     })
                                 }
                             />
-                        </Form.Group>
-                        <Form.Group
-                            className='mb-3'
-                            controlId='exampleForm.ControlTextarea1'>
-                            <Form.Label>Location</Form.Label>
-                            <DropdownButton
-                                variant='info'
-                                title={
-                                    profile.location
-                                        ? profile.location
-                                        : loggedInUser.location
-                                }
-                                id='dropdown-menu-align-right'
-                                onSelect={handleSelectLocation}>
+                            <FormLabel color='secondary.500'>
+                                Location
+                            </FormLabel>
+                            <Select
+                                focusBorderColor={'secondary.300'}
+                                mb={1}
+                                onChange={e =>
+                                    setProfile({
+                                        ...profile,
+                                        location: e.target.value,
+                                    })
+                                }>
                                 {cities.map(e => (
-                                    <Dropdown.Item eventKey={e} key={e}>
-                                        {e}
-                                    </Dropdown.Item>
+                                    <option value={e}>{e}</option>
                                 ))}
-                            </DropdownButton>
-                        </Form.Group>
-                    </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant='secondary' onClick={handleCloseModal}>
-                        Close
-                    </Button>
-                    <Button
-                        variant='outline-success'
-                        onClick={handleUpdateProfile}>
-                        Update
-                    </Button>
-                </Modal.Footer>
-            </Modal> */}
+                            </Select>
+                        </FormControl>
+                    </ModalBody>
+
+                    <ModalFooter>
+                        <Button mr={3} onClick={onClose}>
+                            Close
+                        </Button>
+                        <Button onClick={handleUpdateProfile}>Submit</Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
         </>
     );
 };

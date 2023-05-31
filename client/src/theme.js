@@ -41,4 +41,29 @@ export const myNewTheme = extendTheme({
             900: '#320116',
         },
     },
+    components: {
+        Button: {
+            baseStyle: {
+                // flex: 1,
+                fontSize: 'sm',
+                rounded: 'full',
+                bg: 'secondary.500',
+                color: 'white',
+                boxShadow:'0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)',
+                _hover: {bg: 'secondary.300'},
+                _focus: {bg: 'secondary.500'},
+            },
+            variants: {
+                // Make a variant, we'll call it `base` here and leave it empty
+                base: {},
+                secondary: {
+                    //...define other variants
+                },
+            },
+            defaultProps: {
+                // Then here we set the base variant as the default
+                variant: 'base',
+            },
+        },
+    },
 });

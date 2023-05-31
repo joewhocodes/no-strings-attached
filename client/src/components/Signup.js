@@ -202,7 +202,7 @@ const Signup = () => {
                                     <Button
                                         isLoading
                                         loadingText='Submitting'
-                                        colorScheme='teal'
+                                        // colorScheme='teal'
                                         variant='outline'
                                     />
                                 ) : (

@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteComment, fetchUsers } from './stateSlices/usersSlice';
-import AddFriend from './AddFriend';
+import AddRemoveFriend from './AddRemoveFriend';
 import {
     Avatar,
     Badge,

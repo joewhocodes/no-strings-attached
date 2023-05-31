@@ -6,7 +6,7 @@ import { deleteLocalInstrument } from './stateSlices/signinSlice';
 import UpdateProfile from './UpdateProfile';
 import AddComment from './AddComment';
 import AddInstrument from './AddInstrument';
-import AddFriend from './AddFriend';
+import AddFriend from './AddRemoveFriend';
 import {
     Badge,
     Box,
