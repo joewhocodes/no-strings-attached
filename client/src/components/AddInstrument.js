@@ -52,14 +52,16 @@ const AddInstrument = () => {
                 id: currentProfile._id,
             })
         );
-        setNewInstrument({instrument: instrumentList[0], skillLevel: skillList[0]})
         onClose(true);
     };
 
     return (
         <>
             {instrumentList &&
-                <Button onClick={onOpen} flex={1}>
+                <Button onClick={() => (
+                    onOpen(),
+                    setNewInstrument({instrument: instrumentList[0], skillLevel: skillList[0]})
+                )} flex={1}>
                     Add Instrument
                 </Button>
             }
@@ -80,8 +82,8 @@ const AddInstrument = () => {
                                         instrument: e.target.value,
                                     })
                                 }>
-                                {instrumentList.map(instrument => (
-                                    <option value={instrument}>
+                                {instrumentList.map((instrument, i) => (
+                                    <option key={`instrumentList - ${i}`} value={instrument}>
                                         {instrument}
                                     </option>
                                 ))}
