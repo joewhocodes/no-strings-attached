@@ -53,8 +53,7 @@ router.post(
             User.findOneAndUpdate({_id: req.body.id}, {$push: {instruments: newInstrument}}, function(err,doc) {
                 if (err) { throw err; }
             })
-            console.log(newInstrument)
-            res.json(req.body)
+            res.json(req.body);
         } else {
             const err = new Error('Users not found.');
             console.log('errors ahoy')

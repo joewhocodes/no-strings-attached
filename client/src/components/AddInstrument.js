@@ -57,14 +57,20 @@ const AddInstrument = () => {
 
     return (
         <>
-            {instrumentList &&
-                <Button onClick={() => (
+            <Button
+                onClick={() => (
                     onOpen(),
-                    setNewInstrument({instrument: instrumentList[0], skillLevel: skillList[0]})
-                )} flex={1}>
-                    Add Instrument
-                </Button>
-            }
+                    setNewInstrument({
+                        instrument: instrumentList[0],
+                        skillLevel: skillList[0],
+                    })
+                )}
+                flex={1}
+                isDisabled={!instrumentList.length}
+                _hover={!instrumentList.length ? {bg: 'secondary.600'} : {bg: 'green.500'}}
+                >
+                Add Instrument
+            </Button>
 
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
@@ -83,7 +89,9 @@ const AddInstrument = () => {
                                     })
                                 }>
                                 {instrumentList.map((instrument, i) => (
-                                    <option key={`instrumentList - ${i}`} value={instrument}>
+                                    <option
+                                        key={`instrumentList - ${i}`}
+                                        value={instrument}>
                                         {instrument}
                                     </option>
                                 ))}
