@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProfile } from './stateSlices/usersSlice';
 import { cities } from '../data/cities';
@@ -34,6 +33,7 @@ const UpdateProfile = () => {
         dispatch(updateProfile({bio: profile.bio, location: profile.location, id: loggedInUser.id}));
         onClose(true);
     };
+    console.log(profile.location)
     return (
         <>
             <Button onClick={onOpen} flex={1}>
@@ -72,9 +72,11 @@ const UpdateProfile = () => {
                                         ...profile,
                                         location: e.target.value,
                                     })
-                                }>
-                                {cities.map(city => (
-                                    <option value={city}>{city}</option>
+                                }
+                                defaultValue={profile.location}
+                                >
+                                {cities.map((city, i) => (
+                                    <option defaultValue={i==12} value={city}>{city}</option>
                                 ))}
                             </Select>
                         </FormControl>
