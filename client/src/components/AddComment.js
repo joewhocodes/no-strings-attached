@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { addComment, setCurrentProfile } from './stateSlices/usersSlice';
+import { addComment, fetchCurrentProfile } from './stateSlices/usersSlice';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { nanoid } from 'nanoid';
@@ -30,7 +30,7 @@ const AddComment = () => {
                 comment,
             })
         );
-        dispatch(setCurrentProfile({ currentProfileId: id }))
+        dispatch(fetchCurrentProfile({ currentProfileId: id }))
         setComment('');
         handleCloseModal();
     };
@@ -67,7 +67,7 @@ const AddComment = () => {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant='secondary' onClick={handleCloseModal}>
+                    <Button onClick={handleCloseModal}>
                         Close
                     </Button>
                     <Button

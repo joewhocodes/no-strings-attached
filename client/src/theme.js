@@ -65,5 +65,15 @@ export const myNewTheme = extendTheme({
                 variant: 'base',
             },
         },
+        FormLabel: {
+            baseStyle: {
+                color: 'secondary.500',
+            },
+        },
+        Select: {
+            baseStyle: {
+                focusBorderColor: 'secondary.300',
+            }
+        }
     },
 });

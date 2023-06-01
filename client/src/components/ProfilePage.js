@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUsers, setCurrentProfile, deleteInstrument } from './stateSlices/usersSlice';
+import { fetchUsers, fetchCurrentProfile, deleteInstrument } from './stateSlices/usersSlice';
 import { deleteLocalInstrument } from './stateSlices/signinSlice';
 import Header from './Header';
 import FriendList from './FriendList';
 import Comments from './Comments';
 import ProfileCard from './ProfileCard';
-import { Center, Heading, SimpleGrid, Box } from '@chakra-ui/react';
+import { SimpleGrid, Box } from '@chakra-ui/react';
 
-const Profile = () => {
+const ProfilePage = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
     const { users } = useSelector((state) => state.users);
     const { currentProfile } = useSelector((state) => state.users);
@@ -23,7 +23,7 @@ const Profile = () => {
     }, [dispatch, id, loggedInUser.token]);
 
     useEffect(() => {
-        dispatch(setCurrentProfile({ currentProfileId: id }))
+        dispatch(fetchCurrentProfile({ currentProfileId: id }))
     }, [dispatch, id]);
 
     const handleDeleteInstrument = ins => {
@@ -47,4 +47,4 @@ const Profile = () => {
     );
 };
 
-export default Profile;
+export default ProfilePage;

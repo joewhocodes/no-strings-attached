@@ -1,7 +1,7 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateProfile } from './stateSlices/usersSlice';
-import { updateLocalProfile } from './stateSlices/signinSlice';
+import { fetchCurrentProfile, updateProfile } from './stateSlices/usersSlice';
 import { cities } from '../data/cities';
 import {
     Button,
@@ -21,20 +21,20 @@ import {
 
 const UpdateProfile = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const { currentProfile } = useSelector((state) => state.users);
     const { loggedInUser } = useSelector(state => state.signin);
     const [profile, setProfile] = useState({
-        bio: loggedInUser.bio,
-        location: loggedInUser.location,
+        bio: currentProfile.bio,
+        location: currentProfile.location,
     });
+    const { id } = useParams();
 
     const dispatch = useDispatch();
 
     const handleUpdateProfile = () => {
         dispatch(updateProfile({bio: profile.bio, location: profile.location, id: loggedInUser.id}));
-        dispatch(updateLocalProfile({bio: profile.bio, location: profile.location}));
         onClose(true);
     };
-
     return (
         <>
             <Button onClick={onOpen} flex={1}>
@@ -50,7 +50,7 @@ const UpdateProfile = () => {
                     <ModalCloseButton />
                     <ModalBody>
                         <FormControl>
-                            <FormLabel color='secondary.500'>Bio</FormLabel>
+                            <FormLabel>Bio</FormLabel>
                             <Textarea
                                 rows={5}
                                 mb={5}
@@ -64,9 +64,7 @@ const UpdateProfile = () => {
                                     })
                                 }
                             />
-                            <FormLabel color='secondary.500'>
-                                Location
-                            </FormLabel>
+                            <FormLabel>Location</FormLabel>
                             <Select
                                 focusBorderColor={'secondary.300'}
                                 mb={1}
@@ -76,8 +74,8 @@ const UpdateProfile = () => {
                                         location: e.target.value,
                                     })
                                 }>
-                                {cities.map(e => (
-                                    <option value={e}>{e}</option>
+                                {cities.map(city => (
+                                    <option value={city}>{city}</option>
                                 ))}
                             </Select>
                         </FormControl>

@@ -1,15 +1,13 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUsers, setCurrentProfile, deleteInstrument } from './stateSlices/usersSlice';
+import { fetchUsers, fetchCurrentProfile, deleteInstrument } from './stateSlices/usersSlice';
 import { deleteLocalInstrument } from './stateSlices/signinSlice';
 import UpdateProfile from './UpdateProfile';
 import AddComment from './AddComment';
 import AddInstrument from './AddInstrument';
 import AddFriend from './AddRemoveFriend';
 import {
-    Badge,
-    Box,
     Flex,
     Heading,
     Image,
@@ -17,8 +15,9 @@ import {
     Text,
     useColorModeValue,
 } from '@chakra-ui/react';
+import InstrumentList from './InstrumentList';
 
-const Profile = () => {
+const ProfileCard = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
     const { currentProfile } = useSelector((state) => state.users);
     const { id } = useParams();
@@ -31,7 +30,7 @@ const Profile = () => {
     }, [dispatch, id, loggedInUser.token]);
 
     useEffect(() => {
-        dispatch(setCurrentProfile({ currentProfileId: id }))
+        dispatch(fetchCurrentProfile({ currentProfileId: id }))
     }, [dispatch, id]);
 
     const handleDeleteInstrument = ins => {
@@ -47,7 +46,7 @@ const Profile = () => {
                 borderRadius='lg'
                 w={{ sm: '100%', md: '540px' }}
                 minH={'50vh'}
-                height={{ sm: '476px', md: '20rem' }}
+                // height={{ sm: '476px', md: '20rem' }}
                 direction={{ base: 'column', md: 'row' }}
                 bg={useColorModeValue('white', 'gray.900')}
                 boxShadow={'2xl'}
@@ -108,36 +107,11 @@ const Profile = () => {
                             <AddInstrument />
                         </Stack>
                     )}
-                    <Stack
-                        align={'left'}
-                        justify={'left'}
-                        // direction={'c'}
-                        mt={6}>
-                        {loggedInUser.instruments.map((instrument, i) => (
-                            <Flex key={i}>
-                                <Badge
-                                    color={'secondary.500'}
-                                    px={2}
-                                    py={1}
-                                    bg={'gray.100'}
-                                    fontWeight={'600'}>
-                                    {instrument.instrument}
-                                </Badge>
-                                <Badge
-                                    color={'primary.500'}
-                                    px={2}
-                                    py={1}
-                                    bg={'gray.50'}
-                                    fontWeight={'400'}>
-                                    {instrument.skill}
-                                </Badge>
-                            </Flex>
-                        ))}
-                    </Stack>
+                    <InstrumentList />
                 </Stack>
             </Stack>
         </Flex>
     );
 };
 
-export default Profile;
+export default ProfileCard;

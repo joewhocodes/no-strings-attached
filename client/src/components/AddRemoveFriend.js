@@ -37,13 +37,13 @@ const AddFriend = props => {
                     flex={1}
                     fontSize={'sm'}
                     rounded={'full'}
-                    bg={'blue.400'}
+                    bg={!isFriend ? 'secondary.400' : 'green.400'}
                     color={'white'}
                     boxShadow={
                         '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
                     }
-                    _hover={!isFriend ? {bg: 'blue.500'} : {bg: 'green.500'}}
-                    _focus={!isFriend ? {bg: 'blue.500'} : {bg: 'green.500'}}>
+                    _hover={!isFriend ? {bg: 'secondary.600'} : {bg: 'green.500'}}
+                    _focus={!isFriend ? {bg: 'secondary.600'} : {bg: 'green.500'}}>
                     {!isFriend ? 'Add Friend' : <CheckIcon ml={2} />} 
                 </Button>
             )}

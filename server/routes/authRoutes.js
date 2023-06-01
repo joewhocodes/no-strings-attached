@@ -33,6 +33,7 @@ router.get(
     asyncHandler(async (req, res) => {
         const user = await User.findOne({_id: req.params.id});
         if (req.body) {
+            console.log('fetched user')
             res.json(user)
         } else {
             const err = new Error('Users not found.');
@@ -160,7 +161,7 @@ router.post(
     // requireAdmin,
     asyncHandler(async (req, res) => {
         const newProfile = {bio: req.body.bio, location: req.body.location}
-        console.log(req.body.id)
+        console.log(`new profile: ${newProfile.bio}`)
         if (req.body) {
             User.findOneAndUpdate({_id: req.body.id}, {$set: newProfile}, function(err,doc) {
                 if (err) { throw err; }

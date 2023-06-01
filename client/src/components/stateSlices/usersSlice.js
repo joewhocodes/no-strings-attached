@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+
 const initialState = {
     status: 'idle',
     users: [],
@@ -25,8 +26,8 @@ export const fetchUsers = createAsyncThunk(
     }
 );
 
-export const setCurrentProfile = createAsyncThunk(
-    'users/setCurrentProfile',
+export const fetchCurrentProfile = createAsyncThunk(
+    'users/fetchCurrentProfile',
     async ({currentProfileId}) => {
         try {
             const { data } = await axios.get(`/api/user/${currentProfileId}`);
@@ -39,9 +40,10 @@ export const setCurrentProfile = createAsyncThunk(
 
 export const addInstrument = createAsyncThunk(
     'users/addInstrument',
-    async ({instrument, skill, id}) => {
+    async ({instrument, skill, id}, {dispatch}) => {
         try {
             const { data } = await axios.post('/api/users/addInstrument', {instrument, skill, id});
+            dispatch(fetchCurrentProfile({ currentProfileId: id }))
             return data;
         } catch (err) {
             console.log(err)
@@ -111,15 +113,22 @@ export const deleteComment = createAsyncThunk(
 
 export const updateProfile = createAsyncThunk(
     'users/updateProfile',
-    async ({bio, location, id}) => {
+    async ({bio, location, id}, {dispatch}) => {
         try {
             const { data } = await axios.post('/api/users/updateProfile', {bio, location, id});
+            dispatch(fetchCurrentProfile({ currentProfileId: id }))
             return data;
         } catch (err) {
             console.log(err)
         }
     }
 );
+
+// export const updateData = createAsyncThunk('data/update', async (params, {dispatch}) => {
+//     const result = await sdkClient.update({ params })
+//     dispatch(getData())
+//     return result
+//   })
 
 export const usersSlice = createSlice({
     name: 'users',
@@ -141,7 +150,7 @@ export const usersSlice = createSlice({
             state.status = 'succeeded';
             state.users = [...action.payload];
         },
-        [setCurrentProfile.fulfilled]: (state, action) => {
+        [fetchCurrentProfile.fulfilled]: (state, action) => {
             state.status = 'succeeded';
             state.currentProfile = action.payload;
         },
