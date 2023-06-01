@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addInstrument, fetchCurrentProfile } from './stateSlices/usersSlice';
-import { addLocalInstrument } from './stateSlices/signinSlice';
+import { addInstrument } from './stateSlices/usersSlice';
 import {
     Button,
     FormControl,
@@ -20,6 +19,7 @@ import {
 const AddInstrument = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { loggedInUser } = useSelector(state => state.signin);
+    const { currentProfile } = useSelector((state) => state.users);
     const [newInstrument, setNewInstrument] = useState({
         instrument: '',
         skillLevel: '',
@@ -36,27 +36,23 @@ const AddInstrument = () => {
         'Keyboard',
     ].filter(
         instrument =>
-            !loggedInUser.instruments
-                .map(instrument => Object.keys(instrument)[0])
+            !currentProfile.instruments
+                .map(e => Object.values(e)[0])
                 .includes(instrument)
     );
+
     const skillList = ['Beginner', 'Intermediate', 'Professional'];
 
     const handleAddInstrument = () => {
-        if (!newInstrument.instrument || !newInstrument.skillLevel) return;
+        // if (!newInstrument.instrument || !newInstrument.skillLevel) return;
         dispatch(
             addInstrument({
                 instrument: newInstrument.instrument,
                 skill: newInstrument.skillLevel,
-                id: loggedInUser.id,
+                id: currentProfile._id,
             })
         );
-        dispatch(
-            addLocalInstrument({
-                instrument: newInstrument.instrument,
-                skill: newInstrument.skillLevel,
-            })
-        );
+        setNewInstrument({instrument: instrumentList[0], skillLevel: skillList[0]})
         onClose(true);
     };
 

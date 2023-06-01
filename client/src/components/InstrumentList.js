@@ -1,14 +1,25 @@
 import React from "react";
+import { useDispatch } from 'react-redux';
+import { removeInstrument } from './stateSlices/usersSlice';
 import { useSelector } from 'react-redux';
 import {
     Badge,
+    Button,
     Flex,
     Stack,
   } from '@chakra-ui/react'
 
 const InstrumentList = () => {
+    const { loggedInUser } = useSelector(state => state.signin);
     const { currentProfile } = useSelector((state) => state.users);
+    const loggedInUserProfile = loggedInUser.id === currentProfile._id;
+    const dispatch = useDispatch();
     
+    const handleRemoveInstrument = instrument => {
+        const filteredInstruments = currentProfile.instruments.filter(e => e !== instrument);
+        dispatch(removeInstrument({instruments: filteredInstruments, id: loggedInUser.id}));
+    };
+
     return (
         currentProfile.instruments && (
             <Stack
@@ -34,6 +45,11 @@ const InstrumentList = () => {
                             fontWeight={'400'}>
                             {instrument.skill}
                         </Badge>
+                        {loggedInUserProfile && (
+                            <Button onClick={() => handleRemoveInstrument(instrument)}>
+                                X
+                            </Button>
+                        )}
                     </Flex>
                 ))}
             </Stack>

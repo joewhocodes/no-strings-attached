@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUsers, fetchCurrentProfile, deleteInstrument } from './stateSlices/usersSlice';
-import { deleteLocalInstrument } from './stateSlices/signinSlice';
+
 import UpdateProfile from './UpdateProfile';
 import AddComment from './AddComment';
 import AddInstrument from './AddInstrument';
@@ -20,24 +18,9 @@ import InstrumentList from './InstrumentList';
 const ProfileCard = () => {
     const { loggedInUser } = useSelector((state) => state.signin);
     const { currentProfile } = useSelector((state) => state.users);
-    const { id } = useParams();
-    const dispatch = useDispatch();
 
     const loggedInUserProfile = loggedInUser.id === currentProfile._id;
 
-    useEffect(() => {
-        dispatch(fetchUsers({ token: loggedInUser.token }));
-    }, [dispatch, id, loggedInUser.token]);
-
-    useEffect(() => {
-        dispatch(fetchCurrentProfile({ currentProfileId: id }))
-    }, [dispatch, id]);
-
-    const handleDeleteInstrument = ins => {
-        const filteredInstruments = loggedInUser.instruments.filter(e => e !== ins);
-        dispatch(deleteInstrument({instruments: filteredInstruments, id: loggedInUser.id}));
-        dispatch(deleteLocalInstrument({instruments: filteredInstruments}));
-    };
 
     return (
         <Flex py={6}>

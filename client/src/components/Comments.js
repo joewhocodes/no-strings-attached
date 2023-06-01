@@ -2,20 +2,14 @@ import React from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteComment, fetchUsers } from './stateSlices/usersSlice';
-import AddRemoveFriend from './AddRemoveFriend';
 import {
     Avatar,
-    Badge,
     Box,
     Button,
     Center,
-    Flex,
     Heading,
-    Image,
-    Link,
     Stack,
     Text,
-    useColorModeValue,
 } from '@chakra-ui/react';
 
 
@@ -27,7 +21,7 @@ const Comments = () => {
 
     const handleDeleteComment = commentId => {
         const filteredComments = currentProfile.comments.filter(
-            e => e.commentId !== commentId
+            comment => comment.commentId !== commentId
         );
         dispatch(deleteComment({ id: currentProfile._id, filteredComments }));
         dispatch(fetchUsers({ token: loggedInUser.token }));

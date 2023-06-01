@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCurrentProfile, updateProfile } from './stateSlices/usersSlice';
+import { updateProfile } from './stateSlices/usersSlice';
 import { cities } from '../data/cities';
 import {
     Button,
@@ -27,7 +27,6 @@ const UpdateProfile = () => {
         bio: currentProfile.bio,
         location: currentProfile.location,
     });
-    const { id } = useParams();
 
     const dispatch = useDispatch();
 

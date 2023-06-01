@@ -63,7 +63,7 @@ router.post(
 );
 
 router.post(
-    '/api/users/deleteInstrument',
+    '/api/users/removeInstrument',
     // requireAuth,
     // requireAdmin,
     asyncHandler(async (req, res) => {

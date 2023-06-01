@@ -51,11 +51,12 @@ export const addInstrument = createAsyncThunk(
     }
 );
 
-export const deleteInstrument = createAsyncThunk(
-    'users/deleteInstrument',
-    async ({instruments, id}) => {
+export const removeInstrument = createAsyncThunk(
+    'users/removeInstrument',
+    async ({instruments, id}, {dispatch}) => {
         try {
-            const { data } = await axios.post('/api/users/deleteInstrument', {instruments, id});
+            const { data } = await axios.post('/api/users/removeInstrument', {instruments, id});
+            dispatch(fetchCurrentProfile({ currentProfileId: id }))
             return data;
         } catch (err) {
             console.log(err)
@@ -116,7 +117,7 @@ export const updateProfile = createAsyncThunk(
     async ({bio, location, id}, {dispatch}) => {
         try {
             const { data } = await axios.post('/api/users/updateProfile', {bio, location, id});
-            dispatch(fetchCurrentProfile({ currentProfileId: id }))
+            dispatch(fetchCurrentProfile({ currentProfileId: id }));
             return data;
         } catch (err) {
             console.log(err)
