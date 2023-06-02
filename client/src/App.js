@@ -20,20 +20,18 @@ const App = () => {
 
     return (
         <>
-
-                <Box bg='primary.10'>
-                    <Routes>
-                        <Route path="/" element={loggedInUser ? <Home /> : <Signup />} />
-                        <Route path="/Signin" element={loggedInUser ? <Navigate to="/"/> : <Signin />} />
-                        <Route element={loggedInUser ? <Outlet/> : <Navigate to="/"/>}>
-                            <Route path="/users/:id" element={<Profile />} />
-                            <Route path="/FriendPage" element={<FriendPage />} />
-                            <Route path="/UserList" element={<UserList />} />
-                        </Route>
-                        <Route path="*" element={<Navigate to="/"/>} />
-                    </Routes>
-                </Box>
-
+            <Box bg='primary.10'>
+                <Routes>
+                    <Route path="/" element={loggedInUser ? <Home /> : <Signup />} />
+                    <Route path="/Signin" element={loggedInUser ? <Navigate to="/"/> : <Signin />} />
+                    <Route element={loggedInUser ? <Outlet/> : <Navigate to="/"/>}>
+                        <Route path="/users/:id" element={<Profile />} />
+                        <Route path="/FriendPage" element={<FriendPage />} />
+                        <Route path="/UserList" element={<UserList />} />
+                    </Route>
+                    <Route path="*" element={<Navigate to="/"/>} />
+                </Routes>
+            </Box>
         </>
     );
 };
