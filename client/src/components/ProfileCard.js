@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import UpdateProfile from './UpdateProfile';
 import AddComment from './AddComment';
@@ -20,7 +20,6 @@ const ProfileCard = () => {
     const { currentProfile } = useSelector((state) => state.users);
 
     const loggedInUserProfile = loggedInUser.id === currentProfile._id;
-
 
     return (
         <Flex py={6}>
@@ -58,7 +57,7 @@ const ProfileCard = () => {
                         color={'backing.500'}>
                         {currentProfile.firstName}
                     </Heading>
-                    <Text fontWeight={600} color={'black'} size='sm' mb={4}>
+                    <Text fontWeight={600} as={'i'} color={'black'} size='sm' mb={4}>
                         {currentProfile.location}
                     </Text>
                     <Text

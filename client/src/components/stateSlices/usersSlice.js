@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-
 const initialState = {
     status: 'idle',
     users: [],
@@ -57,7 +56,6 @@ export const removeInstrument = createAsyncThunk(
         try {
             const { data } = await axios.post('/api/users/removeInstrument', {instruments, id});
             dispatch(fetchCurrentProfile({ currentProfileId: id }))
-            console.log('finish remove ins')
             return data;
         } catch (err) {
             console.log(err)

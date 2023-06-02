@@ -33,7 +33,7 @@ const UpdateProfile = () => {
         dispatch(updateProfile({bio: profile.bio, location: profile.location, id: loggedInUser.id}));
         onClose(true);
     };
-    console.log(profile.location)
+
     return (
         <>
             <Button onClick={onOpen} flex={1}>
@@ -76,7 +76,7 @@ const UpdateProfile = () => {
                                 defaultValue={profile.location}
                                 >
                                 {cities.map((city, i) => (
-                                    <option defaultValue={i==12} value={city}>{city}</option>
+                                    <option value={city}>{city}</option>
                                 ))}
                             </Select>
                         </FormControl>
