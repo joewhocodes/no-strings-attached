@@ -45,7 +45,7 @@ const AddFriend = props => {
                     bg={!isFriend ? 'primary.500' : 'green.400'}
                     _hover={!isFriend ? {bg: 'primary.400'} : {bg: 'red.500'}}
                     _focus={!isFriend ? {bg: 'primary.400'} : {bg: 'green.300'}}>
-                    {!isFriend ? 'Add Friend' : <CheckIcon ml={2} />} 
+                    {!isFriend ? 'Add Friend' : 'Friends'} 
                 </Button>
             )}
         </>

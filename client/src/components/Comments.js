@@ -32,7 +32,6 @@ const Comments = () => {
 
     return (
         <Box>
-            {/* <Heading>Comments</Heading> */}
             {currentProfile.comments &&
                 currentProfile.comments.map(comment => (
                     <Center py={6} key={comment.commentId}>
