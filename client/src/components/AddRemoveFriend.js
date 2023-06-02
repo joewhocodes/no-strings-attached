@@ -33,17 +33,18 @@ const AddFriend = props => {
         <>
             {props && loggedInUser.id !== props.user._id && (
                 <Button
+                    variant={'secondary'}
                     onClick={() => !isFriend ? handleAddFriend() : handleRemoveFriend()}
                     flex={1}
                     fontSize={'sm'}
                     rounded={'full'}
-                    bg={!isFriend ? 'secondary.400' : 'green.400'}
                     color={'white'}
                     boxShadow={
                         '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
                     }
-                    _hover={!isFriend ? {bg: 'secondary.600'} : {bg: 'green.500'}}
-                    _focus={!isFriend ? {bg: 'secondary.600'} : {bg: 'green.500'}}>
+                    bg={!isFriend ? 'primary.500' : 'green.400'}
+                    _hover={!isFriend ? {bg: 'primary.400'} : {bg: 'red.500'}}
+                    _focus={!isFriend ? {bg: 'primary.400'} : {bg: 'green.300'}}>
                     {!isFriend ? 'Add Friend' : <CheckIcon ml={2} />} 
                 </Button>
             )}

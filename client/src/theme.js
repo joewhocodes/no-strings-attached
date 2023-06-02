@@ -64,6 +64,14 @@ export const myNewTheme = extendTheme({
                     _hover: {bg: 'red.400'},
                     _focus: {bg: 'red.500'},
                 },
+                secondary: {
+                    // width: '50%', 
+                    alignSelf: 'center',
+                    // mt: 2, 
+                    bg: 'primary.500',
+                    _hover: {bg: 'primary.400'},
+                    _focus: {bg: 'primary.500'},
+                },
             },
             defaultProps: {
                 // Then here we set the base variant as the default

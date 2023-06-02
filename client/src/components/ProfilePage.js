@@ -6,11 +6,13 @@ import Header from './Header';
 import FriendList from './FriendList';
 import Comments from './Comments';
 import ProfileCard from './ProfileCard';
-import { SimpleGrid, Box } from '@chakra-ui/react';
+import { SimpleGrid, Box, Heading, Image } from '@chakra-ui/react';
 import { SpinnerIcon } from '@chakra-ui/icons';
+import comments from '../images/comments.png';
+import friends from '../images/friends.png';
 
 const ProfilePage = () => {
-    const { loggedInUser } = useSelector((state) => state.signin);
+    const { loggedInUser } = useSelector(state => state.signin);
     const { id } = useParams();
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
@@ -30,11 +32,29 @@ const ProfilePage = () => {
             {loading ? (
                 <SpinnerIcon />
             ) : (
-                <SimpleGrid columns={{ base: 1, md: 3 }} spacing={5} minH={'100vh'}>
+                <SimpleGrid
+                    columns={{ base: 1, lg: 3 }}
+                    spacing={5}
+                    minH={'100vh'}>
                     <ProfileCard />
-                    {/* <Heading textAlign={'center'} mt={'5'}>Comments</Heading> */}
-                    <Comments />
-                    <FriendList />
+                    <Box mt={'72px'} textAlign={'center'}>
+                        <Image
+                            src={comments}
+                            margin={'auto'}
+                            width='200px'></Image>
+                        <Box maxH={'80vh'} overflow={'scroll'}>
+                            <Comments />
+                        </Box>
+                    </Box>
+                    <Box mt={'72px'} textAlign={'center'}>
+                        <Image
+                            src={friends}
+                            margin={'auto'}
+                            width='160px'></Image>
+                        <Box maxH={'80vh'} overflow={'scroll'}>
+                            <FriendList />
+                        </Box>
+                    </Box>
                 </SimpleGrid>
             )}
         </Box>

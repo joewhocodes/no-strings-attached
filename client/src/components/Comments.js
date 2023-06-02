@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteComment, fetchCurrentProfile } from './stateSlices/usersSlice';
 import {
@@ -12,12 +12,12 @@ import {
     Text,
 } from '@chakra-ui/react';
 
-
 const Comments = () => {
     const { loggedInUser } = useSelector(state => state.signin);
     const { currentProfile } = useSelector(state => state.users);
     const dispatch = useDispatch();
     const { id } = useParams();
+    const navigate = useNavigate();
 
     const handleDeleteComment = commentId => {
         const filteredComments = currentProfile.comments.filter(
@@ -26,8 +26,12 @@ const Comments = () => {
         dispatch(deleteComment({ id: currentProfile._id, filteredComments }));
     };
 
+    const handleViewProfile = userId => {
+        navigate(`/users/${userId}`);
+    };
+
     return (
-        <Box pt={'60px'} maxH={'100vh'} overflow={'scroll'}>
+        <Box>
             {/* <Heading>Comments</Heading> */}
             {currentProfile.comments &&
                 currentProfile.comments.map(comment => (
@@ -39,7 +43,7 @@ const Comments = () => {
                             height={{ sm: '312px', md: '15rem' }}
                             direction={{ base: 'column', md: 'row' }}
                             bg={'white'}
-                            boxShadow={'2xl'}
+                            boxShadow={'lg'}
                             padding={4}>
                             <Stack
                                 flexDirection='column'
@@ -55,7 +59,6 @@ const Comments = () => {
                                     <Avatar
                                         src={comment.profileImg}
                                         size='full'
-                                        position='absolute'
                                         top={0}
                                     />
                                 </Box>
@@ -92,25 +95,14 @@ const Comments = () => {
                                         flex={1}
                                         fontSize={'sm'}
                                         rounded={'full'}
-                                        bg={'gray.400'}
-                                        _focus={{
-                                            bg: 'gray.200',
-                                        }}>
-                                        <NavLink to={`/users/${comment.userId}`}>
-                                            View Profile
-                                        </NavLink>
+                                        onClick={() => handleViewProfile(comment.userId)}>
+                                        View Profile
                                     </Button>
+
                                     {loggedInUser.id === comment.userId ||
                                     id === loggedInUser.id ? (
                                         <Button
                                             variant={'delete'}
-                                            // flex={1}
-                                            // fontSize={'sm'}
-                                            // rounded={'full'}
-                                            // bg={'red.400'}
-                                            // _focus={{
-                                            //     bg: 'gray.200',
-                                            // }}
                                             onClick={() =>
                                                 handleDeleteComment(
                                                     comment.commentId
@@ -120,6 +112,7 @@ const Comments = () => {
                                         </Button>
                                     ) : (
                                         <Button
+                                            variant={'secondary'}
                                             flex={1}
                                             fontSize={'sm'}
                                             rounded={'full'}
@@ -133,18 +126,6 @@ const Comments = () => {
                             </Stack>
                         </Stack>
                     </Center>
-
-                    //     <p>
-                    //         <Heading>Comments</Heading>
-                    //         {c.firstName}
-                    //         <img
-                    //             src={`${c.profileImg}`}
-                    //             width='100px'
-                    //             alt='profile image'
-                    //         />
-                    //         {c.comment}
-
-                    //     </p>
                 ))}
         </Box>
     );

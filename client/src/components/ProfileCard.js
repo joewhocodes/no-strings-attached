@@ -24,8 +24,8 @@ const ProfileCard = () => {
 
     return (
         <Flex
-            mt={'83px'}
-            mb={'30px'}
+            mt={'75px'}
+            mb={'22px'}
             bg={'white'}
             alignItems={'center'}
             borderWidth={'1px'}
@@ -33,12 +33,12 @@ const ProfileCard = () => {
             borderRadius={'lg'}>
             <Stack
                 display={'flex'}
-                w={{ sm: '100%', md: '540px' }}
+                w={{ sm: '100%', lg: '540px' }}
                 direction={'column'}
                 padding={4}>
                 <Box>
                     <Heading
-                        fontSize={'2xl'}
+                        fontSize={'26px'}
                         fontFamily={'body'}
                         textAlign={'center'}
                         color={'backing.500'}>
@@ -47,12 +47,12 @@ const ProfileCard = () => {
                     <Center ml={'auto'} mr={'auto'}>
                         <Image
                             borderRadius='md'
+                            mt={4}
                             boxSize='250px'
                             objectFit='cover'
                             src={currentProfile.profileImg}
                         />
                     </Center>
-
                     <Stack
                         flex={1}
                         flexDirection='column'

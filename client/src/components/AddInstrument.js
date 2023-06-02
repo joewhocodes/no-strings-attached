@@ -65,9 +65,10 @@ const AddInstrument = () => {
                         skillLevel: skillList[0],
                     })
                 )}
+                variant={'secondary'}
                 flex={1}
                 isDisabled={!instrumentList.length}
-                _hover={!instrumentList.length ? {bg: 'secondary.600'} : {bg: 'green.500'}}
+                _hover={!instrumentList.length ? {bg: 'primary.500'} : {bg: 'primary.300'}}
                 >
                 Add Instrument
             </Button>

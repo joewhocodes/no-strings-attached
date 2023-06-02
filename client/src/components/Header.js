@@ -50,7 +50,7 @@ const Header = () => {
                     size={'md'}
                     icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
                     aria-label={'Open Menu'}
-                    display={{ md: 'none' }}
+                    display={{ lg: 'none' }}
                     onClick={isOpen ? onClose : onOpen}
                 />
                 <HStack spacing={8} alignItems={'center'}>
@@ -60,7 +60,7 @@ const Header = () => {
                     <HStack
                         as={'nav'}
                         spacing={10}
-                        display={{ base: 'none', md: 'flex' }}>
+                        display={{ base: 'none', lg: 'flex' }}>
                         <NavLink to='/'>Home</NavLink>
                         <NavLink to={`/users/${loggedInUser.id}`}>
                             Profile
@@ -88,7 +88,7 @@ const Header = () => {
             </Flex>
 
             {isOpen ? (
-                <Box pb={4} display={{ md: 'none' }}>
+                <Box pb={4} display={{ lg: 'none' }}>
                     <Stack as={'nav'} spacing={4}>
                         <NavLink to='/'>Home</NavLink>
                         <NavLink to={`/users/${loggedInUser.id}`}>

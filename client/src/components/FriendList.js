@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, NavLink } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import AddRemoveFriend from './AddRemoveFriend';
 import {
@@ -17,9 +17,14 @@ const FriendList = () => {
     const { users } = useSelector(state => state.users);
     const { id } = useParams();
     const userInfo = users.find(e => e._id === id);
+    const navigate = useNavigate();
+    
+    const handleViewProfile = userId => {
+        navigate(`/users/${userId}`);
+    };
 
     return (
-        <Box pt={'60px'} maxH={'100vh'} overflow={'scroll'}>
+        <Box>
             {users
                 .filter(user => userInfo.friends.includes(user._id))
                 .map(user => {
@@ -29,7 +34,7 @@ const FriendList = () => {
                             maxW={'320px'}
                             w={'full'}
                             bg={'white'}
-                            boxShadow={'2xl'}
+                            boxShadow={'lg'}
                             rounded={'lg'}
                             p={6}
                             textAlign={'center'}>
@@ -73,10 +78,10 @@ const FriendList = () => {
                                     rounded={'full'}
                                     _focus={{
                                         bg: 'gray.200',
-                                    }}>
-                                    <NavLink to={`/users/${user._id}`}>
+                                    }}
+                                    onClick={() => handleViewProfile(user._id)}
+                                    >
                                         View Profile
-                                    </NavLink>
                                 </Button>
                                 <AddRemoveFriend user={user} />
                             </Stack>
