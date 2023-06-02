@@ -188,8 +188,8 @@ router.post(
         // resize uploaded image with sharp
         const resizedImageBuffer = await sharp(req.file.buffer)
         .resize({
-            width: 200,
-            height: 200,
+            width: 500,
+            height: 500,
             fit: sharp.fit.inside,
             withoutEnlargement: true,
         })
