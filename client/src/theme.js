@@ -56,8 +56,13 @@ export const myNewTheme = extendTheme({
             variants: {
                 // Make a variant, we'll call it `base` here and leave it empty
                 base: {},
-                secondary: {
-                    //...define other variants
+                delete: {
+                    width: '50%', 
+                    alignSelf: 'center',
+                    mt: 2, 
+                    bg: 'red.500',
+                    _hover: {bg: 'red.400'},
+                    _focus: {bg: 'red.500'},
                 },
             },
             defaultProps: {

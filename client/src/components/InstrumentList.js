@@ -26,44 +26,55 @@ const InstrumentList = () => {
 
     return (
         currentProfile.instruments && (
-            <Stack
+            <Flex
                 align={'left'}
                 justify={'left'}
                 // direction={'c'}
                 mt={6}>
                 {currentProfile.instruments.map((instrument, i) => (
-                    <Flex key={i}>
+                    <Flex key={i}
+                    direction={'column'}>
                         <Box
                             flex={1}
                             color={'secondary.500'}
                             minWidth={'60px'}
                             px={2}
                             py={1}
-                            bg={'gray.100'}
+                            alignSelf={'center'}
+                            // bg={'gray.100'}
                             fontWeight={'600'}>
-                            {instrument.instrument}
+                            {/* {instrument.instrument} */}
+                        <Image
+                            src={require(`../images/instrument-icons/${instrument.instrument}.png`)}
+                            width={'50px'}
+                            ></Image>
                         </Box>
                         <Box
                             flex={1}
+                            textAlign={'center'}
+                            borderRadius={10}
                             color={'primary.500'}
+                            height={'60px'}
                             px={2}
                             py={1}
-                            bg={'gray.50'}
+                            bg={instrument.skill === 'Beginner' ? 'green.500' : instrument.skill === 'Intermediate' ? 'yellow.500' : 'red.500'}
                             fontWeight={'400'}>
-                            {instrument.skill}
-                            <Image src={require(`../images/instrument-icons/${instrument.instrument}.png`)}></Image>
+                            {/* {instrument.skill} */}
                         </Box>
-                        <Box 
-                        justifyContent={'end'}>
+                        
+                        {/* <Box flex={1}> */}
                             {loggedInUserProfile && (
-                                <Button onClick={() => handleRemoveInstrument(instrument)}>
+                                <Button variant={'delete'}
+                                    onClick={() =>
+                                        handleRemoveInstrument(instrument)
+                                    }>
                                     X
                                 </Button>
                             )}
-                        </Box>
+                        {/* </Box> */}
                     </Flex>
                 ))}
-            </Stack>
+            </Flex>
         )
     );
 }

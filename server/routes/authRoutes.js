@@ -32,11 +32,11 @@ router.get(
     '/api/user/:id',
     asyncHandler(async (req, res) => {
         const user = await User.findOne({_id: req.params.id});
-        if (req.body) {
-            console.log('fetched user')
+        if (user) {
             res.json(user)
+            console.log('fetched user')
         } else {
-            const err = new Error('Users not found.');
+            const err = new Error('User not found.');
             console.log('errors ahoy')
         }
     })
