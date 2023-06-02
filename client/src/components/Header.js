@@ -33,8 +33,19 @@ const Header = () => {
     };
 
     return (
-        <Box bg={useColorModeValue('white', 'gray.900')} px={4}>
-            <Flex h='65px' alignItems={'center'} justifyContent={'space-between'}>
+        <Box
+            position={'fixed'}
+            zIndex={100}
+            top={0}
+            left={0}
+            right={0}
+            bg={useColorModeValue('white', 'gray.900')}
+            px={4}
+            mb={'300px'}>
+            <Flex
+                h='65px'
+                alignItems={'center'}
+                justifyContent={'space-between'}>
                 <IconButton
                     size={'md'}
                     icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
@@ -43,16 +54,18 @@ const Header = () => {
                     onClick={isOpen ? onClose : onOpen}
                 />
                 <HStack spacing={8} alignItems={'center'}>
-                    <NavLink to="/">
+                    <NavLink to='/'>
                         <img src={logoNavbar} width='200px' alt='Logo' />
                     </NavLink>
                     <HStack
                         as={'nav'}
                         spacing={10}
                         display={{ base: 'none', md: 'flex' }}>
-                            <NavLink to="/">Home</NavLink>
-                            <NavLink to={`/users/${loggedInUser.id}`}>Profile</NavLink>
-                            <NavLink to="/UserList">All Users</NavLink>
+                        <NavLink to='/'>Home</NavLink>
+                        <NavLink to={`/users/${loggedInUser.id}`}>
+                            Profile
+                        </NavLink>
+                        <NavLink to='/UserList'>All Users</NavLink>
                     </HStack>
                 </HStack>
                 <Flex alignItems={'center'}>
@@ -63,15 +76,12 @@ const Header = () => {
                             variant={'link'}
                             cursor={'pointer'}
                             minW={0}>
-                            <Avatar
-                                size={'md'}
-                                src={
-                                    loggedInUser.profileImg
-                                }
-                            />
+                            <Avatar size={'md'} src={loggedInUser.profileImg} />
                         </MenuButton>
                         <MenuList>
-                            <MenuItem onClick={logoutSubmitHandler}>Sign Out</MenuItem>
+                            <MenuItem onClick={logoutSubmitHandler}>
+                                Sign Out
+                            </MenuItem>
                         </MenuList>
                     </Menu>
                 </Flex>
@@ -80,9 +90,11 @@ const Header = () => {
             {isOpen ? (
                 <Box pb={4} display={{ md: 'none' }}>
                     <Stack as={'nav'} spacing={4}>
-                        <NavLink to="/">Home</NavLink>
-                        <NavLink to={`/users/${loggedInUser.id}`}>Profile</NavLink>
-                        <NavLink to="/UserList">All Users</NavLink>
+                        <NavLink to='/'>Home</NavLink>
+                        <NavLink to={`/users/${loggedInUser.id}`}>
+                            Profile
+                        </NavLink>
+                        <NavLink to='/UserList'>All Users</NavLink>
                     </Stack>
                 </Box>
             ) : null}

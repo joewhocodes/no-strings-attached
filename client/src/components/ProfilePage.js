@@ -25,20 +25,19 @@ const ProfilePage = () => {
     }, [dispatch, id]);
 
     return (
-        <> 
+        <Box maxH={'100vh'}>
             <Header />
-            {loading ? <SpinnerIcon /> : (
-                <SimpleGrid columns={{ base: 1, md: 3 }} spacing={5}>
-                    <ProfileCard/>
-                    <Box>
-                        {/* <Heading textAlign={'center'} mt={'5'}>Comments</Heading> */}
-                        <Comments />
-                    </Box>
+            {loading ? (
+                <SpinnerIcon />
+            ) : (
+                <SimpleGrid columns={{ base: 1, md: 3 }} spacing={5} minH={'100vh'}>
+                    <ProfileCard />
+                    {/* <Heading textAlign={'center'} mt={'5'}>Comments</Heading> */}
+                    <Comments />
                     <FriendList />
                 </SimpleGrid>
-            )
-            }
-        </>
+            )}
+        </Box>
     );
 };
 

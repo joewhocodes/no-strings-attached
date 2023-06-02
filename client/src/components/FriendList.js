@@ -19,7 +19,7 @@ const FriendList = () => {
     const userInfo = users.find(e => e._id === id);
 
     return (
-        <Box>
+        <Box pt={'60px'} maxH={'100vh'} overflow={'scroll'}>
             {users
                 .filter(user => userInfo.friends.includes(user._id))
                 .map(user => {

@@ -27,7 +27,7 @@ const Comments = () => {
     };
 
     return (
-        <>
+        <Box pt={'60px'} maxH={'100vh'} overflow={'scroll'}>
             {/* <Heading>Comments</Heading> */}
             {currentProfile.comments &&
                 currentProfile.comments.map(comment => (
@@ -146,7 +146,7 @@ const Comments = () => {
 
                     //     </p>
                 ))}
-        </>
+        </Box>
     );
 };
 
