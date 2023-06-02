@@ -90,7 +90,7 @@ const AddInstrument = () => {
                                 }>
                                 {instrumentList.map((instrument, i) => (
                                     <option
-                                        key={`instrumentList - ${i}`}
+                                        key={instrument}
                                         value={instrument}>
                                         {instrument}
                                     </option>
@@ -106,7 +106,7 @@ const AddInstrument = () => {
                                     })
                                 }>
                                 {skillList.map(skill => (
-                                    <option value={skill}>{skill}</option>
+                                    <option value={skill} key={skill}>{skill}</option>
                                 ))}
                             </Select>
                         </FormControl>

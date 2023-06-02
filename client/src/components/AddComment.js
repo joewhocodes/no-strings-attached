@@ -23,14 +23,13 @@ const AddComment = () => {
         dispatch(
             addComment({
                 commentId: nanoid(),
-                friendId: id,
+                currentProfileId: id,
                 loggedInUserId: loggedInUser.id,
                 firstName: loggedInUser.firstName,
                 profileImg: loggedInUser.profileImg,
                 comment,
             })
         );
-        dispatch(fetchCurrentProfile({ currentProfileId: id }))
         setComment('');
         handleCloseModal();
     };
@@ -73,7 +72,7 @@ const AddComment = () => {
                     <Button
                         variant='outline-success'
                         onClick={() => handleAddComment()}>
-                        Update
+                        Send
                     </Button>
                 </Modal.Footer>
             </Modal>

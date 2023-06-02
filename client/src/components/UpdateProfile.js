@@ -76,7 +76,7 @@ const UpdateProfile = () => {
                                 defaultValue={profile.location}
                                 >
                                 {cities.map((city, i) => (
-                                    <option value={city}>{city}</option>
+                                    <option value={city} key={i}>{city}</option>
                                 ))}
                             </Select>
                         </FormControl>

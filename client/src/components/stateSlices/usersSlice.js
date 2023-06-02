@@ -89,9 +89,10 @@ export const removeFriend = createAsyncThunk(
 
 export const addComment = createAsyncThunk(
     'users/addComment',
-    async ({commentId, friendId, loggedInUserId, firstName, profileImg, comment}) => {
+    async ({commentId, currentProfileId, loggedInUserId, firstName, profileImg, comment}, {dispatch}) => {
         try {
-            const { data } = await axios.post('/api/users/addComment', {commentId, friendId, loggedInUserId, firstName, profileImg, comment});
+            const { data } = await axios.post('/api/users/addComment', {commentId, currentProfileId, loggedInUserId, firstName, profileImg, comment});
+            dispatch(fetchCurrentProfile({ currentProfileId }))
             return data;
         } catch (err) {
             console.log(err)
@@ -101,9 +102,10 @@ export const addComment = createAsyncThunk(
 
 export const deleteComment = createAsyncThunk(
     'users/deleteComment',
-    async ({id, filteredComments}) => {
+    async ({id, filteredComments}, {dispatch}) => {
         try {
             const { data } = await axios.post('/api/users/deleteComment', {id, filteredComments});
+            dispatch(fetchCurrentProfile({ currentProfileId: id }))
             return data;
         } catch (err) {
             console.log(err)

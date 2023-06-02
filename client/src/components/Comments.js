@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteComment, fetchUsers } from './stateSlices/usersSlice';
+import { deleteComment, fetchCurrentProfile } from './stateSlices/usersSlice';
 import {
     Avatar,
     Box,
@@ -24,15 +24,14 @@ const Comments = () => {
             comment => comment.commentId !== commentId
         );
         dispatch(deleteComment({ id: currentProfile._id, filteredComments }));
-        dispatch(fetchUsers({ token: loggedInUser.token }));
     };
 
     return (
         <>
             {/* <Heading>Comments</Heading> */}
             {currentProfile.comments &&
-                currentProfile.comments.map(user => (
-                    <Center py={6}>
+                currentProfile.comments.map(comment => (
+                    <Center py={6} key={comment.commentId}>
                         <Stack
                             borderWidth='1px'
                             borderRadius='lg'
@@ -54,7 +53,7 @@ const Comments = () => {
                                     w={'96px'}
                                     h={'96px'}>
                                     <Avatar
-                                        src={user.profileImg}
+                                        src={comment.profileImg}
                                         size='full'
                                         position='absolute'
                                         top={0}
@@ -73,13 +72,13 @@ const Comments = () => {
                                     textAlign={'left'}
                                     fontFamily={'body'}
                                     px={3}>
-                                    {user.firstName}
+                                    {comment.firstName}
                                 </Heading>
                                 <Text
                                     textAlign={'left'}
                                     color={'gray.700'}
                                     px={3}>
-                                    {user.comment}
+                                    {comment.comment}
                                 </Text>
 
                                 <Stack
@@ -97,23 +96,24 @@ const Comments = () => {
                                         _focus={{
                                             bg: 'gray.200',
                                         }}>
-                                        <NavLink to={`/users/${user.userId}`}>
+                                        <NavLink to={`/users/${comment.userId}`}>
                                             View Profile
                                         </NavLink>
                                     </Button>
-                                    {loggedInUser.id === user.userId ||
+                                    {loggedInUser.id === comment.userId ||
                                     id === loggedInUser.id ? (
                                         <Button
-                                            flex={1}
-                                            fontSize={'sm'}
-                                            rounded={'full'}
-                                            bg={'red.400'}
-                                            _focus={{
-                                                bg: 'gray.200',
-                                            }}
+                                            variant={'delete'}
+                                            // flex={1}
+                                            // fontSize={'sm'}
+                                            // rounded={'full'}
+                                            // bg={'red.400'}
+                                            // _focus={{
+                                            //     bg: 'gray.200',
+                                            // }}
                                             onClick={() =>
                                                 handleDeleteComment(
-                                                    user.commentId
+                                                    comment.commentId
                                                 )
                                             }>
                                             Delete

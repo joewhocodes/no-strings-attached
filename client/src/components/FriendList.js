@@ -24,7 +24,7 @@ const FriendList = () => {
                 .filter(user => userInfo.friends.includes(user._id))
                 .map(user => {
                     return (
-                    <Center py={6}>
+                    <Center py={6} key={user._id}>
                         <Box
                             maxW={'320px'}
                             w={'full'}

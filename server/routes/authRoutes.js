@@ -36,7 +36,7 @@ router.get(
             res.json(user)
             console.log('fetched user')
         } else {
-            const err = new Error('User not found.');
+            const err = new Error('Users not found.');
             console.log('errors ahoy')
         }
     })
@@ -123,9 +123,9 @@ router.post(
     asyncHandler(async (req, res) => {
         if (req.body) {
             const newComment = {commentId: req.body.commentId, firstName: req.body.firstName, profileImg: req.body.profileImg, comment: req.body.comment, userId: req.body.loggedInUserId}
-            User.findOneAndUpdate({_id: req.body.friendId}, {$push: {comments: newComment}}, function(err,doc) {
+            User.findOneAndUpdate({_id: req.body.currentProfileId}, {$push: {comments: newComment}}, function(err,doc) {
                 if (err) { throw err; }
-                else { console.log(newComment); }
+                console.log('comment added')
             })  
             res.json(req.body)
         } else {
