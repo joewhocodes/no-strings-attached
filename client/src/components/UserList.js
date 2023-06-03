@@ -7,8 +7,10 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Header from './Header';
 import AddRemoveFriend from './AddRemoveFriend';
 import { cities } from '../data/cities';
+import allUsers from '../images/all-users.png';
 import {
     Badge,
+    Box,
     Button,
     Center,
     Flex,
@@ -62,6 +64,12 @@ const UserList = () => {
     return (
         <>
             <Header />
+            <Box mt={'72px'} textAlign={'center'}>
+                <Image
+                    src={allUsers}
+                    margin={'auto'}
+                    width='250px'></Image>
+            </Box>
             <div>
                 <h1>All users</h1>
                 <h4>Filter By...</h4>
