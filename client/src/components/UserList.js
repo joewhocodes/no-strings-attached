@@ -14,9 +14,12 @@ import {
     Button,
     Center,
     Flex,
+    FormControl,
+    FormLabel,
     Heading,
     Image,
     Link,
+    Select,
     Stack,
     Text,
     useColorModeValue,
@@ -33,6 +36,15 @@ const UserList = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const instrumentList = [
+        'All',
+        'Guitar',
+        'Bass',
+        'Vocals',
+        'Drums',
+        'Keyboard',
+    ];
 
     useEffect(() => {
         if (loggedInUser) {
@@ -64,47 +76,54 @@ const UserList = () => {
     return (
         <>
             <Header />
-            <Box mt={'72px'} textAlign={'center'}>
-                <Image
-                    src={allUsers}
-                    margin={'auto'}
-                    width='250px'></Image>
+            <Box mt={'72px'} mb={'40px'} textAlign={'center'}>
+                <Image src={allUsers} margin={'auto'} width='250px'></Image>
             </Box>
-            <div>
-                <h1>All users</h1>
-                <h4>Filter By...</h4>
-                <p>Location</p>
-                <DropdownButton
-                    variant='info'
-                    title={filters.location}
-                    id='dropdown-menu-align-right'
-                    onSelect={e => setFilters({ ...filters, location: e })}>
-                    <Dropdown.Item eventKey={'All'}>
-                        <i>All</i>
-                    </Dropdown.Item>
-                    {cities.map(e => (
-                        <Dropdown.Item eventKey={e} key={e}>
-                            {e}
-                        </Dropdown.Item>
-                    ))}
-                </DropdownButton>
-                <p>Instrument</p>
-                <DropdownButton
-                    variant='info'
-                    title={filters.instrument}
-                    id='dropdown-menu-align-right'
-                    onSelect={e => setFilters({ ...filters, instrument: e })}>
-                    <Dropdown.Item eventKey={'All'}>
-                        <i>All</i>
-                    </Dropdown.Item>
-                    {['Guitar', 'Bass', 'Vocals', 'Drums', 'Keyboard'].map(
-                        e => (
-                            <Dropdown.Item eventKey={e} key={e}>
-                                {e}
-                            </Dropdown.Item>
-                        )
-                    )}
-                </DropdownButton>
+            <Box>
+                <Flex justifyContent={'center'}>
+                    <FormControl
+                        width={'50%'}
+                        bg={'white'}
+                        p={5}
+                        borderRadius={'10px'}>
+                        <FormLabel>Instrument</FormLabel>
+                        <Select
+                            mb={'5'}
+                            bg={'white'}
+                            onChange={e =>
+                                setFilters({
+                                    ...filters,
+                                    instrument: e.target.value,
+                                })
+                            }>
+                            {instrumentList.map((instrument, i) => (
+                                <option key={instrument} value={instrument}>
+                                    {instrument}
+                                </option>
+                            ))}
+                        </Select>
+                        <FormLabel>Location</FormLabel>
+                        <Select
+                            mb={'5'}
+                            bg={'white'}
+                            onChange={e =>
+                                setFilters({
+                                    ...filters,
+                                    location: e.target.value,
+                                })
+                            }>
+                            <option key={'All'}>
+                                <i>All</i>
+                            </option>
+                            {cities.map((city, i) => (
+                                <option key={city} value={city}>
+                                    {city}
+                                </option>
+                            ))}
+                        </Select>
+                    </FormControl>
+                </Flex>
+
                 <Flex flexWrap={'wrap'} justifyContent={'center'}>
                     {filteredResults
                         .filter(e => e._id !== loggedInUser.id)
@@ -124,9 +143,9 @@ const UserList = () => {
                                     <Flex flex={1} justifyContent={'center'}>
                                         <Image
                                             borderRadius='md'
-                                            pt={{sm: '27px', md: '0px'}}
+                                            pt={{ sm: '27px', md: '0px' }}
                                             mt={'0px'}
-                                            w={{md: '211' }}
+                                            w={{ md: '211' }}
                                             height={{ md: '178' }}
                                             boxSize='250px'
                                             objectFit='cover'
@@ -203,9 +222,10 @@ const UserList = () => {
                                                 _focus={{
                                                     bg: 'gray.200',
                                                 }}
-                                                onClick={() => handleViewProfile(user._id)}
-                                                >
-                                                    View Profile
+                                                onClick={() =>
+                                                    handleViewProfile(user._id)
+                                                }>
+                                                View Profile
                                             </Button>
                                             <AddRemoveFriend user={user} />
                                         </Stack>
@@ -214,7 +234,7 @@ const UserList = () => {
                             </Center>
                         ))}
                 </Flex>
-            </div>
+            </Box>
         </>
     );
 };
