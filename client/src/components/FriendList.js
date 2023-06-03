@@ -31,6 +31,8 @@ const FriendList = () => {
                     return (
                     <Center py={6} key={user._id}>
                         <Box
+                            borderWidth='1px'
+                            borderRadius='lg'
                             maxW={'320px'}
                             // minH={'198px'}
                             w={'full'}

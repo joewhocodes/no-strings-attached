@@ -82,6 +82,11 @@ const UserList = () => {
             <Box>
                 <Flex justifyContent={'center'}>
                     <FormControl
+                        borderWidth='1px'
+                        borderRadius='lg'
+                        spacing={4}
+                        pt={'50px'}
+                        boxShadow={'lg'}
                         width={'50%'}
                         bg={'white'}
                         p={5}

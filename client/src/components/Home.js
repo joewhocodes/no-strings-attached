@@ -22,9 +22,23 @@ const Home = () => {
         <>
             <Header />
             <Container maxW={'5xl'} py={12} mt={'100px'} position={'relative'}>
-                <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10} textAlign={'center'} mt={{ base: '0', md: '5vh' }}>
-                    <Stack spacing={4} bg={'white'} pt={'50px'} pb={'50px'} justifyContent={'center'}>
-                        <Heading fontSize={'40px'}>Hey {loggedInUser.firstName}!</Heading>
+                <SimpleGrid
+                    columns={{ base: 1, md: 2 }}
+                    spacing={10}
+                    textAlign={'center'}
+                    mt={{ base: '0', md: '5vh' }}>
+                    <Stack
+                        borderWidth='1px'
+                        borderRadius='lg'
+                        spacing={4}
+                        bg={'white'}
+                        pt={'50px'}
+                        boxShadow={'lg'}
+                        pb={'50px'}
+                        justifyContent={'center'}>
+                        <Heading fontSize={'40px'}>
+                            Hey {loggedInUser.firstName}!
+                        </Heading>
                         <Text color={'gray.500'} fontSize={'15px'} pb={'10px'}>
                             Let's get jamming ✌️
                         </Text>
@@ -50,7 +64,14 @@ const Home = () => {
                                 />
                             }></Stack>
                     </Stack>
-                    <Flex justifyContent={'center'}>
+                    <Flex
+                        justifyContent={'center'}
+                        borderWidth='1px'
+                        borderRadius='lg'
+                        spacing={4}
+                        bg={'white'}
+                        pt={'50px'}
+                        boxShadow={'lg'}>
                         <Image
                             rounded={'md'}
                             alt={'feature image'}
