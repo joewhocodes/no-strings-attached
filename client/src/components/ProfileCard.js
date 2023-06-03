@@ -25,7 +25,9 @@ const ProfileCard = () => {
     return (
         <Flex
             mt={'75px'}
+            mr={'15px'}
             mb={'22px'}
+            ml={'15px'}
             bg={'white'}
             alignItems={'center'}
             borderWidth={'1px'}

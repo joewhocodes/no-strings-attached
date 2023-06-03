@@ -26,7 +26,11 @@ const Header = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const logoutSubmitHandler = () => {
+    const handleViewProfile = () => {
+        navigate(`/users/${loggedInUser.id}`);
+    };
+
+    const handleLogout = () => {
         dispatch(logout());
         localStorage.removeItem('loggedInUser');
         navigate('/');
@@ -79,7 +83,10 @@ const Header = () => {
                             <Avatar size={'md'} src={loggedInUser.profileImg} />
                         </MenuButton>
                         <MenuList>
-                            <MenuItem onClick={logoutSubmitHandler}>
+                            <MenuItem onClick={handleViewProfile}>
+                                My Profile
+                            </MenuItem>
+                            <MenuItem onClick={handleLogout}>
                                 Sign Out
                             </MenuItem>
                         </MenuList>
