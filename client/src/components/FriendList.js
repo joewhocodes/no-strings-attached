@@ -32,6 +32,7 @@ const FriendList = () => {
                     <Center py={6} key={user._id}>
                         <Box
                             maxW={'320px'}
+                            // minH={'198px'}
                             w={'full'}
                             bg={'white'}
                             boxShadow={'lg'}
@@ -61,14 +62,10 @@ const FriendList = () => {
                             </Heading>
                             <Text
                                 textAlign={'center'}
+                                minH={'20px'}
                                 //   color={useColorModeValue('gray.700', 'gray.400')}
                                 px={3}>
-                                Actress, musician, songwriter and artist. PM for
-                                work inquires or{' '}
-                                <Link href={'#'} color={'blue.400'}>
-                                    #tag
-                                </Link>{' '}
-                                me in your posts
+                                {user.bio}
                             </Text>
 
                             <Stack mt={8} direction={'row'} spacing={4}>
