@@ -4,12 +4,9 @@
   "description": "An app to connect you to other music makers in your area",
   "main": "index.js",
   "scripts": {
-    "start": "node server/server.js",
-    "server": "nodemon server/server.js",
     "client": "npm run start --prefix client",
-    "clientinstall": "npm install --prefix client",
-    "dev": "concurrently \"npm run client\" \"npm run server\"",
-    "render-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build -- prefix client"
+    "server": "nodemon server/server.js",
+    "dev": "concurrently \"npm run client\" \"npm run server\""
   },
   "repository": {
     "type": "git",
