@@ -136,7 +136,7 @@ router.post(
 );
 
 router.post(
-    '/api/users/deleteComment',
+    '/api/users/removeComment',
     // requireAuth,
     // requireAdmin,
     asyncHandler(async (req, res) => {

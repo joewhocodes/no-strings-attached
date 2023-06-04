@@ -2,9 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { removeInstrument } from './stateSlices/usersSlice';
 import { useSelector } from 'react-redux';
-// import 'client/public/instrument-icons';
-import Guitar from '../images/instrument-icons/Guitar.png';
-import { Box, Button, Flex, Image, Stack } from '@chakra-ui/react';
+import { Box, Button, Flex, Image } from '@chakra-ui/react';
 
 const InstrumentList = () => {
     const { loggedInUser } = useSelector(state => state.signin);

@@ -100,11 +100,11 @@ export const addComment = createAsyncThunk(
     }
 );
 
-export const deleteComment = createAsyncThunk(
-    'users/deleteComment',
+export const removeComment = createAsyncThunk(
+    'users/removeComment',
     async ({id, filteredComments}, {dispatch}) => {
         try {
-            const { data } = await axios.post('/api/users/deleteComment', {id, filteredComments});
+            const { data } = await axios.post('/api/users/removeComment', {id, filteredComments});
             dispatch(fetchCurrentProfile({ currentProfileId: id }))
             return data;
         } catch (err) {
@@ -125,12 +125,6 @@ export const updateProfile = createAsyncThunk(
         }
     }
 );
-
-// export const updateData = createAsyncThunk('data/update', async (params, {dispatch}) => {
-//     const result = await sdkClient.update({ params })
-//     dispatch(getData())
-//     return result
-//   })
 
 export const usersSlice = createSlice({
     name: 'users',

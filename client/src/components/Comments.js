@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteComment, fetchCurrentProfile } from './stateSlices/usersSlice';
+import { removeComment, fetchCurrentProfile } from './stateSlices/usersSlice';
 import {
     Avatar,
     Box,
@@ -19,11 +19,11 @@ const Comments = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const handleDeleteComment = commentId => {
+    const handleRemoveComment = commentId => {
         const filteredComments = currentProfile.comments.filter(
             comment => comment.commentId !== commentId
         );
-        dispatch(deleteComment({ id: currentProfile._id, filteredComments }));
+        dispatch(removeComment({ id: currentProfile._id, filteredComments }));
     };
 
     const handleViewProfile = userId => {
@@ -103,7 +103,7 @@ const Comments = () => {
                                         <Button
                                             variant={'delete'}
                                             onClick={() =>
-                                                handleDeleteComment(
+                                                handleRemoveComment(
                                                     comment.commentId
                                                 )
                                             }>

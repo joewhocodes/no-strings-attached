@@ -89,8 +89,7 @@ const UserList = () => {
                         boxShadow={'lg'}
                         width={'50%'}
                         bg={'white'}
-                        p={5}
-                        borderRadius={'10px'}>
+                        p={5}>
                         <FormLabel>Instrument</FormLabel>
                         <Select
                             mb={'5'}

@@ -44,7 +44,6 @@ const AddInstrument = () => {
     const skillList = ['Beginner', 'Intermediate', 'Professional'];
 
     const handleAddInstrument = () => {
-        // if (!newInstrument.instrument || !newInstrument.skillLevel) return;
         dispatch(
             addInstrument({
                 instrument: newInstrument.instrument,
@@ -68,8 +67,11 @@ const AddInstrument = () => {
                 variant={'secondary'}
                 flex={1}
                 isDisabled={!instrumentList.length}
-                _hover={!instrumentList.length ? {bg: 'primary.500'} : {bg: 'primary.300'}}
-                >
+                _hover={
+                    !instrumentList.length
+                        ? { bg: 'primary.500' }
+                        : { bg: 'primary.300' }
+                }>
                 Add Instrument
             </Button>
 
@@ -90,9 +92,7 @@ const AddInstrument = () => {
                                     })
                                 }>
                                 {instrumentList.map((instrument, i) => (
-                                    <option
-                                        key={instrument}
-                                        value={instrument}>
+                                    <option key={instrument} value={instrument}>
                                         {instrument}
                                     </option>
                                 ))}
@@ -107,7 +107,9 @@ const AddInstrument = () => {
                                     })
                                 }>
                                 {skillList.map(skill => (
-                                    <option value={skill} key={skill}>{skill}</option>
+                                    <option value={skill} key={skill}>
+                                        {skill}
+                                    </option>
                                 ))}
                             </Select>
                         </FormControl>
