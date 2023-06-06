@@ -5,6 +5,7 @@ const initialState = {
     status: 'idle',
     users: [],
     currentProfile: {},
+    loading: true,
     error: null,
 };
 
@@ -141,14 +142,20 @@ export const usersSlice = createSlice({
         },
         [fetchUsers.pending]: (state) => {
             state.status = 'loading';
+            state.loading = true;
         },
         [fetchUsers.fulfilled]: (state, action) => {
             state.status = 'succeeded';
             state.users = [...action.payload];
+            state.loading = false;
+        },
+        [fetchCurrentProfile.pending]: (state, action) => {
+            state.loading = true;
         },
         [fetchCurrentProfile.fulfilled]: (state, action) => {
             state.status = 'succeeded';
             state.currentProfile = action.payload;
+            state.loading = false;
         },
         [fetchUsers.rejected]: (state, action) => {
             state.status = 'failed';

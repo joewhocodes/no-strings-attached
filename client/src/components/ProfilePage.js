@@ -6,16 +6,15 @@ import Header from './Header';
 import FriendList from './FriendList';
 import Comments from './Comments';
 import ProfileCard from './ProfileCard';
-import { SimpleGrid, Box, Heading, Image } from '@chakra-ui/react';
-import { SpinnerIcon } from '@chakra-ui/icons';
+import { Center, SimpleGrid, Box, Image, Spinner } from '@chakra-ui/react';
 import comments from '../images/comments.png';
 import friends from '../images/friends.png';
 
 const ProfilePage = () => {
     const { loggedInUser } = useSelector(state => state.signin);
+    const { loading } = useSelector(state => state.users);
     const { id } = useParams();
     const dispatch = useDispatch();
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         dispatch(fetchUsers({ token: loggedInUser.token }));
@@ -23,14 +22,15 @@ const ProfilePage = () => {
 
     useEffect(() => {
         dispatch(fetchCurrentProfile({ currentProfileId: id }));
-        setLoading(false);
     }, [dispatch, id]);
 
     return (
         <Box maxH={'100vh'}>
             <Header />
             {loading ? (
-                <SpinnerIcon />
+                <Center>
+                    <Spinner size='xl' color='backing.500' mt='50vh'/>
+                </Center>
             ) : (
                 <SimpleGrid
                     columns={{ base: 1, lg: 3 }}
