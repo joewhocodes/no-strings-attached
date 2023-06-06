@@ -35,7 +35,7 @@ const ProfileCard = () => {
             borderRadius={'lg'}>
             <Stack
                 display={'flex'}
-                w={{ sm: '100%', lg: '540px' }}
+                w={['100%', '100%', '100%', '540px' ]}
                 direction={'column'}
                 padding={4}>
                 <Box>
