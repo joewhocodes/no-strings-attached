@@ -23,6 +23,7 @@ import {
     Text,
     useColorModeValue,
 } from '@chakra-ui/react';
+import InstrumentList from './InstrumentList';
 
 const UserList = () => {
     const { loggedInUser } = useSelector(state => state.signin);
@@ -206,6 +207,7 @@ const UserList = () => {
                                                     px={3}>
                                                     {user.bio}
                                                 </Text>
+                                                {/* <InstrumentList user={user}/> */}
                                                 <Stack
                                                     align={'center'}
                                                     justify={'center'}

@@ -4,7 +4,7 @@ import { removeInstrument } from './stateSlices/usersSlice';
 import { useSelector } from 'react-redux';
 import { Box, Button, Flex, Image } from '@chakra-ui/react';
 
-const InstrumentList = () => {
+const InstrumentList = props => {
     const { loggedInUser } = useSelector(state => state.signin);
     const { currentProfile } = useSelector(state => state.users);
     const loggedInUserProfile = loggedInUser.id === currentProfile._id;
@@ -22,12 +22,13 @@ const InstrumentList = () => {
         );
         console.log('instrument removed');
     };
+    console.log(props.user)
     
     return (
         <Box minH={'105px'}>
-            {currentProfile.instruments && (
+            {props.user.instruments && (
                 <Flex align={'left'} justify={'left'} mt={6}>
-                    {currentProfile.instruments.map((instrument, i) => (
+                    {props.user.instruments.map((instrument, i) => (
                         <Flex key={i} direction={'column'}>
                             <Box
                                 flex={1}
@@ -46,7 +47,7 @@ const InstrumentList = () => {
                                 textAlign={'center'}
                                 borderRadius={10}
                                 color={'primary.500'}
-                                height={'60px'}
+                                // height={'60px'}
                                 px={2}
                                 py={1}
                                 bg={

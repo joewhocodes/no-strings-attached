@@ -103,7 +103,7 @@ const ProfileCard = () => {
                                 <AddInstrument />
                             </Stack>
                         )}
-                        <InstrumentList />
+                        <InstrumentList user={currentProfile}/>
                     </Stack>
                 </Box>
             </Stack>
