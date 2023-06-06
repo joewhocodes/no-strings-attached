@@ -50,9 +50,9 @@ const InstrumentList = () => {
                                 px={2}
                                 py={1}
                                 bg={
-                                    instrument.skill === 'Beginner'
+                                    instrument.skillLevel === 'Beginner'
                                         ? 'green.500'
-                                        : instrument.skill === 'Intermediate'
+                                        : instrument.skillLevel === 'Intermediate'
                                         ? 'yellow.500'
                                         : 'red.500'
                                 }

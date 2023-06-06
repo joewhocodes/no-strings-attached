@@ -41,13 +41,13 @@ const AddInstrument = () => {
                 .includes(instrument)
     );
 
-    const skillList = ['Beginner', 'Intermediate', 'Professional'];
+    const skillLevel = ['Beginner', 'Intermediate', 'Professional'];
 
     const handleAddInstrument = () => {
         dispatch(
             addInstrument({
                 instrument: newInstrument.instrument,
-                skill: newInstrument.skillLevel,
+                skillLevel: newInstrument.skillLevel,
                 id: currentProfile._id,
             })
         );
@@ -61,7 +61,7 @@ const AddInstrument = () => {
                     onOpen(),
                     setNewInstrument({
                         instrument: instrumentList[0],
-                        skillLevel: skillList[0],
+                        skillLevel: skillLevel[0],
                     })
                 )}
                 variant={'secondary'}
@@ -106,7 +106,7 @@ const AddInstrument = () => {
                                         skillLevel: e.target.value,
                                     })
                                 }>
-                                {skillList.map(skill => (
+                                {skillLevel.map(skill => (
                                     <option value={skill} key={skill}>
                                         {skill}
                                     </option>

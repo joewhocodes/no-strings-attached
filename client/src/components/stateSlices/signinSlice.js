@@ -28,7 +28,7 @@ export const signinSlice = createSlice({
         },
         addLocalInstrument(state, action) {
             const instrument = action.payload.instrument;
-            const newInstrument = { [instrument]: action.payload.skill };
+            const newInstrument = { [instrument]: action.payload.skillLevel };
             state.loggedInUser.instruments.push(newInstrument);
         },
         deleteLocalInstrument(state, action) {
