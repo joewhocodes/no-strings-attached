@@ -2,10 +2,12 @@
   "name": "no-strings-attached",
   "version": "1.0.0",
   "description": "An app to connect you to other music makers in your area",
-  "main": "index.js",
+  "main": "./server/server.js",
   "scripts": {
     "client": "npm run start --prefix client",
     "server": "nodemon server/server.js",
+    "deploy": "node server/server.js",
+    "start": "cd ./server && node server.js",
     "dev": "concurrently \"npm run client\" \"npm run server\""
   },
   "repository": {
