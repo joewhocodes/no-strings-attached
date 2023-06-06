@@ -117,7 +117,8 @@ const Comments = () => {
                                             rounded={'full'}
                                             _focus={{
                                                 bg: 'gray.200',
-                                            }}>
+                                            }}
+                                            onClick={() => handleViewProfile(comment.userId)}>
                                             Reply
                                         </Button>
                                     )}
