@@ -13,7 +13,7 @@ const AddFriend = props => {
     const handleAddFriend = () => {
         dispatch(addFriend({friendId: props.user._id, loggedInUserId: loggedInUser.id}));
         dispatch(addLocalFriend({friendId: props.user._id, loggedInUserId: loggedInUser.id}));
-        dispatch(fetchUsers({ token: loggedInUser.token }));
+        dispatch(fetchUsers({ token: loggedInUser.token, changingPage: false }));
     };
     
     const handleRemoveFriend = () => {
@@ -21,7 +21,7 @@ const AddFriend = props => {
         const friendFilteredFriends = props.user.friends.filter(friend => friend !== loggedInUser.id);
         dispatch(removeFriend({friendId: props.user._id, loggedInUserFilteredFriends, friendFilteredFriends, loggedInUserId: loggedInUser.id}));
         dispatch(removeLocalFriend({loggedInUserFilteredFriends, friendFilteredFriends, loggedInUserId: loggedInUser.id}));
-        dispatch(fetchUsers({ token: loggedInUser.token }));
+        dispatch(fetchUsers({ token: loggedInUser.token, changingPage: false }));
     };
 
     useEffect(() => {

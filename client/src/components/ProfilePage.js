@@ -12,7 +12,7 @@ import friends from '../images/friends.png';
 
 const ProfilePage = () => {
     const { loggedInUser } = useSelector(state => state.signin);
-    const { loading } = useSelector(state => state.users);
+    const [isloading, setIsloading] = useState(true);
     const { id } = useParams();
     const dispatch = useDispatch();
 
@@ -21,13 +21,17 @@ const ProfilePage = () => {
     }, [dispatch, id, loggedInUser.token]);
 
     useEffect(() => {
+        setIsloading(true);
         dispatch(fetchCurrentProfile({ currentProfileId: id }));
+        setTimeout(() => {
+            setIsloading(false)
+        }, 1000);
     }, [dispatch, id]);
 
     return (
         <Box maxH={'100vh'}>
             <Header />
-            {loading ? (
+            {isloading ? (
                 <Center>
                     <Spinner size='xl' color='backing.500' mt='50vh'/>
                 </Center>
