@@ -40,10 +40,7 @@ const AddComment = () => {
                 onClick={() => handleShowModal()}
                 flex={1}
                 fontSize={'sm'}
-                rounded={'full'}
-                _focus={{
-                    bg: 'gray.200',
-                }}>
+                rounded={'full'}>
                 Message
             </Button>
             <Modal show={show} onHide={handleCloseModal}>
@@ -66,9 +63,7 @@ const AddComment = () => {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={handleCloseModal}>
-                        Close
-                    </Button>
+                    <Button onClick={handleCloseModal}>Close</Button>
                     <Button
                         variant='outline-success'
                         onClick={() => handleAddComment()}>
