@@ -11,6 +11,7 @@ const streamifier = require('streamifier');
 
 const router = express.Router();
 const cloudinary = require("../utils/cloudinary");
+const { nanoid } = require('nanoid');
 
 router.get(
     '/api/users',
@@ -204,6 +205,7 @@ router.post(
                 password,
                 profileImg: result.secure_url,
                 cloudinary_id: result.public_id,
+                _id: nanoid(),
             });   
             res.status(200).json({
                 token: generateToken(user._id),
