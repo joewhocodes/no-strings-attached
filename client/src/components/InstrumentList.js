@@ -22,7 +22,7 @@ const InstrumentList = () => {
         );
         console.log('instrument removed');
     };
-
+    
     return (
         <Box minH={'105px'}>
             {currentProfile.instruments && (

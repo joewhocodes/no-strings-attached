@@ -39,7 +39,7 @@ export const fetchCurrentProfile = createAsyncThunk(
 
 export const addInstrument = createAsyncThunk(
     'users/addInstrument',
-    async ({instrument, skill, id}, {dispatch}) => {
+    async ({instrument, skillLevel, id}, {dispatch}) => {
         try {
             const { data } = await axios.post('/api/users/addInstrument', {instrument, skillLevel, id});
             dispatch(fetchCurrentProfile({ currentProfileId: id }))
