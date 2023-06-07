@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { addComment, fetchCurrentProfile } from './stateSlices/usersSlice';
+import { addComment } from './stateSlices/usersSlice';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { nanoid } from 'nanoid';
