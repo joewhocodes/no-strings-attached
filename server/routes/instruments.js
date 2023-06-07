@@ -27,15 +27,4 @@ module.exports = {
             console.log(err)
         }
     },
-        // app.put('/instruments/update/:id', (req, res) => {
-    //     Instrument.findByIdAndUpdate(
-    //         { _id: req.params.id },
-    //         {
-    //             title: req.body.title,
-    //             description: req.body.description,
-    //         }
-    //     )
-    //         .then((doc) => console.log(doc))
-    //         .catch((err) => console.log(err));
-    // }),
 };
