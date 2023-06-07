@@ -18,7 +18,6 @@ import {
 
 const AddInstrument = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const { loggedInUser } = useSelector(state => state.signin);
     const { currentProfile } = useSelector((state) => state.users);
     const [newInstrument, setNewInstrument] = useState({
         instrument: '',

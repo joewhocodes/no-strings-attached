@@ -10,7 +10,6 @@ import {
     Text,
     Stack,
     Button,
-    Link,
 } from '@chakra-ui/react';
 
 const FriendList = () => {
@@ -65,7 +64,6 @@ const FriendList = () => {
                             <Text
                                 textAlign={'center'}
                                 minH={'20px'}
-                                //   color={useColorModeValue('gray.700', 'gray.400')}
                                 px={3}>
                                 {user.bio}
                             </Text>

@@ -1,23 +1,31 @@
 import { useState } from 'react';
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addComment } from './stateSlices/usersSlice';
-import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
 import { nanoid } from 'nanoid';
-import { Button } from '@chakra-ui/react';
+import {
+    Button,
+    FormControl,
+    FormLabel,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+    Select,
+    Textarea,
+    useDisclosure,
+} from '@chakra-ui/react';
 
 const AddComment = () => {
+    const { isOpen, onOpen, onClose } = useDisclosure();
     const [comment, setComment] = useState('');
-    const { loggedInUser } = useSelector((state) => state.signin);
+    const { loggedInUser } = useSelector(state => state.signin);
     const { id } = useParams();
 
     const dispatch = useDispatch();
-
-    // Modal State
-    const [show, setShow] = useState(false);
-    const handleCloseModal = () => setShow(false);
-    const handleShowModal = () => setShow(true);
 
     const handleAddComment = () => {
         dispatch(
@@ -31,45 +39,39 @@ const AddComment = () => {
             })
         );
         setComment('');
-        handleCloseModal();
+        onClose(true);
     };
 
     return (
         <>
-            <Button
-                onClick={() => handleShowModal()}
-                flex={1}
-                fontSize={'sm'}
-                rounded={'full'}>
+            <Button onClick={onOpen} flex={1}>
                 Message
             </Button>
-            <Modal show={show} onHide={handleCloseModal}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Add Comment</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form>
-                        <Form.Group
-                            className='mb-3'
-                            controlId='exampleForm.ControlTextarea1'>
-                            <Form.Label>Comment</Form.Label>
-                            <Form.Control
-                                as='textarea'
-                                rows={3}
+            <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader color={'backing.500'}>Add Comment</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                        <FormControl>
+                            <FormLabel>Bio</FormLabel>
+                            <Textarea
+                                rows={5}
+                                mb={5}
                                 value={comment}
+                                color={'secondary.800'}
+                                focusBorderColor={'secondary.300'}
                                 onChange={e => setComment(e.target.value)}
                             />
-                        </Form.Group>
-                    </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button onClick={handleCloseModal}>Close</Button>
-                    <Button
-                        variant='outline-success'
-                        onClick={() => handleAddComment()}>
-                        Send
-                    </Button>
-                </Modal.Footer>
+                        </FormControl>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button mr={3} onClick={onClose}>
+                            Close
+                        </Button>
+                        <Button onClick={handleAddComment}>Submit</Button>
+                    </ModalFooter>
+                </ModalContent>
             </Modal>
         </>
     );

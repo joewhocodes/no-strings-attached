@@ -6,7 +6,7 @@ import Header from './Header';
 import FriendList from './FriendList';
 
 const FriendPage = () => {
-    const { loggedInUser } = useSelector((state) => state.signin);
+    const { loggedInUser } = useSelector(state => state.signin);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -23,7 +23,7 @@ const FriendPage = () => {
     return (
         <>
             <Header />
-            <div className="col-10, col-sm-8, col-md-6 mx-auto">
+            <div className='col-10, col-sm-8, col-md-6 mx-auto'>
                 <FriendList />
             </div>
         </>

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addFriend, fetchUsers, removeFriend } from './stateSlices/usersSlice';
 import { addLocalFriend, removeLocalFriend } from './stateSlices/signinSlice';
 import { Button } from '@chakra-ui/react';
-import { CheckIcon } from '@chakra-ui/icons';
 
 const AddFriend = props => {
     const { loggedInUser } = useSelector(state => state.signin);
@@ -27,7 +26,6 @@ const AddFriend = props => {
     useEffect(() => {
         isFriend = loggedInUser.friends.includes(props.user._id);
     }, [handleAddFriend, handleRemoveFriend]);
-    
     
     return (
         <>
