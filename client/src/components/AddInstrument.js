@@ -18,7 +18,7 @@ import {
 
 const AddInstrument = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const { currentProfile } = useSelector((state) => state.users);
+    const { currentProfile } = useSelector(state => state.users);
     const [newInstrument, setNewInstrument] = useState({
         instrument: '',
         skillLevel: '',
@@ -26,7 +26,6 @@ const AddInstrument = () => {
 
     const dispatch = useDispatch();
 
-    // Filter user instruments so only new ones appear in Modal
     const instrumentList = [
         'Guitar',
         'Bass',

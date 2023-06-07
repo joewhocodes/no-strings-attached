@@ -22,8 +22,8 @@ const InstrumentList = props => {
         );
         console.log('instrument removed');
     };
-    console.log(props.user)
-    
+    console.log(props.user);
+
     return (
         <Box minH={'105px'}>
             {props.user.instruments && (
@@ -47,13 +47,13 @@ const InstrumentList = props => {
                                 textAlign={'center'}
                                 borderRadius={10}
                                 color={'primary.500'}
-                                // height={'60px'}
                                 px={2}
                                 py={1}
                                 bg={
                                     instrument.skillLevel === 'Beginner'
                                         ? 'green.500'
-                                        : instrument.skillLevel === 'Intermediate'
+                                        : instrument.skillLevel ===
+                                          'Intermediate'
                                         ? 'yellow.500'
                                         : 'red.500'
                                 }

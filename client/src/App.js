@@ -5,7 +5,6 @@ import Home from './components/Home';
 import Signup from './components/Signup';
 import Signin from './components/Signin';
 import Profile from './components/ProfilePage';
-import FriendPage from './components/FriendPage';
 import UserList from './components/UserList';
 import { Box } from '@chakra-ui/react';
 
@@ -22,14 +21,24 @@ const App = () => {
         <>
             <Box bg='primary.10'>
                 <Routes>
-                    <Route path="/" element={loggedInUser ? <Home /> : <Signup />} />
-                    <Route path="/Signin" element={loggedInUser ? <Navigate to="/"/> : <Signin />} />
-                    <Route element={loggedInUser ? <Outlet/> : <Navigate to="/"/>}>
-                        <Route path="/users/:id" element={<Profile />} />
-                        <Route path="/FriendPage" element={<FriendPage />} />
-                        <Route path="/UserList" element={<UserList />} />
+                    <Route
+                        path='/'
+                        element={loggedInUser ? <Home /> : <Signup />}
+                    />
+                    <Route
+                        path='/Signin'
+                        element={
+                            loggedInUser ? <Navigate to='/' /> : <Signin />
+                        }
+                    />
+                    <Route
+                        element={
+                            loggedInUser ? <Outlet /> : <Navigate to='/' />
+                        }>
+                        <Route path='/users/:id' element={<Profile />} />
+                        <Route path='/UserList' element={<UserList />} />
                     </Route>
-                    <Route path="*" element={<Navigate to="/"/>} />
+                    <Route path='*' element={<Navigate to='/' />} />
                 </Routes>
             </Box>
         </>

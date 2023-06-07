@@ -56,7 +56,9 @@ const Signin = () => {
             <Stack spacing={10} mx={'auto'} maxW={'lg'} py={12} px={6}>
                 <img src={logo} alt='Logo' />
                 <Stack align={'center'}>
-                    <Heading fontSize={'4xl'} color={'secondary.500'}>Sign in to your account</Heading>
+                    <Heading fontSize={'4xl'} color={'secondary.500'}>
+                        Sign in to your account
+                    </Heading>
                     <Text fontSize={'lg'} color={'gray.600'}>
                         And get on the jam ✌️
                     </Text>
@@ -74,7 +76,9 @@ const Signin = () => {
                         p={8}>
                         <Stack spacing={5}>
                             <FormControl id='email'>
-                                <FormLabel color='secondary.500'>Email address</FormLabel>
+                                <FormLabel color='secondary.500'>
+                                    Email address
+                                </FormLabel>
                                 <Input
                                     type='email'
                                     {...formik.getFieldProps('email')}
@@ -86,7 +90,9 @@ const Signin = () => {
                                 ) : null}
                             </FormControl>
                             <FormControl id='password'>
-                                <FormLabel color='secondary.500'>Password</FormLabel>
+                                <FormLabel color='secondary.500'>
+                                    Password
+                                </FormLabel>
                                 <Input
                                     type='password'
                                     {...formik.getFieldProps('password')}
@@ -121,7 +127,11 @@ const Signin = () => {
                             <Text align={'center'}>
                                 Not yet a user?{' '}
                                 <NavLink to={'/'}>
-                                    <Link color={'secondary.500'} _hover={{color: 'secondary.300'}}>Sign Up</Link>
+                                    <Link
+                                        color={'secondary.500'}
+                                        _hover={{ color: 'secondary.300' }}>
+                                        Sign Up
+                                    </Link>
                                 </NavLink>
                             </Text>
                         </Stack>

@@ -17,11 +17,11 @@ import {
     useDisclosure,
     useColorModeValue,
     Stack,
-  } from '@chakra-ui/react';
-  import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+} from '@chakra-ui/react';
+import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 
 const Header = () => {
-    const { loggedInUser } = useSelector((state) => state.signin);
+    const { loggedInUser } = useSelector(state => state.signin);
     const { isOpen, onOpen, onClose } = useDisclosure();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -86,9 +86,7 @@ const Header = () => {
                             <MenuItem onClick={handleViewProfile}>
                                 My Profile
                             </MenuItem>
-                            <MenuItem onClick={handleLogout}>
-                                Sign Out
-                            </MenuItem>
+                            <MenuItem onClick={handleLogout}>Sign Out</MenuItem>
                         </MenuList>
                     </Menu>
                 </Flex>
@@ -106,29 +104,6 @@ const Header = () => {
                 </Box>
             ) : null}
         </Box>
-
-        // <nav>
-        //     <ul>
-        //         <li>
-        //             <NavLink to="/">Home</NavLink>
-        //             <NavLink to={`/users/${loggedInUser.id}`}>
-        //                 Profile
-        //             </NavLink>
-        //             <NavLink to="/FriendPage">Friends</NavLink>
-        //             <NavLink to="/UserList">All Users</NavLink>
-        //         </li>
-        //         <li>
-        //             {loggedInUser && (
-        //                 <button
-        //                     onClick={logoutSubmitHandler}
-        //                     className="btn btn-lg btn-primary btn-block"
-        //                 >
-        //                     Sign out
-        //                 </button>
-        //             )}
-        //         </li>
-        //     </ul>
-        // </nav>
     );
 };
 

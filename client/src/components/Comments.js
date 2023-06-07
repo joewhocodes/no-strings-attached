@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeComment, fetchCurrentProfile } from './stateSlices/usersSlice';
+import { removeComment } from './stateSlices/usersSlice';
 import {
     Avatar,
     Box,
@@ -94,7 +94,9 @@ const Comments = () => {
                                         flex={1}
                                         fontSize={'sm'}
                                         rounded={'full'}
-                                        onClick={() => handleViewProfile(comment.userId)}>
+                                        onClick={() =>
+                                            handleViewProfile(comment.userId)
+                                        }>
                                         View Profile
                                     </Button>
 
@@ -118,7 +120,11 @@ const Comments = () => {
                                             _focus={{
                                                 bg: 'gray.200',
                                             }}
-                                            onClick={() => handleViewProfile(comment.userId)}>
+                                            onClick={() =>
+                                                handleViewProfile(
+                                                    comment.userId
+                                                )
+                                            }>
                                             Reply
                                         </Button>
                                     )}

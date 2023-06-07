@@ -16,11 +16,11 @@ import {
     Select,
     Textarea,
     useDisclosure,
-  } from '@chakra-ui/react'
+} from '@chakra-ui/react';
 
 const UpdateProfile = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const { currentProfile } = useSelector((state) => state.users);
+    const { currentProfile } = useSelector(state => state.users);
     const { loggedInUser } = useSelector(state => state.signin);
     const [profile, setProfile] = useState({
         bio: currentProfile.bio,
@@ -30,7 +30,13 @@ const UpdateProfile = () => {
     const dispatch = useDispatch();
 
     const handleUpdateProfile = () => {
-        dispatch(updateProfile({bio: profile.bio, location: profile.location, id: loggedInUser.id}));
+        dispatch(
+            updateProfile({
+                bio: profile.bio,
+                location: profile.location,
+                id: loggedInUser.id,
+            })
+        );
         onClose(true);
     };
 
@@ -73,10 +79,11 @@ const UpdateProfile = () => {
                                         location: e.target.value,
                                     })
                                 }
-                                defaultValue={profile.location}
-                                >
+                                defaultValue={profile.location}>
                                 {cities.map((city, i) => (
-                                    <option value={city} key={i}>{city}</option>
+                                    <option value={city} key={i}>
+                                        {city}
+                                    </option>
                                 ))}
                             </Select>
                         </FormControl>

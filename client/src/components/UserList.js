@@ -7,7 +7,6 @@ import AddRemoveFriend from './AddRemoveFriend';
 import { cities } from '../data/cities';
 import allUsers from '../images/all-users.png';
 import {
-    Badge,
     Box,
     Button,
     Center,
@@ -16,14 +15,11 @@ import {
     FormLabel,
     Heading,
     Image,
-    Link,
     Select,
     Spinner,
     Stack,
     Text,
-    useColorModeValue,
 } from '@chakra-ui/react';
-import InstrumentList from './InstrumentList';
 
 const UserList = () => {
     const { loggedInUser } = useSelector(state => state.signin);
@@ -207,34 +203,6 @@ const UserList = () => {
                                                     px={3}>
                                                     {user.bio}
                                                 </Text>
-                                                {/* <InstrumentList user={user}/> */}
-                                                <Stack
-                                                    align={'center'}
-                                                    justify={'center'}
-                                                    direction={'row'}
-                                                    mt={6}>
-                                                    <Badge
-                                                        px={2}
-                                                        py={1}
-                                                        bg={'gray.50'}
-                                                        fontWeight={'400'}>
-                                                        #art
-                                                    </Badge>
-                                                    <Badge
-                                                        px={2}
-                                                        py={1}
-                                                        bg={'gray.50'}
-                                                        fontWeight={'400'}>
-                                                        #photography
-                                                    </Badge>
-                                                    <Badge
-                                                        px={2}
-                                                        py={1}
-                                                        bg={'gray.50'}
-                                                        fontWeight={'400'}>
-                                                        #music
-                                                    </Badge>
-                                                </Stack>
 
                                                 <Stack
                                                     width={'100%'}

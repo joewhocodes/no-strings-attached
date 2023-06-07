@@ -24,7 +24,7 @@ const ProfilePage = () => {
         setIsloading(true);
         dispatch(fetchCurrentProfile({ currentProfileId: id }));
         setTimeout(() => {
-            setIsloading(false)
+            setIsloading(false);
         }, 1000);
     }, [dispatch, id]);
 
@@ -33,7 +33,7 @@ const ProfilePage = () => {
             <Header />
             {isloading ? (
                 <Center>
-                    <Spinner size='xl' color='backing.500' mt='50vh'/>
+                    <Spinner size='xl' color='backing.500' mt='50vh' />
                 </Center>
             ) : (
                 <SimpleGrid

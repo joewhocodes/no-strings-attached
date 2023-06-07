@@ -35,7 +35,7 @@ const ProfileCard = () => {
             borderRadius={'lg'}>
             <Stack
                 display={'flex'}
-                w={['100%', '100%', '100%', '540px' ]}
+                w={['100%', '100%', '100%', '540px']}
                 direction={'column'}
                 padding={4}>
                 <Box>
@@ -68,21 +68,18 @@ const ProfileCard = () => {
                             as={'i'}
                             color={'black'}
                             size='sm'
-                            mt={5}
-                            >
+                            mt={5}>
                             {currentProfile.location}
                         </Text>
                         <Text
                             textAlign={'center'}
-                            color={useColorModeValue('gray.700', 'gray.400')}
-                            >
+                            color={useColorModeValue('gray.700', 'gray.400')}>
                             "{currentProfile.bio}"
                         </Text>
                         {!loggedInUserProfile ? (
                             <Stack
                                 width={'100%'}
                                 mt={'2rem'}
-                                // pt={5}
                                 direction={'row'}
                                 padding={2}
                                 justifyContent={'space-between'}
@@ -94,7 +91,6 @@ const ProfileCard = () => {
                             <Stack
                                 width={'100%'}
                                 mt={'2rem'}
-                                // pt={5}
                                 direction={'row'}
                                 padding={2}
                                 justifyContent={'space-between'}
@@ -103,7 +99,7 @@ const ProfileCard = () => {
                                 <AddInstrument />
                             </Stack>
                         )}
-                        <InstrumentList user={currentProfile}/>
+                        <InstrumentList user={currentProfile} />
                     </Stack>
                 </Box>
             </Stack>

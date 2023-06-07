@@ -44,37 +44,35 @@ export const myNewTheme = extendTheme({
     components: {
         Button: {
             baseStyle: {
-                // flex: 1,
                 fontSize: 'sm',
                 rounded: 'full',
                 bg: 'secondary.500',
                 color: 'white',
-                boxShadow:'0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)',
-                _hover: {bg: 'secondary.300'},
-                _focus: {bg: 'secondary.500'},
+                boxShadow:
+                    '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)',
+                _hover: { bg: 'secondary.300' },
+                _focus: { bg: 'secondary.500' },
             },
             variants: {
-                // Make a variant, we'll call it `base` here and leave it empty
                 base: {},
                 delete: {
-                    width: '50%', 
+                    width: '50%',
                     alignSelf: 'center',
-                    mt: 2, 
+                    mt: 2,
                     bg: 'red.500',
-                    _hover: {bg: 'red.400'},
-                    _focus: {bg: 'red.500'},
+                    _hover: { bg: 'red.400' },
+                    _focus: { bg: 'red.500' },
                 },
                 secondary: {
-                    // width: '50%', 
+                    // width: '50%',
                     alignSelf: 'center',
-                    // mt: 2, 
+                    // mt: 2,
                     bg: 'primary.500',
-                    _hover: {bg: 'primary.400'},
-                    _focus: {bg: 'primary.500'},
+                    _hover: { bg: 'primary.400' },
+                    _focus: { bg: 'primary.500' },
                 },
             },
             defaultProps: {
-                // Then here we set the base variant as the default
                 variant: 'base',
             },
         },
@@ -86,7 +84,7 @@ export const myNewTheme = extendTheme({
         Select: {
             baseStyle: {
                 focusBorderColor: 'secondary.300',
-            }
-        }
+            },
+        },
     },
 });

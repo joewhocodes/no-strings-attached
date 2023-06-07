@@ -16,7 +16,7 @@ root.render(
     <ChakraProvider theme={myNewTheme}>
         <Provider store={store}>
             <Router>
-                <App/>
+                <App />
             </Router>
         </Provider>
     </ChakraProvider>

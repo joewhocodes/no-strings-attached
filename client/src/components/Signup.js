@@ -22,11 +22,12 @@ import {
     useColorModeValue,
     Link,
 } from '@chakra-ui/react';
-  import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 
 const Signup = () => {
-    const { status, userRegistered, error } = useSelector(state => state.signup);
+    const { status, userRegistered, error } = useSelector(
+        state => state.signup
+    );
     const { loggedInUser } = useSelector(state => state.signin);
     const [showPassword, setShowPassword] = useState(false);
 
@@ -67,7 +68,7 @@ const Signup = () => {
                 email: values.email,
                 password: values.password,
             };
-            console.log(formData)
+            console.log(formData);
             dispatch(signupUser(formData));
             setTimeout(() => {
                 dispatch(signinUser(signInData));
@@ -75,7 +76,6 @@ const Signup = () => {
         },
     });
 
-    // Keeps user logged in on local storage
     if (loggedInUser || userRegistered) {
         localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
     }
@@ -89,7 +89,10 @@ const Signup = () => {
             <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
                 <img src={logo} width='400px' alt='Logo' />
                 <Stack align={'center'}>
-                    <Heading color='secondary.500' fontSize={'4xl'} textAlign={'center'}>
+                    <Heading
+                        color='secondary.500'
+                        fontSize={'4xl'}
+                        textAlign={'center'}>
                         Sign up
                     </Heading>
                     <Text fontSize={'lg'} color={'gray.600'}>
@@ -110,12 +113,16 @@ const Signup = () => {
                         boxShadow={'lg'}
                         p={8}>
                         <Stack spacing={4}>
-                            <FormLabel color='secondary.500'>First Name</FormLabel>
+                            <FormLabel color='secondary.500'>
+                                First Name
+                            </FormLabel>
                             <Input
                                 type='text'
                                 {...formik.getFieldProps('firstName')}
                             />
-                            <FormLabel color='secondary.500'>Location</FormLabel>
+                            <FormLabel color='secondary.500'>
+                                Location
+                            </FormLabel>
                             <select
                                 className='form-control form-control-lg'
                                 id='location'
@@ -152,7 +159,9 @@ const Signup = () => {
                                 </small>
                             ) : null}
                             <FormControl id='email' isRequired>
-                                <FormLabel color='secondary.500'>Email address</FormLabel>
+                                <FormLabel color='secondary.500'>
+                                    Email address
+                                </FormLabel>
                                 <Input
                                     type='email'
                                     {...formik.getFieldProps('email')}
@@ -164,7 +173,9 @@ const Signup = () => {
                                 ) : null}
                             </FormControl>
                             <FormControl>
-                                <FormLabel color='secondary.500'>Password</FormLabel>
+                                <FormLabel color='secondary.500'>
+                                    Password
+                                </FormLabel>
                                 <InputGroup>
                                     <Input
                                         type={
@@ -223,7 +234,11 @@ const Signup = () => {
                                 <Text align={'center'}>
                                     Already a user?{' '}
                                     <NavLink to={'/signin'}>
-                                        <Link color={'secondary.500'} _hover={{color: 'secondary.300'}}>Login</Link>
+                                        <Link
+                                            color={'secondary.500'}
+                                            _hover={{ color: 'secondary.300' }}>
+                                            Login
+                                        </Link>
                                     </NavLink>
                                 </Text>
                             </Stack>
@@ -236,5 +251,3 @@ const Signup = () => {
 };
 
 export default Signup;
-
-
