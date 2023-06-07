@@ -7,15 +7,12 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const cloudinary = require('cloudinary').v2;
 
-//Use .env file in config folder
 dotenv.config();
 
-//Connect To Database
 connectDB();
 
 const app = express();
 
-// Bodyparser middleware
 app.use(
     bodyParser.urlencoded({
         extended: false,

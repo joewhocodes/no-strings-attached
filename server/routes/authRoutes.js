@@ -16,6 +16,7 @@ router.get(
         const users = await User.find();
         if (users) {
             res.json(users);
+            console.log('fetched all users');
         } else {
             const err = new Error('Users not found.');
             err.status = 404;

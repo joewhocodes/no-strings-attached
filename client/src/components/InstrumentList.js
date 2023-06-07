@@ -20,9 +20,7 @@ const InstrumentList = props => {
                 id: loggedInUser.id,
             })
         );
-        console.log('instrument removed');
     };
-    console.log(props.user);
 
     return (
         <Box minH={'105px'}>
