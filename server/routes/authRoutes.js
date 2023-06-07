@@ -2,7 +2,6 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 const User = require('../models/user');
 const { generateToken } = require('../utils/generateToken');
-const { requireAuth } = require('../middleware/authMiddleware');
 const multer = require('multer');
 const upload = multer();
 const sharp = require('sharp');
@@ -13,7 +12,6 @@ const { nanoid } = require('nanoid');
 
 router.get(
     '/api/users',
-    requireAuth,
     asyncHandler(async (req, res) => {
         const users = await User.find();
         if (users) {
