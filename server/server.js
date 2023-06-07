@@ -5,7 +5,7 @@ const globalErrorHandler = require('./middleware/errorMiddleware');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const cloudinary = require("cloudinary").v2;
+const cloudinary = require('cloudinary').v2;
 
 //Use .env file in config folder
 dotenv.config();
