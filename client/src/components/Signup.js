@@ -18,6 +18,7 @@ import {
     Stack,
     Button,
     Heading,
+    Select,
     Text,
     useColorModeValue,
     Link,
@@ -123,7 +124,7 @@ const Signup = () => {
                             <FormLabel color='secondary.500'>
                                 Location
                             </FormLabel>
-                            <select
+                            <Select
                                 className='form-control form-control-lg'
                                 id='location'
                                 name='location'
@@ -132,7 +133,7 @@ const Signup = () => {
                                 {cities.map(e => (
                                     <option>{e}</option>
                                 ))}
-                            </select>
+                            </Select>
                             {formik.touched.location &&
                             formik.errors.location ? (
                                 <small className='form-text text-danger'>
