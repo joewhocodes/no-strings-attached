@@ -36,6 +36,10 @@ const Header = () => {
         navigate('/');
     };
 
+    const returnString = () => {
+        return 'Hello World';
+    }
+
     return (
         <Box
             position={'fixed'}
