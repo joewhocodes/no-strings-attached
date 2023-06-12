@@ -204,10 +204,10 @@ Project Link: [https://github.com/joewhocodes/no-strings-attached](https://githu
 [forks-url]: https://github.com/joewhocodes/no-strings-attached/network/members
 [stars-shield]: https://img.shields.io/github/stars/joewhocodes/no-strings-attached.svg?style=for-the-badge
 [stars-url]: https://github.com/joewhocodes/no-strings-attached/stargazers
-[issues-shield]: https://img.shields.io/github/issues/joewhocodes/moviegojoe.svg?style=for-the-badge
-[issues-url]: https://github.com/joewhocodes/moviegojoe/issues
-[license-shield]: https://img.shields.io/github/license/joewhocodes/moviegojoe.svg?style=for-the-badge
-[license-url]: https://github.com/joewhocodes/moviegojoe/blob/main/LICENSE.txt
+[issues-shield]: https://img.shields.io/github/issues/joewhocodes/no-strings-attached.svg?style=for-the-badge
+[issues-url]: https://github.com/joewhocodes/no-strings-attached/issues
+[license-shield]: https://img.shields.io/github/license/joewhocodes/no-strings-attached.svg?style=for-the-badge
+[license-url]: https://github.com/joewhocodes/no-strings-attached/blob/main/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/joewhocodes
 [product-screenshot]: /client/src/images/screenshot.png
