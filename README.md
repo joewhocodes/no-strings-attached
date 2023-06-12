@@ -8,7 +8,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/joewhocodes/mo-strings-attached">
-    <img src="./client/src/images/logo-full.png" alt="Logo">
+    <img width="500px" src="./client/src/images/logo-full.png" alt="Logo">
   </a>
 
 <h3 align="center">No Strings Attached</h3>
@@ -110,17 +110,12 @@ To get a local copy up and running follow these simple example steps.
    ```sh
    cd client && npm install && cd .. && npm install
    ```
-3. Add Environment variables, including MongoDB, JWT and Cloudinary
+3. Add Environment variables in an .env file in root directory, including MongoDB, JWT and Cloudinary
    ```sh
-  PORT = 
-  MONGO_URI = 
-  JWT_SECRET = 
-  CLOUD_NAME = 
-  API_KEY = 
-  API_SECRET = 
+   PORT, MONGO_URI, JWT_SECRET, CLOUD_NAME, API_KEY, API_SECRET
    ```
 4. Run the app
-   ```
+   ```sh
    npm run dev
    ```
 <p align="right">(<a href="#top">back to top</a>)</p>
